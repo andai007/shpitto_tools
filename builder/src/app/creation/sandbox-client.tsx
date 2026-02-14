@@ -184,6 +184,14 @@ type CreationSandboxClientProps = {
   initialPayload?: SandboxLoadPayload;
 };
 
+const safeStructuredClone = <T,>(value: T): T => {
+  // Safari < 15.4 may not have structuredClone; sandbox payload is JSON-safe.
+  if (typeof (globalThis as any).structuredClone === "function") {
+    return (globalThis as any).structuredClone(value) as T;
+  }
+  return JSON.parse(JSON.stringify(value)) as T;
+};
+
 const detectPrimitiveArrayFields = (code: string) => {
   const fields = new Set<string>();
   const pattern = /(\w+)\.map\(\((\w+)(?:\s*,\s*\w+)?\)\s*=>[\s\S]{0,260}\{\2\}/g;
@@ -219,7 +227,7 @@ const coercePageDataArrays = (
   primitiveArrayFieldsByType: Map<string, string[]>
 ): Data => {
   if (!primitiveArrayFieldsByType.size) return pageData;
-  const cloned = structuredClone(pageData) as Record<string, any>;
+  const cloned = safeStructuredClone(pageData) as Record<string, any>;
   const content = Array.isArray(cloned?.content) ? (cloned.content as Array<Record<string, any>>) : [];
   content.forEach((item) => {
     const type = typeof item?.type === "string" ? item.type : "";
@@ -232,6 +240,48 @@ const coercePageDataArrays = (
       if (coerced) (props as Record<string, unknown>)[field] = coerced;
     });
   });
+  return cloned as Data;
+};
+
+const normalizeEditorKeys = (pageData: Data): Data => {
+  const cloned = safeStructuredClone(pageData) as Record<string, any>;
+
+  const normalizeItems = (items: unknown[], prefix: string) => {
+    const seen = new Set<string>();
+    return items.map((item, index) => {
+      const input = item && typeof item === "object" ? (item as Record<string, any>) : {};
+      const type = typeof input.type === "string" && input.type.trim() ? input.type.trim() : "block";
+      const existingKey = typeof input._key === "string" && input._key.trim() ? input._key.trim() : "";
+      const baseKey = existingKey || `${prefix}-${type}-${index}`;
+      let key = baseKey;
+      let suffix = 1;
+      while (seen.has(key)) {
+        key = `${baseKey}-${suffix}`;
+        suffix += 1;
+      }
+      seen.add(key);
+      const props = input.props && typeof input.props === "object" ? { ...input.props } : {};
+      if (typeof props.id !== "string" || !props.id.trim()) {
+        props.id = key;
+      }
+      return { ...input, _key: key, props };
+    });
+  };
+
+  if (Array.isArray(cloned.content)) {
+    cloned.content = normalizeItems(cloned.content, "content");
+  }
+
+  if (cloned.zones && typeof cloned.zones === "object" && !Array.isArray(cloned.zones)) {
+    const zones = cloned.zones as Record<string, unknown>;
+    cloned.zones = Object.fromEntries(
+      Object.entries(zones).map(([zoneKey, value]) => {
+        if (!Array.isArray(value)) return [zoneKey, value];
+        return [zoneKey, normalizeItems(value, `zone-${zoneKey}`)];
+      })
+    );
+  }
+
   return cloned as Data;
 };
 
@@ -288,6 +338,7 @@ export default function CreationSandboxClient({ initialPayload }: CreationSandbo
   const isEdit = searchParams.get("mode") === "edit";
   const [config, setConfig] = React.useState<Config | null>(null);
   const [data, setData] = React.useState<Data | null>(null);
+  const [loadError, setLoadError] = React.useState<string | null>(null);
   const [themeCss, setThemeCss] = React.useState<string>("");
   const [motionMode, setMotionMode] = React.useState<"off" | "subtle" | "showcase">("showcase");
   const [pageKey, setPageKey] = React.useState<string>("page-0");
@@ -305,71 +356,82 @@ export default function CreationSandboxClient({ initialPayload }: CreationSandbo
 
   const applyLoadPayload = React.useCallback(
     (payload: SandboxLoadPayload) => {
-      pageIndexRef.current = payload.pageIndex ?? 0;
-      setPageKey(`page-${pageIndexRef.current}`);
-      const nextConfig: Config = {
-        components: {
-          ...((puckConfig as any)?.components ?? {}),
-        },
-      };
-      const failures: string[] = [];
-      const primitiveArrayFieldsByType = new Map<string, string[]>();
-      payload.components.forEach((component) => {
-        const primitiveArrayFields = detectPrimitiveArrayFields(component.code);
-        if (primitiveArrayFields.length) {
-          primitiveArrayFieldsByType.set(component.name, primitiveArrayFields);
-        }
-        const compiled = compileJIT(component.code);
-        if (!compiled) {
-          failures.push(component.name);
-          return;
-        }
-        const Comp = compiled.render as React.ComponentType<any>;
-        const WrappedComponent: React.FC<any> = (props) => (
-          <BlockErrorBoundary blockName={component.name}>
-            <Comp {...props} />
-          </BlockErrorBoundary>
-        );
-        WrappedComponent.displayName = `Wrapped_${component.name}`;
-        nextConfig.components[component.name] = {
-          ...(compiled.config ?? {}),
-          render: WrappedComponent,
-        } as any;
-      });
-
-      const rawContent = Array.isArray((payload.page as any)?.data?.content)
-        ? ((payload.page as any).data.content as Array<{ type?: unknown }>)
-        : [];
-      const requiredTypes = Array.from(
-        new Set(
-          rawContent
-            .map((item) => (typeof item?.type === "string" ? item.type.trim() : ""))
-            .filter(Boolean)
-        )
-      );
-      const missingTypes = requiredTypes.filter((type) => !(nextConfig.components as Record<string, unknown>)[type]);
-      missingTypes.forEach((type) => {
-        (nextConfig.components as Record<string, any>)[type] = {
-          render: createMissingBlockComponent(type),
-          fields: {},
-          defaultProps: { id: `${type}-missing`, anchor: `${type}-missing` },
+      try {
+        setLoadError(null);
+        pageIndexRef.current = payload.pageIndex ?? 0;
+        setPageKey(`page-${pageIndexRef.current}`);
+        const nextConfig: Config = {
+          components: {
+            ...((puckConfig as any)?.components ?? {}),
+          },
         };
-      });
-      if (missingTypes.length) {
-        failures.push(...missingTypes.map((type) => `${type}:missing_renderer`));
-      }
+        const failures: string[] = [];
+        const primitiveArrayFieldsByType = new Map<string, string[]>();
+        payload.components.forEach((component) => {
+          const primitiveArrayFields = detectPrimitiveArrayFields(component.code);
+          if (primitiveArrayFields.length) {
+            primitiveArrayFieldsByType.set(component.name, primitiveArrayFields);
+          }
+          const compiled = compileJIT(component.code);
+          if (!compiled) {
+            failures.push(component.name);
+            return;
+          }
+          const Comp = compiled.render as React.ComponentType<any>;
+          const WrappedComponent: React.FC<any> = (props) => (
+            <BlockErrorBoundary blockName={component.name}>
+              <Comp {...props} />
+            </BlockErrorBoundary>
+          );
+          WrappedComponent.displayName = `Wrapped_${component.name}`;
+          nextConfig.components[component.name] = {
+            ...(compiled.config ?? {}),
+            render: WrappedComponent,
+          } as any;
+        });
 
-      if (failures.length) {
-        postToHost({ type: "puck:compile", payload: { failures } });
+        const rawContent = Array.isArray((payload.page as any)?.data?.content)
+          ? ((payload.page as any).data.content as Array<{ type?: unknown }>)
+          : [];
+        const requiredTypes = Array.from(
+          new Set(
+            rawContent
+              .map((item) => (typeof item?.type === "string" ? item.type.trim() : ""))
+              .filter(Boolean)
+          )
+        );
+        const missingTypes = requiredTypes.filter(
+          (type) => !(nextConfig.components as Record<string, unknown>)[type]
+        );
+        missingTypes.forEach((type) => {
+          (nextConfig.components as Record<string, any>)[type] = {
+            render: createMissingBlockComponent(type),
+            fields: {},
+            defaultProps: { id: `${type}-missing`, anchor: `${type}-missing` },
+          };
+        });
+        if (missingTypes.length) {
+          failures.push(...missingTypes.map((type) => `${type}:missing_renderer`));
+        }
+
+        if (failures.length) {
+          postToHost({ type: "puck:compile", payload: { failures } });
+        }
+        const coercedPageData = coercePageDataArrays(payload.page.data, primitiveArrayFieldsByType);
+        const keyedPageData = normalizeEditorKeys(coercedPageData);
+        const nextData = isEdit ? normalizePuckData(keyedPageData, { logChanges: true }) : keyedPageData;
+        setConfig(nextConfig);
+        setData(nextData);
+        setThemeCss(buildThemeCss(payload.theme));
+        setMotionMode((payload.theme?.motion as any) || "showcase");
+        document.documentElement.classList.toggle("dark", payload.theme?.mode === "dark");
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        console.error("[creation:sandbox] apply_load_payload_failed", { message });
+        setLoadError(message || "apply_load_payload_failed");
       }
-      const coercedPageData = coercePageDataArrays(payload.page.data, primitiveArrayFieldsByType);
-      setConfig(nextConfig);
-      setData(normalizePuckData(coercedPageData, { logChanges: true }));
-      setThemeCss(buildThemeCss(payload.theme));
-      setMotionMode((payload.theme?.motion as any) || "showcase");
-      document.documentElement.classList.toggle("dark", payload.theme?.mode === "dark");
     },
-    [postToHost]
+    [isEdit, postToHost]
   );
 
   React.useEffect(() => {
@@ -426,13 +488,13 @@ export default function CreationSandboxClient({ initialPayload }: CreationSandbo
             />
           ) : (
             <main>
-              <Render config={config} data={normalizePuckData(data, { logChanges: true }) as any} />
+              <Render config={config} data={data as any} />
             </main>
           )}
         </MotionProvider>
       ) : (
         <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-          等待生成内容…
+          {loadError ? `Load failed: ${loadError}` : "等待生成内容…"}
         </div>
       )}
     </div>

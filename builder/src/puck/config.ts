@@ -2,8 +2,11 @@ import React from "react";
 import type { Config } from "@measured/puck";
 import { HeroCenteredBlock } from "@/components/blocks/hero-centered/block";
 import { HeroSplitBlock } from "@/components/blocks/hero-split/block";
+import { HeroCoverBlock } from "@/components/blocks/hero-cover/block";
 import { FeatureGridBlock } from "@/components/blocks/feature-grid/block";
 import { FeatureWithMediaBlock } from "@/components/blocks/feature-with-media/block";
+import { CategoryTabsBlock } from "@/components/blocks/category-tabs/block";
+import { SectorsStripBlock } from "@/components/blocks/sectors-strip/block";
 import { PricingCardsBlock } from "@/components/blocks/pricing-cards/block";
 import { FAQAccordionBlock } from "@/components/blocks/faq-accordion/block";
 import { FooterBlock } from "@/components/blocks/footer/block";
@@ -395,6 +398,80 @@ export const puckConfig: Config = {
         }),
       },
     },
+    HeroCover: {
+      render: renderBlock(HeroCoverBlock),
+      defaultProps: {
+        id: "hero-cover-1",
+        mediaSrc: "/assets/placeholder.png",
+        mediaAlt: "",
+        height: "520px",
+        mobileHeight: "360px",
+        fullBleed: true,
+        paddingY: "sm",
+        maxWidth: "2xl",
+        background: "none",
+      },
+      fields: {
+        mediaSrc: textField("Media Src"),
+        mediaAlt: textField("Media Alt"),
+        mobileMediaSrc: textField("Mobile Media Src"),
+        mobileMediaAlt: textField("Mobile Media Alt"),
+        height: textField("Height"),
+        mobileHeight: textField("Mobile Height"),
+        fullBleed: booleanField("Full Bleed"),
+        overlay: textField("Overlay Color"),
+        overlayOpacity: textField("Overlay Opacity"),
+        paddingY: selectField("Padding", ["sm", "md", "lg"]),
+        background: selectField("Background", ["none", "muted", "gradient", "image"]),
+        maxWidth: selectField("Max Width", ["lg", "xl", "2xl"]),
+      },
+    },
+    SectorsStrip: {
+      render: renderBlock(SectorsStripBlock),
+      defaultProps: {
+        id: "sectors-strip-1",
+        title: "I NOSTRI SETTORI",
+        subtitle: "PAMA opera con esperienza in settori ad alta specializzazione.",
+        items: [
+          {
+            title: "SETTORE OIL & GAS",
+            description: "Soluzioni per applicazioni ad alta precisione.",
+            cta: { label: "SCOPRI DI PIÙ", href: "#", variant: "primary" },
+          },
+          {
+            title: "SETTORE COSTRUZIONE DI MACCHINE",
+            description: "Macchine utensili per processi industriali avanzati.",
+            cta: { label: "SCOPRI DI PIÙ", href: "#", variant: "primary" },
+          },
+          {
+            title: "SETTORE STAMPI",
+            description: "Sistemi dedicati alla produzione stampi.",
+            cta: { label: "SCOPRI DI PIÙ", href: "#", variant: "primary" },
+          },
+        ],
+        paddingY: "lg",
+        maxWidth: "xl",
+        background: "none",
+      },
+      fields: {
+        title: textField("Title"),
+        subtitle: textareaField("Subtitle"),
+        paddingY: selectField("Padding", ["sm", "md", "lg"]),
+        background: selectField("Background", ["none", "muted", "gradient", "image"]),
+        maxWidth: selectField("Max Width", ["lg", "xl", "2xl"]),
+        items: listField("Items", {
+          title: textField("Title"),
+          description: textareaField("Description"),
+          imageSrc: textField("Image Src"),
+          imageAlt: textField("Image Alt"),
+          cta: {
+            label: textField("CTA Label"),
+            href: textField("CTA Href"),
+            variant: selectField("CTA Variant", ["primary", "secondary", "link"]),
+          },
+        }),
+      },
+    },
     NeonHeroBeam: {
       render: renderBlock(NeonHeroBeamBlock),
       defaultProps: {
@@ -751,6 +828,62 @@ export const puckConfig: Config = {
         mediaSrc: textField("Media Src"),
         mediaAlt: textField("Media Alt"),
         mediaKind: selectField("Media Kind", ["image", "video"]),
+      },
+    },
+    CategoryTabs: {
+      render: renderBlock(CategoryTabsBlock),
+      defaultProps: {
+        id: "CategoryTabs-1",
+        title: "I NOSTRI PRODOTTI",
+        subtitle: "Seleziona una categoria per esplorare le soluzioni PAMA.",
+        tabs: [{ label: "ACCESSORI" }, { label: "CENTRI DI LAVORO" }, { label: "AUTOMAZIONE" }],
+        panels: [
+          {
+            title: "Accessori per ogni esigenza",
+            description: "Moduli e accessori per ampliare versatilita e precisione.",
+            bullets: ["Soluzioni modulari", "Setup rapido", "Qualita costante"],
+            cta: { label: "SCOPRI DI PIÙ", href: "#prodotti", variant: "primary" },
+          },
+          {
+            title: "Centri di lavoro",
+            description: "Prestazioni elevate per lavorazioni industriali ad alta precisione.",
+            bullets: ["Rigidita strutturale", "Controllo avanzato", "Affidabilita a lungo termine"],
+            cta: { label: "SCOPRI DI PIÙ", href: "#prodotti", variant: "primary" },
+          },
+          {
+            title: "Automazione",
+            description: "Linee automatizzate per produttivita e qualita ripetibile.",
+            bullets: ["Integrazione su misura", "Riduzione tempi ciclo", "Monitoraggio produzione"],
+            cta: { label: "SCOPRI DI PIÙ", href: "#prodotti", variant: "primary" },
+          },
+        ],
+        paddingY: "lg",
+        maxWidth: "xl",
+        background: "none",
+      },
+      fields: {
+        eyebrow: textField("Eyebrow"),
+        title: textField("Title"),
+        subtitle: textareaField("Subtitle"),
+        paddingY: selectField("Padding", ["sm", "md", "lg"]),
+        background: selectField("Background", ["none", "muted", "gradient", "image"]),
+        maxWidth: selectField("Max Width", ["lg", "xl", "2xl"]),
+        tabs: listField("Tabs", {
+          label: textField("Label"),
+        }),
+        panels: listField("Panels", {
+          title: textField("Title"),
+          description: textareaField("Description"),
+          mediaSrc: textField("Media Src"),
+          mediaAlt: textField("Media Alt"),
+          bullets: listField("Bullets", { value: textField("Bullet") }),
+          cta: {
+            label: textField("CTA Label"),
+            href: textField("CTA Href"),
+            variant: selectField("CTA Variant", ["primary", "secondary", "link"]),
+          },
+        }),
+        activeIndex: textField("Active Index"),
       },
     },
     ContentStory: {

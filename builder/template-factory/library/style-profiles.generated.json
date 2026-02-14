@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-02-13T11:28:30.249Z",
-  "sourceRunId": "tf-beauty-salon-29-aura-ref-20260213-whychoose-solid",
-  "profileCount": 7,
+  "generatedAt": "2026-02-14T14:37:47.157Z",
+  "sourceRunId": "tf-20260214-223743",
+  "profileCount": 8,
   "profiles": [
     {
       "id": "auto_sixtine-reference",
@@ -1404,7 +1404,7 @@
     },
     {
       "id": "auto_nexus-engineering-aura-ref",
-      "name": "Dark engineering/corporate landing page with precision-grid sections and bright-yellow glow accents (reference screenshots included)",
+      "name": "Dark engineering/corporate landing page with precision-grid sections and orange glow accents (reference screenshots included)",
       "keywords": [
         "nexusengineeringauraref",
         "nexus",
@@ -1420,7 +1420,7 @@
         "precision",
         "systems",
         "messaging",
-        "bright-yellow",
+        "orange",
         "glow",
         "accents",
         "dashboard-style",
@@ -1433,58 +1433,58 @@
       ],
       "templates": {
         "navigation": {
-          "type": "NexusNavPulse",
+          "type": "Navbar",
           "props": {
+            "variant": "withCTA",
             "sticky": true,
+            "paddingY": "sm",
             "maxWidth": "xl",
-            "logoText": "Nexus",
+            "background": "gradient",
             "links": [
               {
                 "label": "Home",
-                "href": "#top"
+                "href": "#top",
+                "variant": "link"
               },
               {
                 "label": "Services",
-                "href": "#services"
+                "href": "#services",
+                "variant": "link"
               },
               {
                 "label": "About",
-                "href": "#about"
+                "href": "#about",
+                "variant": "link"
               },
               {
                 "label": "Contact",
-                "href": "#contact"
+                "href": "#contact",
+                "variant": "link"
               }
             ],
-            "cta": {
-              "label": "Get Started",
-              "href": "#contact",
-              "variant": "primary"
-            },
-            "logo": "Aura – AI Website Builder",
             "ctas": [
               {
                 "label": "Get Started",
                 "href": "#contact",
                 "variant": "primary"
               }
-            ]
+            ],
+            "logo": "Aura – AI Website Builder"
           }
         },
         "hero": {
-          "type": "NexusHeroDock",
+          "type": "NeonHeroBeam",
           "props": {
+            "paddingY": "lg",
             "maxWidth": "xl",
-            "badge": "Release Orchestration",
+            "badge": "Nexus Platform",
             "title": "Nexus is a precision tool for orchestrating product releases",
             "subtitle": "Ship with velocity while maintaining reliability, policy control, and measurable rollout quality.",
-            "panelTag": "Live Rollout",
+            "panelTag": "Performance",
             "panelTitle": "Release Velocity",
-            "panelSubtitle": "Automated orchestration across environments and teams.",
+            "panelSubtitle": "Automated orchestration across environments.",
             "statValue": "+842%",
             "statDelta": "vs baseline",
-            "background": "none",
-            "backgroundOverlay": "rgba(4,9,17,0.28)",
             "ctas": [
               {
                 "label": "Explore Platform",
@@ -1497,30 +1497,71 @@
                 "variant": "secondary"
               }
             ],
-            "heroImageSrc": "/assets/template-factory/nexus-engineering-aura-ref/slices/desktop-hero.png",
-            "mobileHeroImageSrc": "/assets/template-factory/nexus-engineering-aura-ref/slices/mobile-hero.png",
-            "heroImageAlt": "Aura – AI Website Builder hero visual"
+            "background": "image",
+            "backgroundMedia": {
+              "kind": "image",
+              "src": "/assets/template-factory/nexus-engineering-aura-ref/slices/desktop-hero.png",
+              "alt": "Aura – AI Website Builder reference"
+            },
+            "backgroundOverlay": "rgba(5,8,18,0.55)",
+            "media": {
+              "kind": "image",
+              "src": "/assets/template-factory/nexus-engineering-aura-ref/slices/desktop-hero.png",
+              "alt": "Aura – AI Website Builder hero visual"
+            }
           }
         },
         "story": {
-          "type": "NexusCapabilityStrip",
+          "type": "NeonDashboardStrip",
           "props": {
+            "paddingY": "md",
             "maxWidth": "xl",
-            "eyebrow": "Key Capabilities",
+            "eyebrow": "Wave 01",
             "title": "Engineered for modern product teams",
-            "subtitle": "Designed for scale, precision, and reliable execution.",
-            "items": [
+            "subtitle": "Operational confidence through unified workflows, observability, and rollout controls.",
+            "tabs": [
               {
-                "title": "Precision Targeting",
-                "description": "Model workload placement and route policies around intent and business goals."
+                "label": "Releases"
               },
               {
-                "title": "Automated Workflows",
-                "description": "Ship faster with deterministic rollout stages and controls."
+                "label": "Policy"
               },
               {
-                "title": "Brand Safety",
-                "description": "Guardrails and policy checks keep changes reliable by default."
+                "label": "Insights"
+              },
+              {
+                "label": "Safety"
+              },
+              {
+                "label": "AI"
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Deploy Frequency",
+                "value": "96/day"
+              },
+              {
+                "label": "Rollback Window",
+                "value": "< 3 min"
+              },
+              {
+                "label": "Policy Coverage",
+                "value": "99.2%"
+              }
+            ],
+            "kpis": [
+              {
+                "label": "Team Workspaces",
+                "value": "54"
+              },
+              {
+                "label": "Services Managed",
+                "value": "216"
+              },
+              {
+                "label": "Active Alerts",
+                "value": "7"
               }
             ],
             "body": "This section is generated from a template profile and tuned with prompt context.",
@@ -1543,30 +1584,51 @@
           }
         },
         "approach": {
-          "type": "NexusOpsMatrix",
+          "type": "NeonFeatureCards",
           "props": {
+            "paddingY": "lg",
             "maxWidth": "xl",
-            "eyebrow": "Wave 01",
             "title": "Deploy with velocity, scale without ceremony.",
             "subtitle": "Control release workflows without adding operational drag.",
             "items": [
               {
                 "title": "Zero-config infrastructure",
-                "description": "Provision workers, routes, and policies in one surface."
+                "description": "Provision workers, routes, and policies in one surface.",
+                "highlight": true,
+                "image": {
+                  "src": "/assets/template-factory/nexus-engineering-aura-ref/slices/desktop-approach.png",
+                  "alt": "Zero-config infrastructure"
+                },
+                "imageSrc": "/assets/template-factory/nexus-engineering-aura-ref/slices/desktop-approach.png",
+                "imageAlt": "Zero-config infrastructure"
               },
               {
                 "title": "Traffic-aware scaling",
-                "description": "Continuously adapt workloads to demand signals."
+                "description": "Continuously adapt workloads to demand signals.",
+                "image": {
+                  "src": "/assets/template-factory/nexus-engineering-aura-ref/slices/mobile-approach.png",
+                  "alt": "Traffic-aware scaling"
+                },
+                "imageSrc": "/assets/template-factory/nexus-engineering-aura-ref/slices/mobile-approach.png",
+                "imageAlt": "Traffic-aware scaling"
               },
               {
                 "title": "Precision analytics",
-                "description": "Observe every deploy in real time: rollout health and regional error budgets.",
-                "imageSrc": "/assets/template-factory/nexus-engineering-aura-ref/slices/desktop-approach.png",
+                "description": "Observe rollout health and budget impact in real time.",
+                "image": {
+                  "src": "/assets/template-factory/nexus-engineering-aura-ref/slices/mobile-approach.png",
+                  "alt": "Precision analytics"
+                },
+                "imageSrc": "/assets/template-factory/nexus-engineering-aura-ref/slices/mobile-approach.png",
                 "imageAlt": "Precision analytics"
               },
               {
                 "title": "Unified workflow control",
-                "description": "Feature flags, canary rollouts, and instant rollback from one surface.",
+                "description": "Feature flags, canary rollouts, and instant rollback.",
+                "image": {
+                  "src": "/assets/template-factory/nexus-engineering-aura-ref/slices/mobile-approach.png",
+                  "alt": "Unified workflow control"
+                },
                 "imageSrc": "/assets/template-factory/nexus-engineering-aura-ref/slices/mobile-approach.png",
                 "imageAlt": "Unified workflow control"
               }
@@ -1574,10 +1636,11 @@
           }
         },
         "socialproof": {
-          "type": "NexusProofMosaic",
+          "type": "NeonResultsShowcase",
           "props": {
+            "paddingY": "lg",
             "maxWidth": "xl",
-            "title": "Ship Faster with Nexus",
+            "title": "Ship faster with Nexus",
             "subtitle": "Teams report higher confidence and lower operational load after rollout.",
             "quote": "Nexus gave us a single control plane for releases. We moved faster while reducing incident pressure across teams.",
             "author": "Claire",
@@ -1607,8 +1670,9 @@
           }
         },
         "products": {
-          "type": "NexusControlPanel",
+          "type": "NeonDashboardStrip",
           "props": {
+            "paddingY": "md",
             "maxWidth": "xl",
             "eyebrow": "Wave 02",
             "title": "AI-assisted product orchestration",
@@ -1657,7 +1721,7 @@
             ],
             "dashboardImageSrc": "/assets/template-factory/nexus-engineering-aura-ref/slices/desktop-products.png",
             "mobileDashboardImageSrc": "/assets/template-factory/nexus-engineering-aura-ref/slices/mobile-products.png",
-            "dashboardImageAlt": "AI-assisted product orchestration",
+            "dashboardImageAlt": "Aura – AI Website Builder dashboard visual",
             "items": [
               {
                 "title": "Primary Offer",
@@ -1717,8 +1781,9 @@
           }
         },
         "footer": {
-          "type": "NexusFooterCommand",
+          "type": "NeonFooterGlow",
           "props": {
+            "paddingY": "md",
             "maxWidth": "xl",
             "title": "Ready to streamline your workflow?",
             "subtitle": "Join high-performance engineering teams using Nexus to orchestrate delivery from idea to shipping.",
@@ -1787,312 +1852,318 @@
               }
             ],
             "legal": "© 2024 Nexus Inc. All rights reserved.",
-            "logoText": "Aura – AI Website Builde"
+            "logoText": "Aura – AI Website Builde",
+            "background": "image",
+            "backgroundMedia": {
+              "kind": "image",
+              "src": "/assets/template-factory/nexus-engineering-aura-ref/slices/desktop-footer.png",
+              "alt": "Aura – AI Website Builder footer visual"
+            },
+            "backgroundOverlay": "rgba(0,0,0,0.15)"
           }
         }
       }
     },
     {
-      "id": "auto_beauty-salon-29-aura-ref",
-      "name": "Soft-light beauty salon and wellness clinic homepage with feminine editorial sections and service booking focus (reference screenshots included)",
+      "id": "auto_analogue-co-reference",
+      "name": "Analogue-style retro gaming hardware homepage with minimal monochrome structure and photography-first sections",
       "keywords": [
-        "beautysalonauraref",
-        "beauty",
-        "salon",
-        "aura",
-        "ref",
-        "beautysalonaurabuild",
-        "build",
-        "calm",
-        "wellness",
-        "clinic",
-        "landing",
-        "page",
-        "soft",
-        "neutral",
-        "tones",
-        "elegant",
+        "analoguereference",
+        "analogue",
+        "reference",
+        "analogue-inspired",
+        "retro",
+        "gaming",
+        "hardware",
+        "thin",
+        "navigation",
+        "high-contrast",
         "hero",
-        "signature",
-        "treatment",
-        "highlights",
-        "before-after",
-        "proof",
-        "stylist",
-        "intro"
+        "product",
+        "cards",
+        "technical",
+        "feature",
+        "grid",
+        "review",
+        "strip",
+        "cta",
+        "minimal",
+        "dark",
+        "footer",
+        "analogue-style",
+        "monochrome"
       ],
       "templates": {
         "navigation": {
           "type": "Navbar",
           "props": {
-            "variant": "withCTA",
-            "sticky": true,
+            "variant": "simple",
+            "sticky": false,
             "paddingY": "sm",
-            "maxWidth": "2xl",
-            "background": "gradient",
-            "backgroundGradient": "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-            "logo": "BEAUTY SALON BANGKOK",
+            "maxWidth": "xl",
+            "background": "none",
             "links": [
               {
-                "label": "Home",
-                "href": "#top",
+                "label": "Pocket",
+                "href": "#products",
                 "variant": "link"
               },
               {
-                "label": "Services",
-                "href": "#services",
+                "label": "OS",
+                "href": "#story",
                 "variant": "link"
               },
               {
-                "label": "Blog",
-                "href": "#blog",
+                "label": "Features",
+                "href": "#features",
                 "variant": "link"
               },
               {
-                "label": "Contact",
-                "href": "#contact",
+                "label": "Reviews",
+                "href": "#reviews",
                 "variant": "link"
               }
             ],
             "ctas": [
               {
-                "label": "Book Now",
-                "href": "#contact",
+                "label": "Shop",
+                "href": "#products",
                 "variant": "primary"
               }
-            ]
+            ],
+            "logo": "Analogue"
           }
         },
         "hero": {
           "type": "HeroSplit",
           "props": {
-            "paddingY": "md",
-            "maxWidth": "2xl",
-            "align": "left",
-            "mediaPosition": "right",
+            "paddingY": "lg",
             "headingSize": "lg",
-            "bodySize": "md",
-            "background": "gradient",
-            "backgroundGradient": "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-            "title": "Discover the best in beauty & wellness.",
-            "subtitle": "Premium beauty services for every need. Experience care, style, and confidence.",
-            "media": {
-              "kind": "image",
-              "src": "https://beautybodybangkok.com/wp-content/uploads/2024/06/beautiful-young-woman-smiling.webp",
-              "alt": "Beauty salon portrait"
-            },
+            "bodySize": "sm",
+            "maxWidth": "xl",
+            "mediaPosition": "right",
+            "background": "none",
+            "eyebrow": "Shipping Now",
+            "title": "Analogue Pocket",
+            "subtitle": "",
             "ctas": [
               {
-                "label": "Book Appointment",
-                "href": "#contact",
+                "label": "Shop Now",
+                "href": "#products",
                 "variant": "primary"
               },
               {
-                "label": "Our Services",
-                "href": "#services",
+                "label": "Explore More",
+                "href": "#story",
                 "variant": "secondary"
               }
-            ]
+            ],
+            "backgroundMedia": {
+              "kind": "image",
+              "src": "/assets/template-factory/analogue-co-reference/slices/desktop-hero.png",
+              "alt": "Analogue reference"
+            },
+            "backgroundOverlay": "rgba(5,8,18,0.55)",
+            "media": {
+              "kind": "image",
+              "src": "/assets/template-factory/analogue-co-reference/slices/desktop-hero.png",
+              "alt": "Analogue hero visual"
+            }
           }
         },
         "story": {
-          "type": "CardsGrid",
+          "type": "FeatureWithMedia",
           "props": {
-            "anchor": "services",
-            "paddingY": "md",
-            "maxWidth": "2xl",
-            "background": "gradient",
-            "backgroundGradient": "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-            "title": "Our Services",
-            "subtitle": "Tailored treatments for every style and skin journey.",
-            "variant": "imageText",
-            "columns": "3col",
-            "density": "normal",
-            "cardStyle": "solid",
-            "imagePosition": "top",
-            "imageShape": "rounded",
-            "headingSize": "sm",
-            "bodySize": "sm",
-            "items": [
-              {
-                "title": "Hair Services",
-                "description": "Cut, style, treatment, and finishing by experienced stylists.",
-                "imageSrc": "https://beautybodybangkok.com/wp-content/uploads/2024/06/lady-giving-a-hair-cut.webp",
-                "imageAlt": "Hair service"
-              },
-              {
-                "title": "Nail Services",
-                "description": "Manicure and pedicure care with hygiene-first detail.",
-                "imageSrc": "https://beautybodybangkok.com/wp-content/uploads/2024/06/lady-hand-with-nails-done-after-manicure.webp",
-                "imageAlt": "Nail service"
-              },
-              {
-                "title": "Makeup Services",
-                "description": "Event-ready and daily makeup with personalized looks.",
-                "imageSrc": "https://beautybodybangkok.com/wp-content/uploads/2024/06/Waxing-Services.webp",
-                "imageAlt": "Makeup and beauty service"
-              },
-              {
-                "title": "Massage Services",
-                "description": "Relaxing body treatments for stress and recovery.",
-                "imageSrc": "https://beautybodybangkok.com/wp-content/uploads/2024/06/foot-massage-and-head-massage-at-the-same-time.webp",
-                "imageAlt": "Massage service"
-              },
-              {
-                "title": "Facial Care",
-                "description": "Customized facials for hydration, balance, and glow.",
-                "imageSrc": "https://beautybodybangkok.com/wp-content/uploads/2024/06/Beautician-with-a-brush-applies-a-white-moisturizing-mask-to-the-face-of-a-young-girl-client-in-a-sp_1.webp",
-                "imageAlt": "Facial treatment"
-              },
-              {
-                "title": "Skincare Services",
-                "description": "Professional routines for long-term skin health.",
-                "imageSrc": "https://beautybodybangkok.com/wp-content/uploads/2024/06/pedicure-chair-in-a-beauty-salon.webp",
-                "imageAlt": "Skincare service"
-              }
-            ],
-            "eyebrow": "Our Story",
-            "body": "This section is generated from a template profile and tuned with prompt context.",
-            "ctas": [
-              {
-                "label": "Explore",
-                "href": "#",
-                "variant": "link"
-              }
-            ]
+            "variant": "simple",
+            "paddingY": "lg",
+            "maxWidth": "xl",
+            "background": "none",
+            "eyebrow": "The definitive os",
+            "title": "The Definitive, Scholarly OS for N64",
+            "subtitle": "",
+            "body": "",
+            "items": [],
+            "ctas": [],
+            "dashboardImageSrc": "/assets/template-factory/analogue-co-reference/slices/desktop-story.png",
+            "dashboardImageAlt": "Analogue dashboard visual",
+            "media": {
+              "kind": "image",
+              "src": "/assets/template-factory/analogue-co-reference/slices/desktop-story.png",
+              "alt": "Analogue story visual"
+            },
+            "mediaSrc": "/assets/template-factory/analogue-co-reference/slices/desktop-story.png",
+            "mediaAlt": "Analogue story visual"
           }
         },
         "approach": {
           "type": "FeatureWithMedia",
           "props": {
-            "anchor": "why-choose-us",
-            "variant": "split",
-            "paddingY": "md",
-            "maxWidth": "2xl",
-            "background": "gradient",
-            "backgroundGradient": "linear-gradient(180deg,#18181b 0%,#18181b 100%)",
-            "contentTone": "light",
+            "paddingY": "lg",
+            "maxWidth": "xl",
+            "variant": "simple",
+            "title": "The New Standard for CRT Perfection in 4K.",
+            "subtitle": "",
+            "body": "",
+            "items": [],
+            "ctas": [],
             "media": {
               "kind": "image",
-              "src": "https://beautybodybangkok.com/wp-content/uploads/2024/06/beauty-body-bangkok-salon.webp",
-              "alt": "Salon interior"
+              "src": "/assets/template-factory/analogue-co-reference/slices/desktop-approach.png",
+              "alt": "The New Standard for CRT Perfection in 4K."
             },
-            "eyebrow": "Why Choose Us",
-            "title": "Why Choose Beauty Body Bangkok?",
-            "subtitle": "Professional care with modern techniques and warm, attentive service.",
-            "body": "From expert stylists to premium products and flexible booking, each visit is built around comfort and confidence.",
-            "items": [],
-            "ctas": [
-              {
-                "label": "Book Appointment",
-                "href": "#contact",
-                "variant": "secondary"
-              }
-            ]
+            "mediaSrc": "/assets/template-factory/analogue-co-reference/slices/desktop-approach.png",
+            "mediaAlt": "The New Standard for CRT Perfection in 4K."
           }
         },
         "socialproof": {
-          "type": "FeatureWithMedia",
+          "type": "TestimonialsGrid",
           "props": {
-            "anchor": "consultation",
-            "variant": "reverse",
-            "paddingY": "md",
-            "maxWidth": "2xl",
+            "variant": "3col",
+            "paddingY": "lg",
+            "maxWidth": "xl",
             "background": "gradient",
-            "backgroundGradient": "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-            "media": {
-              "kind": "image",
-              "src": "https://beautybodybangkok.com/wp-content/uploads/2024/06/pedicure-chair-in-a-beauty-salon.webp",
-              "alt": "Consultation area"
-            },
-            "eyebrow": "Consultation",
-            "title": "Free Consultation.",
-            "subtitle": "Book a short session to match services with your needs and schedule.",
-            "body": "Our team helps you choose the right treatment path before your first appointment.",
-            "items": [],
-            "ctas": [
+            "backgroundGradient": "linear-gradient(180deg, #050505 0%, #0f0f10 100%)",
+            "backgroundOverlay": "rgba(0,0,0,0.25)",
+            "backgroundOverlayOpacity": 0.25,
+            "title": "Analogue Reviews",
+            "items": [
               {
-                "label": "Book a Consultation",
-                "href": "#contact",
-                "variant": "primary"
+                "quote": "“A reference-quality handheld with remarkable build quality.”",
+                "name": "4.5/5",
+                "role": "Reviews",
+                "avatar": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/mobile-socialproof.png",
+                  "alt": "4.5/5"
+                }
+              },
+              {
+                "quote": "“The best modern way to experience classic cartridges.”",
+                "name": "5/5",
+                "role": "Press",
+                "avatar": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/mobile-socialproof.png",
+                  "alt": "5/5"
+                }
+              },
+              {
+                "quote": "“Scholarly OS and outstanding visual fidelity.”",
+                "name": "4.5/5",
+                "role": "Community",
+                "avatar": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/mobile-socialproof.png",
+                  "alt": "4.5/5"
+                }
+              },
+              {
+                "quote": "“A definitive package for N64 enthusiasts.”",
+                "name": "9/10",
+                "role": "Media",
+                "avatar": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/mobile-socialproof.png",
+                  "alt": "9/10"
+                }
               }
-            ]
+            ],
+            "imageSrc": "/assets/template-factory/analogue-co-reference/slices/desktop-socialproof.png",
+            "imageAlt": "Results visual"
           }
         },
         "products": {
-          "type": "FAQAccordion",
-          "props": {
-            "anchor": "faq",
-            "paddingY": "md",
-            "maxWidth": "2xl",
-            "background": "gradient",
-            "backgroundGradient": "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-            "title": "Frequently Asked Questions",
-            "variant": "singleOpen",
-            "items": [
-              {
-                "q": "What are your opening hours?",
-                "a": "We are open daily, including weekends. Please check current hours before visiting."
-              },
-              {
-                "q": "Do I need to book in advance?",
-                "a": "Advance booking is recommended for preferred time slots and specialist services."
-              },
-              {
-                "q": "What products do you use?",
-                "a": "We use salon-grade products selected for safety, performance, and skin compatibility."
-              },
-              {
-                "q": "Can I request a specific stylist?",
-                "a": "Yes. Mention your preferred stylist while booking and we will arrange it when available."
-              },
-              {
-                "q": "Do you offer consultation before treatment?",
-                "a": "Yes. We provide consultation to align treatment plans with your goals."
-              }
-            ],
-            "subtitle": "Modular blocks tailored to your site objectives."
-          }
-        },
-        "contact": {
           "type": "CardsGrid",
           "props": {
-            "anchor": "blog",
-            "paddingY": "md",
-            "maxWidth": "2xl",
-            "background": "gradient",
-            "backgroundGradient": "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-            "title": "Latest from the Blog",
-            "subtitle": "Trends, care routines, and practical beauty advice from our team.",
-            "variant": "imageText",
-            "columns": "3col",
-            "density": "compact",
+            "paddingY": "lg",
+            "maxWidth": "xl",
+            "title": "Everything, Elevated",
+            "subtitle": "",
+            "variant": "product",
+            "columns": "4col",
+            "density": "normal",
             "cardStyle": "solid",
             "imagePosition": "top",
+            "imageSize": "md",
             "imageShape": "rounded",
             "headingSize": "sm",
             "bodySize": "sm",
             "items": [
               {
-                "title": "Discover Why Thai Massage is Loved",
-                "description": "Explore the history and wellness benefits of traditional Thai massage.",
-                "tag": "Massage",
-                "imageSrc": "https://beautybodybangkok.com/wp-content/uploads/2024/09/the-origin-of-thai-massage-768x432.webp",
-                "imageAlt": "Thai massage guide"
+                "title": "Built for Multiplayer",
+                "subtitle": "",
+                "description": "Local multiplayer with low-latency input handling.",
+                "cta": {
+                  "label": "Learn",
+                  "href": "#features",
+                  "variant": "link"
+                },
+                "image": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/desktop-products.png",
+                  "alt": "Built for Multiplayer"
+                },
+                "cover": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/desktop-products.png",
+                  "alt": "Built for Multiplayer"
+                },
+                "imageSrc": "/assets/template-factory/analogue-co-reference/slices/desktop-products.png",
+                "imageAlt": "Built for Multiplayer"
               },
               {
-                "title": "Eyelash Extensions in Bangkok",
-                "description": "A practical guide to styles, retention, and aftercare.",
-                "tag": "Eyelash",
-                "imageSrc": "https://beautybodybangkok.com/wp-content/uploads/2024/09/stunning-womans-long-eyelashes-768x432.webp",
-                "imageAlt": "Eyelash extension close-up"
+                "title": "N64 Reimagined in 4K",
+                "subtitle": "",
+                "description": "Precision output tuned for modern displays.",
+                "cta": {
+                  "label": "Learn",
+                  "href": "#features",
+                  "variant": "link"
+                },
+                "image": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/mobile-products.png",
+                  "alt": "N64 Reimagined in 4K"
+                },
+                "cover": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/mobile-products.png",
+                  "alt": "N64 Reimagined in 4K"
+                },
+                "imageSrc": "/assets/template-factory/analogue-co-reference/slices/mobile-products.png",
+                "imageAlt": "N64 Reimagined in 4K"
               },
               {
-                "title": "How to Choose the Right Salon",
-                "description": "Checklist for selecting a reliable salon with the right specialists.",
-                "tag": "Salon",
-                "imageSrc": "https://beautybodybangkok.com/wp-content/uploads/2024/06/image-7-768x384.jpeg",
-                "imageAlt": "Salon styling scene"
+                "title": "100% Compatibility",
+                "subtitle": "",
+                "description": "Hardware and save-path compatibility by design.",
+                "cta": {
+                  "label": "Learn",
+                  "href": "#features",
+                  "variant": "link"
+                },
+                "image": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/desktop-products.png",
+                  "alt": "100% Compatibility"
+                },
+                "cover": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/desktop-products.png",
+                  "alt": "100% Compatibility"
+                },
+                "imageSrc": "/assets/template-factory/analogue-co-reference/slices/desktop-products.png",
+                "imageAlt": "100% Compatibility"
+              },
+              {
+                "title": "Powered by 3D",
+                "subtitle": "",
+                "description": "Rich visuals with faithful motion and detail.",
+                "cta": {
+                  "label": "Learn",
+                  "href": "#features",
+                  "variant": "link"
+                },
+                "image": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/mobile-products.png",
+                  "alt": "Powered by 3D"
+                },
+                "cover": {
+                  "src": "/assets/template-factory/analogue-co-reference/slices/mobile-products.png",
+                  "alt": "Powered by 3D"
+                },
+                "imageSrc": "/assets/template-factory/analogue-co-reference/slices/mobile-products.png",
+                "imageAlt": "Powered by 3D"
               }
             ]
           }
@@ -2100,64 +2171,56 @@
         "cta": {
           "type": "LeadCaptureCTA",
           "props": {
-            "anchor": "book-now",
-            "variant": "card",
-            "paddingY": "sm",
-            "maxWidth": "2xl",
+            "variant": "banner",
+            "paddingY": "lg",
+            "maxWidth": "xl",
             "background": "gradient",
-            "backgroundGradient": "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-            "title": "Ready for your next appointment?",
-            "subtitle": "Choose your preferred service and reserve a time in minutes.",
+            "backgroundGradient": "linear-gradient(180deg, #080808 0%, #121212 100%)",
+            "backgroundOverlay": "rgba(0,0,0,0.2)",
+            "backgroundOverlayOpacity": 0.2,
+            "title": "We make products to celebrate and explore the history of video games.",
+            "subtitle": "with the respect it deserves.",
             "cta": {
-              "label": "Book Now",
-              "href": "#contact",
-              "variant": "primary"
-            },
-            "note": "Same-day slots available for selected services."
+              "label": "All Products",
+              "href": "#products",
+              "variant": "secondary"
+            }
           }
         },
         "footer": {
           "type": "Footer",
           "props": {
-            "anchor": "contact",
             "variant": "multiColumn",
             "paddingY": "md",
-            "maxWidth": "2xl",
+            "maxWidth": "xl",
             "background": "gradient",
-            "backgroundGradient": "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-            "logoText": "BEAUTY SALON BANGKOK",
+            "backgroundGradient": "linear-gradient(180deg, #090909 0%, #151515 100%)",
+            "backgroundOverlay": "rgba(0,0,0,0.15)",
+            "backgroundOverlayOpacity": 0.15,
             "columns": [
               {
-                "title": "Services",
+                "title": "Products",
                 "links": [
                   {
-                    "label": "Hair",
-                    "href": "#services"
+                    "label": "Pocket",
+                    "href": "#products"
                   },
                   {
-                    "label": "Nails",
-                    "href": "#services"
-                  },
-                  {
-                    "label": "Facial",
-                    "href": "#services"
+                    "label": "3D",
+                    "href": "#products"
                   }
                 ]
               },
               {
-                "title": "Company",
+                "title": "Support",
                 "links": [
                   {
-                    "label": "About",
-                    "href": "#why-choose-us"
-                  },
-                  {
-                    "label": "Blog",
-                    "href": "#blog"
+                    "label": "Help",
+                    "href": "#support"
                   },
                   {
                     "label": "Contact",
-                    "href": "#contact"
+                    "href": "#support"
                   }
                 ]
               },
@@ -2166,16 +2229,436 @@
                 "links": [
                   {
                     "label": "Privacy",
-                    "href": "#privacy"
+                    "href": "#legal"
                   },
                   {
                     "label": "Terms",
-                    "href": "#terms"
+                    "href": "#legal"
                   }
                 ]
               }
             ],
-            "legal": "© 2026 Beauty Salon Bangkok. All rights reserved."
+            "legal": "© 2026 Analogue-inspired template",
+            "logoText": "Analogue"
+          }
+        }
+      }
+    },
+    {
+      "id": "auto_pamama-machinetools-reference",
+      "name": "Industrial machine tools corporate homepage with product hero, capability sections, proof cards, and technical credibility",
+      "keywords": [
+        "pamamamachinetoolsreference",
+        "pamama",
+        "machinetools",
+        "reference",
+        "pamamachinetoolscom",
+        "pamamachinetools",
+        "com",
+        "industrial",
+        "machine-tools",
+        "clean",
+        "navigation",
+        "large",
+        "engineering",
+        "hero",
+        "product",
+        "capability",
+        "grid",
+        "technical",
+        "highlights",
+        "social",
+        "proof",
+        "strong",
+        "cta",
+        "compact"
+      ],
+      "templates": {
+        "navigation": {
+          "type": "Navbar",
+          "props": {
+            "variant": "withCTA",
+            "sticky": true,
+            "paddingY": "sm",
+            "maxWidth": "xl",
+            "background": "none",
+            "brand": "pama",
+            "logo": {
+              "alt": "PAMA"
+            },
+            "links": [
+              {
+                "label": "SETTORI",
+                "href": "#settori",
+                "variant": "link"
+              },
+              {
+                "label": "PRODOTTI",
+                "href": "#prodotti",
+                "variant": "link"
+              },
+              {
+                "label": "ASSISTENZA",
+                "href": "#assistenza",
+                "variant": "link"
+              }
+            ],
+            "ctas": [
+              {
+                "label": "CONTATTI",
+                "href": "#contatti",
+                "variant": "primary"
+              }
+            ],
+            "showMenu": true,
+            "menuHref": "#menu",
+            "language": {
+              "label": "IT",
+              "href": "#lang"
+            }
+          }
+        },
+        "hero": {
+          "type": "HeroCover",
+          "props": {
+            "paddingY": "sm",
+            "maxWidth": "2xl",
+            "background": "none",
+            "fullBleed": true,
+            "flush": true,
+            "height": "calc(100vh - 84px)",
+            "mobileHeight": "calc(100vh - 72px)",
+            "ctas": [
+              {
+                "label": "Get Started",
+                "href": "#contact",
+                "variant": "primary"
+              }
+            ],
+            "mediaSrc": "/assets/template-factory/pamama-machinetools-reference/desktop-hero-top.png",
+            "mediaAlt": "pamama-machinetools-reference hero visual",
+            "mobileMediaSrc": "/assets/template-factory/pamama-machinetools-reference/mobile-hero-top.png",
+            "mobileMediaAlt": "pamama-machinetools-reference hero visual mobile"
+          }
+        },
+        "story": {
+          "type": "FeatureWithMedia",
+          "props": {
+            "variant": "split",
+            "paddingY": "lg",
+            "maxWidth": "xl",
+            "background": "muted",
+            "eyebrow": "CHI SIAMO",
+            "title": "Your solution provider",
+            "subtitle": "PAMA è partner nella fornitura di macchine utensili e servizi.",
+            "body": "Tecnologia, esperienza e supporto specialistico per processi produttivi ad alta precisione.",
+            "ctas": [
+              {
+                "label": "SCOPRI DI PIÙ",
+                "href": "#chi-siamo",
+                "variant": "primary"
+              }
+            ],
+            "dashboardImageSrc": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-story.png",
+            "dashboardImageAlt": "pamama-machinetools-reference dashboard visual",
+            "media": {
+              "kind": "image",
+              "src": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-story.png",
+              "alt": "pamama-machinetools-reference story visual"
+            },
+            "mediaSrc": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-story.png",
+            "mediaAlt": "pamama-machinetools-reference story visual"
+          }
+        },
+        "approach": {
+          "type": "SectorsStrip",
+          "props": {
+            "paddingY": "lg",
+            "maxWidth": "xl",
+            "background": "none",
+            "title": "I NOSTRI SETTORI",
+            "subtitle": "PAMA opera con esperienza in settori ad alta specializzazione.",
+            "items": [
+              {
+                "title": "SETTORE OIL & GAS",
+                "description": "Soluzioni per applicazioni ad alta precisione.",
+                "cta": {
+                  "label": "SCOPRI DI PIÙ",
+                  "href": "#settori",
+                  "variant": "primary"
+                },
+                "image": {
+                  "src": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-approach.png",
+                  "alt": "SETTORE OIL & GAS"
+                },
+                "imageSrc": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-approach.png",
+                "imageAlt": "SETTORE OIL & GAS"
+              },
+              {
+                "title": "SETTORE COSTRUZIONE DI MACCHINE",
+                "description": "Macchine utensili per processi industriali avanzati.",
+                "cta": {
+                  "label": "SCOPRI DI PIÙ",
+                  "href": "#settori",
+                  "variant": "primary"
+                },
+                "image": {
+                  "src": "/assets/template-factory/pamama-machinetools-reference/slices/mobile-approach.png",
+                  "alt": "SETTORE COSTRUZIONE DI MACCHINE"
+                },
+                "imageSrc": "/assets/template-factory/pamama-machinetools-reference/slices/mobile-approach.png",
+                "imageAlt": "SETTORE COSTRUZIONE DI MACCHINE"
+              },
+              {
+                "title": "SETTORE STAMPI",
+                "description": "Sistemi dedicati alla produzione stampi.",
+                "cta": {
+                  "label": "SCOPRI DI PIÙ",
+                  "href": "#settori",
+                  "variant": "primary"
+                },
+                "image": {
+                  "src": "/assets/template-factory/pamama-machinetools-reference/slices/mobile-approach.png",
+                  "alt": "SETTORE STAMPI"
+                },
+                "imageSrc": "/assets/template-factory/pamama-machinetools-reference/slices/mobile-approach.png",
+                "imageAlt": "SETTORE STAMPI"
+              }
+            ]
+          }
+        },
+        "socialproof": {
+          "type": "CardsGrid",
+          "props": {
+            "paddingY": "lg",
+            "maxWidth": "xl",
+            "background": "muted",
+            "title": "HIGHLIGHTS",
+            "subtitle": "News, eventi e aggiornamenti PAMA.",
+            "variant": "media",
+            "columns": "3col",
+            "density": "normal",
+            "cardStyle": "solid",
+            "imagePosition": "top",
+            "imageSize": "md",
+            "imageShape": "rounded",
+            "headingSize": "sm",
+            "bodySize": "sm",
+            "items": [
+              {
+                "title": "Pama innova per crescere globalmente",
+                "description": "Approfondimenti dal mondo PAMA.",
+                "cta": {
+                  "label": "SCOPRI DI PIÙ",
+                  "href": "#highlights",
+                  "variant": "link"
+                },
+                "avatar": {
+                  "src": "/assets/template-factory/pamama-machinetools-reference/slices/mobile-socialproof.png",
+                  "alt": "Avatar 1"
+                }
+              },
+              {
+                "title": "EMO 2025",
+                "description": "Save the date: 22-26 Settembre 2025.",
+                "cta": {
+                  "label": "SCOPRI DI PIÙ",
+                  "href": "#highlights",
+                  "variant": "link"
+                },
+                "avatar": {
+                  "src": "/assets/template-factory/pamama-machinetools-reference/slices/mobile-socialproof.png",
+                  "alt": "Avatar 2"
+                }
+              },
+              {
+                "title": "Novità di prodotto",
+                "description": "Aggiornamenti su soluzioni e tecnologie.",
+                "cta": {
+                  "label": "SCOPRI DI PIÙ",
+                  "href": "#highlights",
+                  "variant": "link"
+                },
+                "avatar": {
+                  "src": "/assets/template-factory/pamama-machinetools-reference/slices/mobile-socialproof.png",
+                  "alt": "Avatar 3"
+                }
+              }
+            ],
+            "imageSrc": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-socialproof.png",
+            "imageAlt": "Results visual"
+          }
+        },
+        "products": {
+          "type": "CategoryTabs",
+          "props": {
+            "paddingY": "lg",
+            "maxWidth": "xl",
+            "background": "none",
+            "eyebrow": "I NOSTRI PRODOTTI",
+            "title": "Product Portfolio",
+            "subtitle": "Seleziona una categoria per esplorare le soluzioni PAMA.",
+            "tabs": [
+              {
+                "label": "ACCESSORI"
+              },
+              {
+                "label": "CENTRI DI LAVORO"
+              },
+              {
+                "label": "AUTOMAZIONE"
+              }
+            ],
+            "panels": [
+              {
+                "title": "Accessori per ogni esigenza",
+                "description": "Versatilita e produttivita per processi complessi.",
+                "bullets": [
+                  "Soluzioni modulari",
+                  "Setup rapido",
+                  "Qualita costante"
+                ],
+                "cta": {
+                  "label": "SCOPRI DI PIÙ",
+                  "href": "#contatti",
+                  "variant": "primary"
+                }
+              },
+              {
+                "title": "Centri di lavoro",
+                "description": "Massima versatilita e affidabilita per lavorazioni di precisione.",
+                "bullets": [
+                  "Rigidita strutturale",
+                  "Controllo avanzato",
+                  "Prestazioni ripetibili"
+                ],
+                "cta": {
+                  "label": "SCOPRI DI PIÙ",
+                  "href": "#contatti",
+                  "variant": "primary"
+                }
+              },
+              {
+                "title": "Automazione",
+                "description": "Linee automatizzate per produttivita e qualita ripetibile.",
+                "bullets": [
+                  "Integrazione su misura",
+                  "Riduzione tempi ciclo",
+                  "Monitoraggio produzione"
+                ],
+                "cta": {
+                  "label": "SCOPRI DI PIÙ",
+                  "href": "#contatti",
+                  "variant": "primary"
+                }
+              }
+            ],
+            "activeIndex": 0
+          }
+        },
+        "contact": {
+          "type": "ContentStory",
+          "props": {
+            "variant": "simple",
+            "paddingY": "md",
+            "maxWidth": "xl",
+            "background": "muted",
+            "eyebrow": "ASSISTENZA",
+            "title": "Service",
+            "subtitle": "Supporto specialistico dedicato alle macchine utensili.",
+            "body": "Interventi qualificati, ricambi e consulenza tecnica per garantire continuita produttiva.",
+            "ctas": [
+              {
+                "label": "SCOPRI DI PIÙ",
+                "href": "#assistenza",
+                "variant": "primary"
+              }
+            ]
+          }
+        },
+        "cta": {
+          "type": "FeatureWithMedia",
+          "props": {
+            "variant": "split",
+            "paddingY": "lg",
+            "maxWidth": "xl",
+            "background": "muted",
+            "eyebrow": "SOLUTION PROVIDER",
+            "title": "PAMA, MACHINE UTENSILI CUSTOM",
+            "subtitle": "PAMA sviluppa soluzioni custom per applicazioni industriali complesse.",
+            "body": "Macchine utensili ad alte prestazioni, progettate per affidabilita e produttivita.",
+            "ctas": [
+              {
+                "label": "SCOPRI DI PIÙ",
+                "href": "#solution-provider",
+                "variant": "primary"
+              }
+            ],
+            "cta": {
+              "label": "Inquire Now",
+              "href": "#contact",
+              "variant": "primary"
+            },
+            "media": {
+              "kind": "image",
+              "src": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-cta.png",
+              "alt": "PAMA, MACHINE UTENSILI CUSTOM"
+            },
+            "mediaSrc": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-cta.png",
+            "mediaAlt": "PAMA, MACHINE UTENSILI CUSTOM"
+          }
+        },
+        "footer": {
+          "type": "Footer",
+          "props": {
+            "variant": "multiColumn",
+            "paddingY": "md",
+            "maxWidth": "2xl",
+            "background": "gradient",
+            "backgroundGradient": "linear-gradient(180deg, #0b8ea0 0%, #097f8f 100%)",
+            "columns": [
+              {
+                "title": "Azienda",
+                "links": [
+                  {
+                    "label": "Chi siamo",
+                    "href": "#chi-siamo"
+                  },
+                  {
+                    "label": "Contatti",
+                    "href": "#contatti"
+                  }
+                ]
+              },
+              {
+                "title": "Prodotti",
+                "links": [
+                  {
+                    "label": "Settori",
+                    "href": "#settori"
+                  },
+                  {
+                    "label": "Soluzioni",
+                    "href": "#prodotti"
+                  }
+                ]
+              },
+              {
+                "title": "Supporto",
+                "links": [
+                  {
+                    "label": "Assistenza",
+                    "href": "#assistenza"
+                  },
+                  {
+                    "label": "News",
+                    "href": "#highlights"
+                  }
+                ]
+              }
+            ],
+            "legal": "© 2026 PAMA-inspired template",
+            "logoText": "pamama-machinetools-refe"
           }
         }
       }

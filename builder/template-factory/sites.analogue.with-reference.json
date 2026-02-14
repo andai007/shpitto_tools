@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "sites": [
+    {
+      "id": "analogue-co-reference",
+      "url": "https://www.analogue.co/",
+      "description": "Analogue-style retro gaming hardware homepage with minimal monochrome structure and photography-first sections",
+      "prompt": "Generate an Analogue-inspired retro gaming hardware homepage with thin navigation, high-contrast hero, product cards, technical feature grid, review strip, CTA, and minimal dark footer.",
+      "desktopScreenshot": "/Users/andai007/Downloads/screencapture-analogue-co-2026-02-13-13_21_09.png",
+      "mobileScreenshot": "/Users/andai007/Downloads/screencapture-analogue-co-2026-02-13-13_22_46.png"
+    }
+  ]
+}

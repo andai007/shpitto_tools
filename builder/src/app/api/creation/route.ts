@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import manifest from "@/skills/manifest.json";
 import { PlanningFiles } from "@/lib/agent/planning-files";
 import { generateP2WProject } from "@/lib/agent/p2w-graph";
+import { selectStyleProfile } from "@/lib/agent/section-template-registry";
 import { logError, logInfo, logWarn } from "@/lib/logger";
 
 const ensureDir = async (dir: string) => {
@@ -26,12 +27,107 @@ const persistRequestTimeoutMs = parseTimeoutMs(
   0
 );
 
+const hasAnyApiKey = () =>
+  Boolean(process.env.AIBERM_API_KEY || process.env.OPENROUTER_API_KEY || process.env.ANTHROPIC_API_KEY);
+
 type GenerationResult = Awaited<ReturnType<typeof generateP2WProject>>;
 
 type SandboxPayload = {
   components: Array<{ name: string; code: string }>;
   pages: Array<{ path: string; name: string; data: unknown }>;
   theme?: Record<string, unknown>;
+};
+
+const buildTemplateOnlyFallbackResult = (prompt: string) => {
+  const profile = selectStyleProfile(prompt);
+  if (!profile?.templates) return null;
+
+  const isPamama =
+    profile.id.toLowerCase().includes("pamama") ||
+    profile.keywords.some((k) => String(k).toLowerCase().includes("pamama"));
+
+  const theme = isPamama
+    ? {
+        mode: "light",
+        motion: "subtle",
+        radius: "0.25rem",
+        fontHeading: "Space Grotesk",
+        fontBody: "Space Grotesk",
+        palette: {
+          bg: "#f4f6f7",
+          text: "#1f252b",
+          muted: "#eef2f4",
+          border: "#d6dde1",
+          card: "#ffffff",
+          primary: "#0093ad",
+          accent: "#0093ad",
+          textSecondary: "#4b5563",
+        },
+      }
+    : {
+        mode: "light",
+        motion: "subtle",
+        radius: "0.5rem",
+        fontHeading: "Manrope",
+        fontBody: "Manrope",
+      };
+
+  // Order tuned to match typical landing page flow and PAMA reference screenshots.
+  const order = ["navigation", "hero", "approach", "story", "cta", "products", "contact", "socialproof", "footer"] as const;
+  const anchorByKind: Record<(typeof order)[number], string> = {
+    navigation: "top",
+    hero: "top",
+    approach: "settori",
+    story: "chi-siamo",
+    cta: "solution-provider",
+    products: "prodotti",
+    contact: "assistenza",
+    socialproof: "highlights",
+    footer: "footer",
+  };
+
+  const content = order
+    .filter((kind) => Boolean(profile.templates?.[kind as any]))
+    .map((kind, idx) => {
+      const block = profile.templates?.[kind as any] as any;
+      const props = JSON.parse(JSON.stringify(block.props ?? {})) as Record<string, unknown>;
+      if (typeof props.id !== "string" || !props.id.trim()) {
+        props.id = `${String(block.type || "Block")}-${idx + 1}`;
+      }
+      if (typeof props.anchor !== "string" || !props.anchor.trim()) {
+        props.anchor = anchorByKind[kind];
+      }
+      return { type: String(block.type), props };
+    });
+
+  return {
+    blueprint: {
+      pages: [
+        {
+          path: "/",
+          name: "Home",
+          sections: content.map((section) => ({
+            id: String((section as any)?.props?.id ?? ""),
+            type: String(section.type ?? ""),
+            intent: "Template-only fallback (no API key configured).",
+          })),
+        },
+      ],
+    },
+    theme,
+    pages: [
+      {
+        path: "/",
+        name: "Home",
+        data: {
+          content,
+          root: { props: { title: profile.name || "Home", theme } },
+        },
+      },
+    ],
+    components: [],
+    errors: ["template_only_no_api_key"],
+  };
 };
 
 const toSandboxPayload = (value: unknown): SandboxPayload => {
@@ -205,7 +301,20 @@ export async function POST(request: NextRequest) {
       logWarn("[creation] empty_prompt", { requestId });
       return NextResponse.json({ error: "prompt_required", requestId }, { status: 400 });
     }
-    if (!process.env.AIBERM_API_KEY && !process.env.OPENROUTER_API_KEY && !process.env.ANTHROPIC_API_KEY) {
+    if (!hasAnyApiKey()) {
+      const fallback = buildTemplateOnlyFallbackResult(prompt);
+      if (fallback) {
+        const id = resumeId || `p2w_${Date.now()}`;
+        logWarn("[creation] missing_api_key_template_only", { requestId, id, profileSelected: true });
+        return NextResponse.json({
+          requestId,
+          id,
+          prompt,
+          durationMs: Date.now() - startedAt,
+          pending: false,
+          ...fallback,
+        });
+      }
       logError("[creation] missing_api_key", { requestId });
       return NextResponse.json({ error: "missing_api_key", requestId }, { status: 500 });
     }

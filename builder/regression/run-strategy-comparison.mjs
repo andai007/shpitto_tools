@@ -12,7 +12,9 @@ const PROMPTS_FILE = path.join(ROOT, "regression", "prompts.baseline.json");
 const REPORT_DIR = path.join(ROOT, "regression", "strategy-comparison");
 const SCREENSHOT_DIR = path.join(REPORT_DIR, "screenshots");
 const PORT = Number(process.env.STRATEGY_COMPARE_PORT || 3110);
-const BASE_URL = `http://localhost:${PORT}`;
+// In some sandboxed environments binding 0.0.0.0 is blocked (EPERM). Force localhost.
+const HOST = String(process.env.STRATEGY_COMPARE_HOST || "127.0.0.1").trim() || "127.0.0.1";
+const BASE_URL = `http://${HOST}:${PORT}`;
 const SERVER_MODE = String(process.env.STRATEGY_COMPARE_SERVER_MODE || "dev")
   .trim()
   .toLowerCase();
@@ -145,7 +147,7 @@ const runShell = (cmd, options = {}) =>
   });
 
 const startServerWithScript = async (envOverrides, scriptName) => {
-  const child = spawn("npm", ["run", scriptName, "--", "-p", String(PORT)], {
+  const child = spawn("npm", ["run", scriptName, "--", "-H", HOST, "-p", String(PORT)], {
     cwd: ROOT,
     env: { ...process.env, ...envOverrides },
     stdio: ["ignore", "pipe", "pipe"],

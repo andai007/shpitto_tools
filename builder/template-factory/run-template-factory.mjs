@@ -314,10 +314,370 @@ const RECIPES = {
       },
     },
   },
+  pamama_machine_tools_corporate: {
+    id: "pamama_machine_tools_corporate",
+    styleLabels: ["industrial", "machine-tools", "corporate", "engineering", "light-gray", "teal-accent"],
+    paletteProfile: "industrial-teal-gray",
+    typographySignature: "clean-sans + compact-sans",
+    layoutPatterns: [
+      "thin-top-nav",
+      "hero-factory-cover",
+      "sector-cards-grid",
+      "about-split-image",
+      "product-catalog-grid",
+      "assistenza-section",
+      "highlights-cards",
+      "teal-footer",
+    ],
+    componentSignature: ["Navbar", "HeroCover", "SectorsStrip", "FeatureWithMedia", "CategoryTabs", "CardsGrid", "ContentStory", "Footer"],
+    requiredCategories: ["navigation", "hero", "approach", "story", "cta", "products", "contact", "socialproof", "footer"],
+    sectionSpecs: {
+      navigation: {
+        blockType: "Navbar",
+        defaults: {
+          variant: "withCTA",
+          sticky: true,
+          paddingY: "sm",
+          maxWidth: "xl",
+          background: "none",
+          brand: "pama",
+          logo: { alt: "PAMA" },
+          links: [
+            { label: "SETTORI", href: "#settori", variant: "link" },
+            { label: "PRODOTTI", href: "#prodotti", variant: "link" },
+            { label: "ASSISTENZA", href: "#assistenza", variant: "link" },
+          ],
+          ctas: [{ label: "CONTATTI", href: "#contatti", variant: "primary" }],
+          showMenu: true,
+          menuHref: "#menu",
+          language: { label: "IT", href: "#lang" },
+        },
+      },
+      hero: {
+        blockType: "HeroCover",
+        defaults: {
+          paddingY: "sm",
+          maxWidth: "2xl",
+          background: "none",
+          fullBleed: true,
+          flush: true,
+          height: "calc(100vh - 84px)",
+          mobileHeight: "calc(100vh - 72px)",
+        },
+      },
+      approach: {
+        blockType: "SectorsStrip",
+        defaults: {
+          paddingY: "lg",
+          maxWidth: "xl",
+          background: "none",
+          title: "I NOSTRI SETTORI",
+          subtitle: "PAMA opera con esperienza in settori ad alta specializzazione.",
+          items: [
+            { title: "SETTORE OIL & GAS", description: "Soluzioni per applicazioni ad alta precisione.", cta: { label: "SCOPRI DI PIÙ", href: "#settori", variant: "primary" } },
+            { title: "SETTORE COSTRUZIONE DI MACCHINE", description: "Macchine utensili per processi industriali avanzati.", cta: { label: "SCOPRI DI PIÙ", href: "#settori", variant: "primary" } },
+            { title: "SETTORE STAMPI", description: "Sistemi dedicati alla produzione stampi.", cta: { label: "SCOPRI DI PIÙ", href: "#settori", variant: "primary" } },
+          ],
+        },
+      },
+      story: {
+        blockType: "FeatureWithMedia",
+        defaults: {
+          variant: "split",
+          paddingY: "lg",
+          maxWidth: "xl",
+          background: "muted",
+          eyebrow: "CHI SIAMO",
+          title: "Your solution provider",
+          subtitle: "PAMA è partner nella fornitura di macchine utensili e servizi.",
+          body: "Tecnologia, esperienza e supporto specialistico per processi produttivi ad alta precisione.",
+          ctas: [{ label: "SCOPRI DI PIÙ", href: "#chi-siamo", variant: "primary" }],
+        },
+      },
+      products: {
+        blockType: "CategoryTabs",
+        defaults: {
+          paddingY: "lg",
+          maxWidth: "xl",
+          background: "none",
+          eyebrow: "I NOSTRI PRODOTTI",
+          title: "",
+          subtitle: "Seleziona una categoria per esplorare le soluzioni PAMA.",
+          tabs: [{ label: "ACCESSORI" }, { label: "CENTRI DI LAVORO" }, { label: "AUTOMAZIONE" }],
+          panels: [
+            {
+              title: "Accessori per ogni esigenza",
+              description: "Versatilita e produttivita per processi complessi.",
+              bullets: ["Soluzioni modulari", "Setup rapido", "Qualita costante"],
+              cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
+            },
+            {
+              title: "Centri di lavoro",
+              description: "Massima versatilita e affidabilita per lavorazioni di precisione.",
+              bullets: ["Rigidita strutturale", "Controllo avanzato", "Prestazioni ripetibili"],
+              cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
+            },
+            {
+              title: "Automazione",
+              description: "Linee automatizzate per produttivita e qualita ripetibile.",
+              bullets: ["Integrazione su misura", "Riduzione tempi ciclo", "Monitoraggio produzione"],
+              cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
+            },
+          ],
+          activeIndex: 0,
+        },
+      },
+      cta: {
+        blockType: "FeatureWithMedia",
+        defaults: {
+          variant: "split",
+          paddingY: "lg",
+          maxWidth: "xl",
+          background: "muted",
+          eyebrow: "SOLUTION PROVIDER",
+          title: "PAMA, MACHINE UTENSILI CUSTOM",
+          subtitle: "PAMA sviluppa soluzioni custom per applicazioni industriali complesse.",
+          body: "Macchine utensili ad alte prestazioni, progettate per affidabilita e produttivita.",
+          ctas: [{ label: "SCOPRI DI PIÙ", href: "#solution-provider", variant: "primary" }],
+        },
+      },
+      contact: {
+        blockType: "ContentStory",
+        defaults: {
+          variant: "simple",
+          paddingY: "md",
+          maxWidth: "xl",
+          background: "muted",
+          eyebrow: "ASSISTENZA",
+          title: "Service",
+          subtitle: "Supporto specialistico dedicato alle macchine utensili.",
+          body: "Interventi qualificati, ricambi e consulenza tecnica per garantire continuita produttiva.",
+          ctas: [{ label: "SCOPRI DI PIÙ", href: "#assistenza", variant: "primary" }],
+        },
+      },
+      socialproof: {
+        blockType: "CardsGrid",
+        defaults: {
+          paddingY: "lg",
+          maxWidth: "xl",
+          background: "muted",
+          title: "HIGHLIGHTS",
+          subtitle: "News, eventi e aggiornamenti PAMA.",
+          variant: "media",
+          columns: "3col",
+          density: "normal",
+          cardStyle: "solid",
+          imagePosition: "top",
+          imageSize: "md",
+          imageShape: "rounded",
+          headingSize: "sm",
+          bodySize: "sm",
+          items: [
+            { title: "Pama innova per crescere globalmente", description: "Approfondimenti dal mondo PAMA.", cta: { label: "SCOPRI DI PIÙ", href: "#highlights", variant: "link" } },
+            { title: "EMO 2025", description: "Save the date: 22-26 Settembre 2025.", cta: { label: "SCOPRI DI PIÙ", href: "#highlights", variant: "link" } },
+            { title: "Novità di prodotto", description: "Aggiornamenti su soluzioni e tecnologie.", cta: { label: "SCOPRI DI PIÙ", href: "#highlights", variant: "link" } },
+          ],
+        },
+      },
+      footer: {
+        blockType: "Footer",
+        defaults: {
+          variant: "multiColumn",
+          paddingY: "md",
+          maxWidth: "2xl",
+          background: "gradient",
+          backgroundGradient: "linear-gradient(180deg, #0b8ea0 0%, #097f8f 100%)",
+          columns: [
+            { title: "Azienda", links: [{ label: "Chi siamo", href: "#chi-siamo" }, { label: "Contatti", href: "#contatti" }] },
+            { title: "Prodotti", links: [{ label: "Settori", href: "#settori" }, { label: "Soluzioni", href: "#prodotti" }] },
+            { title: "Supporto", links: [{ label: "Assistenza", href: "#assistenza" }, { label: "News", href: "#highlights" }] },
+          ],
+          legal: "© 2026 PAMA-inspired template",
+        },
+      },
+    },
+  },
+  analogue_console_minimal: {
+    id: "analogue_console_minimal",
+    styleLabels: ["analogue", "retro-gaming", "consumer-electronics", "minimal", "dark", "high-contrast", "photography-led"],
+    paletteProfile: "graphite-mono",
+    typographySignature: "condensed-sans + neutral-sans",
+    layoutPatterns: [
+      "thin-nav-monochrome",
+      "hero-product-focus",
+      "product-grid-image-led",
+      "spec-grid-high-contrast",
+      "review-band-metrics",
+      "dark-minimal-footer",
+    ],
+    componentSignature: ["Navbar", "HeroSplit", "CardsGrid", "FeatureGrid", "ContentStory", "TestimonialsGrid", "LeadCaptureCTA", "Footer"],
+    requiredCategories: ["navigation", "hero", "story", "products", "approach", "socialproof", "cta", "footer"],
+    sectionSpecs: {
+      navigation: {
+        blockType: "Navbar",
+        defaults: {
+          variant: "simple",
+          sticky: false,
+          paddingY: "sm",
+          maxWidth: "xl",
+          background: "none",
+          links: [
+            { label: "Pocket", href: "#products", variant: "link" },
+            { label: "OS", href: "#story", variant: "link" },
+            { label: "Features", href: "#features", variant: "link" },
+            { label: "Reviews", href: "#reviews", variant: "link" },
+          ],
+          ctas: [{ label: "Shop", href: "#products", variant: "primary" }],
+        },
+      },
+      hero: {
+        blockType: "HeroSplit",
+        defaults: {
+          paddingY: "lg",
+          headingSize: "lg",
+          bodySize: "sm",
+          maxWidth: "xl",
+          mediaPosition: "right",
+          background: "none",
+          eyebrow: "Shipping Now",
+          title: "Analogue Pocket",
+          subtitle: "",
+          ctas: [
+            { label: "Shop Now", href: "#products", variant: "primary" },
+            { label: "Explore More", href: "#story", variant: "secondary" },
+          ],
+        },
+      },
+      story: {
+        blockType: "FeatureWithMedia",
+        defaults: {
+          variant: "simple",
+          paddingY: "lg",
+          maxWidth: "xl",
+          background: "none",
+          eyebrow: "The definitive os",
+          title: "The Definitive, Scholarly OS for N64",
+          subtitle: "",
+          body: "",
+          items: [],
+          ctas: [],
+        },
+      },
+      products: {
+        blockType: "CardsGrid",
+        defaults: {
+          paddingY: "lg",
+          maxWidth: "xl",
+          title: "Everything, Elevated",
+          subtitle: "",
+          variant: "product",
+          columns: "4col",
+          density: "normal",
+          cardStyle: "solid",
+          imagePosition: "top",
+          imageSize: "md",
+          imageShape: "rounded",
+          headingSize: "sm",
+          bodySize: "sm",
+          items: [
+            {
+              title: "Built for Multiplayer",
+              subtitle: "",
+              description: "Local multiplayer with low-latency input handling.",
+              cta: { label: "Learn", href: "#features", variant: "link" },
+            },
+            {
+              title: "N64 Reimagined in 4K",
+              subtitle: "",
+              description: "Precision output tuned for modern displays.",
+              cta: { label: "Learn", href: "#features", variant: "link" },
+            },
+            {
+              title: "100% Compatibility",
+              subtitle: "",
+              description: "Hardware and save-path compatibility by design.",
+              cta: { label: "Learn", href: "#features", variant: "link" },
+            },
+            {
+              title: "Powered by 3D",
+              subtitle: "",
+              description: "Rich visuals with faithful motion and detail.",
+              cta: { label: "Learn", href: "#features", variant: "link" },
+            },
+          ],
+        },
+      },
+      approach: {
+        blockType: "FeatureWithMedia",
+        defaults: {
+          paddingY: "lg",
+          maxWidth: "xl",
+          variant: "simple",
+          title: "The New Standard for CRT Perfection in 4K.",
+          subtitle: "",
+          body: "",
+          items: [],
+          ctas: [],
+        },
+      },
+      socialproof: {
+        blockType: "TestimonialsGrid",
+        defaults: {
+          variant: "3col",
+          paddingY: "lg",
+          maxWidth: "xl",
+          background: "gradient",
+          backgroundGradient: "linear-gradient(180deg, #050505 0%, #0f0f10 100%)",
+          backgroundOverlay: "rgba(0,0,0,0.25)",
+          backgroundOverlayOpacity: 0.25,
+          title: "Analogue Reviews",
+          items: [
+            { quote: "“A reference-quality handheld with remarkable build quality.”", name: "4.5/5", role: "Reviews" },
+            { quote: "“The best modern way to experience classic cartridges.”", name: "5/5", role: "Press" },
+            { quote: "“Scholarly OS and outstanding visual fidelity.”", name: "4.5/5", role: "Community" },
+            { quote: "“A definitive package for N64 enthusiasts.”", name: "9/10", role: "Media" },
+          ],
+        },
+      },
+      cta: {
+        blockType: "LeadCaptureCTA",
+        defaults: {
+          variant: "banner",
+          paddingY: "lg",
+          maxWidth: "xl",
+          background: "gradient",
+          backgroundGradient: "linear-gradient(180deg, #080808 0%, #121212 100%)",
+          backgroundOverlay: "rgba(0,0,0,0.2)",
+          backgroundOverlayOpacity: 0.2,
+          title: "We make products to celebrate and explore the history of video games.",
+          subtitle: "with the respect it deserves.",
+          cta: { label: "All Products", href: "#products", variant: "secondary" },
+        },
+      },
+      footer: {
+        blockType: "Footer",
+        defaults: {
+          variant: "multiColumn",
+          paddingY: "md",
+          maxWidth: "xl",
+          background: "gradient",
+          backgroundGradient: "linear-gradient(180deg, #090909 0%, #151515 100%)",
+          backgroundOverlay: "rgba(0,0,0,0.15)",
+          backgroundOverlayOpacity: 0.15,
+          columns: [
+            { title: "Products", links: [{ label: "Pocket", href: "#products" }, { label: "3D", href: "#products" }] },
+            { title: "Support", links: [{ label: "Help", href: "#support" }, { label: "Contact", href: "#support" }] },
+            { title: "Legal", links: [{ label: "Privacy", href: "#legal" }, { label: "Terms", href: "#legal" }] },
+          ],
+          legal: "© 2026 Analogue-inspired template",
+        },
+      },
+    },
+  },
   nexus_engineering_neon: {
     id: "nexus_engineering_neon",
-    styleLabels: ["dark", "nexus", "engineering", "precision", "infra", "product", "gold-accent"],
-    paletteProfile: "dark-neon-gold",
+    styleLabels: ["dark", "nexus", "engineering", "precision", "infra", "product"],
+    paletteProfile: "dark-neon-orange",
     typographySignature: "bold-sans + compact-sans",
     layoutPatterns: [
       "minimal-nav-dark",
@@ -329,45 +689,45 @@ const RECIPES = {
       "workflow-footer-glow",
     ],
     componentSignature: [
-      "NexusNavPulse",
-      "NexusHeroDock",
-      "NexusCapabilityStrip",
-      "NexusOpsMatrix",
-      "NexusControlPanel",
-      "NexusProofMosaic",
-      "NexusFooterCommand",
+      "Navbar",
+      "NeonHeroBeam",
+      "NeonDashboardStrip",
+      "NeonFeatureCards",
+      "NeonResultsShowcase",
+      "NeonFooterGlow",
     ],
     requiredCategories: ["navigation", "hero", "story", "approach", "products", "socialproof", "footer"],
     sectionSpecs: {
       navigation: {
-        blockType: "NexusNavPulse",
+        blockType: "Navbar",
         defaults: {
+          variant: "withCTA",
           sticky: true,
+          paddingY: "sm",
           maxWidth: "xl",
-          logoText: "Nexus",
+          background: "gradient",
           links: [
-            { label: "Home", href: "#top" },
-            { label: "Services", href: "#services" },
-            { label: "About", href: "#about" },
-            { label: "Contact", href: "#contact" },
+            { label: "Home", href: "#top", variant: "link" },
+            { label: "Services", href: "#services", variant: "link" },
+            { label: "About", href: "#about", variant: "link" },
+            { label: "Contact", href: "#contact", variant: "link" },
           ],
-          cta: { label: "Get Started", href: "#contact", variant: "primary" },
+          ctas: [{ label: "Get Started", href: "#contact", variant: "primary" }],
         },
       },
       hero: {
-        blockType: "NexusHeroDock",
+        blockType: "NeonHeroBeam",
         defaults: {
+          paddingY: "lg",
           maxWidth: "xl",
-          badge: "Release Orchestration",
+          badge: "Nexus Platform",
           title: "Nexus is a precision tool for orchestrating product releases",
           subtitle: "Ship with velocity while maintaining reliability, policy control, and measurable rollout quality.",
-          panelTag: "Live Rollout",
+          panelTag: "Performance",
           panelTitle: "Release Velocity",
-          panelSubtitle: "Automated orchestration across environments and teams.",
+          panelSubtitle: "Automated orchestration across environments.",
           statValue: "+842%",
           statDelta: "vs baseline",
-          background: "none",
-          backgroundOverlay: "rgba(4,9,17,0.28)",
           ctas: [
             { label: "Explore Platform", href: "#services", variant: "primary" },
             { label: "View Metrics", href: "#proof", variant: "secondary" },
@@ -375,56 +735,45 @@ const RECIPES = {
         },
       },
       story: {
-        blockType: "NexusCapabilityStrip",
+        blockType: "NeonDashboardStrip",
         defaults: {
+          paddingY: "md",
           maxWidth: "xl",
-          eyebrow: "Key Capabilities",
+          eyebrow: "Wave 01",
           title: "Engineered for modern product teams",
-          subtitle: "Designed for scale, precision, and reliable execution.",
-          items: [
-            {
-              title: "Precision Targeting",
-              description: "Model workload placement and route policies around intent and business goals.",
-            },
-            {
-              title: "Automated Workflows",
-              description: "Ship faster with deterministic rollout stages and controls.",
-            },
-            {
-              title: "Brand Safety",
-              description: "Guardrails and policy checks keep changes reliable by default.",
-            },
+          subtitle: "Operational confidence through unified workflows, observability, and rollout controls.",
+          tabs: [{ label: "Releases" }, { label: "Policy" }, { label: "Insights" }, { label: "Safety" }, { label: "AI" }],
+          metrics: [
+            { label: "Deploy Frequency", value: "96/day" },
+            { label: "Rollback Window", value: "< 3 min" },
+            { label: "Policy Coverage", value: "99.2%" },
+          ],
+          kpis: [
+            { label: "Team Workspaces", value: "54" },
+            { label: "Services Managed", value: "216" },
+            { label: "Active Alerts", value: "7" },
           ],
         },
       },
       approach: {
-        blockType: "NexusOpsMatrix",
+        blockType: "NeonFeatureCards",
         defaults: {
+          paddingY: "lg",
           maxWidth: "xl",
-          eyebrow: "Wave 01",
           title: "Deploy with velocity, scale without ceremony.",
           subtitle: "Control release workflows without adding operational drag.",
           items: [
-            { title: "Zero-config infrastructure", description: "Provision workers, routes, and policies in one surface." },
+            { title: "Zero-config infrastructure", description: "Provision workers, routes, and policies in one surface.", highlight: true },
             { title: "Traffic-aware scaling", description: "Continuously adapt workloads to demand signals." },
-            {
-              title: "Precision analytics",
-              description: "Observe every deploy in real time: rollout health and regional error budgets.",
-              imageSrc: "/assets/template-factory/nexus-engineering-aura-ref/slices/desktop-approach.png",
-              imageAlt: "Precision analytics",
-            },
-            {
-              title: "Unified workflow control",
-              description: "Feature flags, canary rollouts, and instant rollback from one surface.",
-              imageSrc: "/assets/template-factory/nexus-engineering-aura-ref/slices/mobile-approach.png",
-              imageAlt: "Unified workflow control",
-            },
+            { title: "Precision analytics", description: "Observe rollout health and budget impact in real time." },
+            { title: "Unified workflow control", description: "Feature flags, canary rollouts, and instant rollback." },
           ],
         },
       },
       products: {
-        blockType: "NexusControlPanel",
+        blockType: "NeonDashboardStrip",
         defaults: {
+          paddingY: "md",
           maxWidth: "xl",
           eyebrow: "Wave 02",
           title: "AI-assisted product orchestration",
@@ -440,16 +789,14 @@ const RECIPES = {
             { label: "Guardrail Rules", value: "73" },
             { label: "AI Recommendations", value: "312" },
           ],
-          dashboardImageSrc: "/assets/template-factory/nexus-engineering-aura-ref/slices/desktop-products.png",
-          mobileDashboardImageSrc: "/assets/template-factory/nexus-engineering-aura-ref/slices/mobile-products.png",
-          dashboardImageAlt: "AI-assisted product orchestration",
         },
       },
       socialproof: {
-        blockType: "NexusProofMosaic",
+        blockType: "NeonResultsShowcase",
         defaults: {
+          paddingY: "lg",
           maxWidth: "xl",
-          title: "Ship Faster with Nexus",
+          title: "Ship faster with Nexus",
           subtitle: "Teams report higher confidence and lower operational load after rollout.",
           quote:
             "Nexus gave us a single control plane for releases. We moved faster while reducing incident pressure across teams.",
@@ -458,8 +805,9 @@ const RECIPES = {
         },
       },
       footer: {
-        blockType: "NexusFooterCommand",
+        blockType: "NeonFooterGlow",
         defaults: {
+          paddingY: "md",
           maxWidth: "xl",
           title: "Ready to streamline your workflow?",
           subtitle: "Join high-performance engineering teams using Nexus to orchestrate delivery from idea to shipping.",
@@ -723,279 +1071,6 @@ const RECIPES = {
       },
     },
   },
-  beauty_salon_serene: {
-    id: "beauty_salon_serene",
-    styleLabels: ["beauty-salon", "wellness", "editorial", "soft-beige", "service-booking"],
-    paletteProfile: "soft-beige-neutral",
-    typographySignature: "elegant-sans + clean-body",
-    layoutPatterns: [
-      "minimal-nav-light",
-      "hero-split-portrait",
-      "service-cards-grid",
-      "contrast-feature-with-media",
-      "faq-single-open",
-      "consultation-split",
-      "blog-cards-strip",
-      "compact-multicol-footer",
-    ],
-    componentSignature: [
-      "Navbar",
-      "HeroSplit",
-      "CardsGrid",
-      "FeatureWithMedia",
-      "FAQAccordion",
-      "FeatureWithMedia",
-      "CardsGrid",
-      "LeadCaptureCTA",
-      "Footer",
-    ],
-    requiredCategories: ["navigation", "hero", "story", "approach", "products", "socialproof", "contact", "cta", "footer"],
-    sectionSpecs: {
-      navigation: {
-        blockType: "Navbar",
-        defaults: {
-          variant: "withCTA",
-          sticky: true,
-          paddingY: "sm",
-          maxWidth: "2xl",
-          background: "gradient",
-          backgroundGradient: "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-          logo: "BEAUTY SALON BANGKOK",
-          links: [
-            { label: "Home", href: "#top", variant: "link" },
-            { label: "Services", href: "#services", variant: "link" },
-            { label: "Blog", href: "#blog", variant: "link" },
-            { label: "Contact", href: "#contact", variant: "link" },
-          ],
-          ctas: [{ label: "Book Now", href: "#contact", variant: "primary" }],
-        },
-      },
-      hero: {
-        blockType: "HeroSplit",
-        defaults: {
-          paddingY: "md",
-          maxWidth: "2xl",
-          align: "left",
-          mediaPosition: "right",
-          headingSize: "lg",
-          bodySize: "md",
-          background: "gradient",
-          backgroundGradient: "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-          title: "Discover the best in beauty & wellness.",
-          subtitle: "Premium beauty services for every need. Experience care, style, and confidence.",
-          media: {
-            kind: "image",
-            src: "https://beautybodybangkok.com/wp-content/uploads/2024/06/beautiful-young-woman-smiling.webp",
-            alt: "Beauty salon portrait",
-          },
-          ctas: [
-            { label: "Book Appointment", href: "#contact", variant: "primary" },
-            { label: "Our Services", href: "#services", variant: "secondary" },
-          ],
-        },
-      },
-      story: {
-        blockType: "CardsGrid",
-        defaults: {
-          anchor: "services",
-          paddingY: "md",
-          maxWidth: "2xl",
-          background: "gradient",
-          backgroundGradient: "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-          title: "Our Services",
-          subtitle: "Tailored treatments for every style and skin journey.",
-          variant: "imageText",
-          columns: "3col",
-          density: "normal",
-          cardStyle: "solid",
-          imagePosition: "top",
-          imageShape: "rounded",
-          headingSize: "sm",
-          bodySize: "sm",
-          items: [
-            {
-              title: "Hair Services",
-              description: "Cut, style, treatment, and finishing by experienced stylists.",
-              imageSrc: "https://beautybodybangkok.com/wp-content/uploads/2024/06/lady-giving-a-hair-cut.webp",
-              imageAlt: "Hair service",
-            },
-            {
-              title: "Nail Services",
-              description: "Manicure and pedicure care with hygiene-first detail.",
-              imageSrc: "https://beautybodybangkok.com/wp-content/uploads/2024/06/lady-hand-with-nails-done-after-manicure.webp",
-              imageAlt: "Nail service",
-            },
-            {
-              title: "Makeup Services",
-              description: "Event-ready and daily makeup with personalized looks.",
-              imageSrc: "https://beautybodybangkok.com/wp-content/uploads/2024/06/Waxing-Services.webp",
-              imageAlt: "Makeup and beauty service",
-            },
-            {
-              title: "Massage Services",
-              description: "Relaxing body treatments for stress and recovery.",
-              imageSrc: "https://beautybodybangkok.com/wp-content/uploads/2024/06/foot-massage-and-head-massage-at-the-same-time.webp",
-              imageAlt: "Massage service",
-            },
-            {
-              title: "Facial Care",
-              description: "Customized facials for hydration, balance, and glow.",
-              imageSrc:
-                "https://beautybodybangkok.com/wp-content/uploads/2024/06/Beautician-with-a-brush-applies-a-white-moisturizing-mask-to-the-face-of-a-young-girl-client-in-a-sp_1.webp",
-              imageAlt: "Facial treatment",
-            },
-            {
-              title: "Skincare Services",
-              description: "Professional routines for long-term skin health.",
-              imageSrc: "https://beautybodybangkok.com/wp-content/uploads/2024/06/pedicure-chair-in-a-beauty-salon.webp",
-              imageAlt: "Skincare service",
-            },
-          ],
-        },
-      },
-      approach: {
-        blockType: "FeatureWithMedia",
-        defaults: {
-          anchor: "why-choose-us",
-          variant: "split",
-          paddingY: "md",
-          maxWidth: "2xl",
-          background: "gradient",
-          backgroundGradient: "linear-gradient(180deg,#18181b 0%,#18181b 100%)",
-          contentTone: "light",
-          media: {
-            kind: "image",
-            src: "https://beautybodybangkok.com/wp-content/uploads/2024/06/beauty-body-bangkok-salon.webp",
-            alt: "Salon interior",
-          },
-          eyebrow: "Why Choose Us",
-          title: "Why Choose Beauty Body Bangkok?",
-          subtitle: "Professional care with modern techniques and warm, attentive service.",
-          body: "From expert stylists to premium products and flexible booking, each visit is built around comfort and confidence.",
-          items: [],
-          ctas: [{ label: "Book Appointment", href: "#contact", variant: "secondary" }],
-        },
-      },
-      products: {
-        blockType: "FAQAccordion",
-        defaults: {
-          anchor: "faq",
-          paddingY: "md",
-          maxWidth: "2xl",
-          background: "gradient",
-          backgroundGradient: "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-          title: "Frequently Asked Questions",
-          variant: "singleOpen",
-          items: [
-            { q: "What are your opening hours?", a: "We are open daily, including weekends. Please check current hours before visiting." },
-            { q: "Do I need to book in advance?", a: "Advance booking is recommended for preferred time slots and specialist services." },
-            { q: "What products do you use?", a: "We use salon-grade products selected for safety, performance, and skin compatibility." },
-            { q: "Can I request a specific stylist?", a: "Yes. Mention your preferred stylist while booking and we will arrange it when available." },
-            { q: "Do you offer consultation before treatment?", a: "Yes. We provide consultation to align treatment plans with your goals." },
-          ],
-        },
-      },
-      socialproof: {
-        blockType: "FeatureWithMedia",
-        defaults: {
-          anchor: "consultation",
-          variant: "reverse",
-          paddingY: "md",
-          maxWidth: "2xl",
-          background: "gradient",
-          backgroundGradient: "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-          media: {
-            kind: "image",
-            src: "https://beautybodybangkok.com/wp-content/uploads/2024/06/pedicure-chair-in-a-beauty-salon.webp",
-            alt: "Consultation area",
-          },
-          eyebrow: "Consultation",
-          title: "Free Consultation.",
-          subtitle: "Book a short session to match services with your needs and schedule.",
-          body: "Our team helps you choose the right treatment path before your first appointment.",
-          items: [],
-          ctas: [{ label: "Book a Consultation", href: "#contact", variant: "primary" }],
-        },
-      },
-      contact: {
-        blockType: "CardsGrid",
-        defaults: {
-          anchor: "blog",
-          paddingY: "md",
-          maxWidth: "2xl",
-          background: "gradient",
-          backgroundGradient: "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-          title: "Latest from the Blog",
-          subtitle: "Trends, care routines, and practical beauty advice from our team.",
-          variant: "imageText",
-          columns: "3col",
-          density: "compact",
-          cardStyle: "solid",
-          imagePosition: "top",
-          imageShape: "rounded",
-          headingSize: "sm",
-          bodySize: "sm",
-          items: [
-            {
-              title: "Discover Why Thai Massage is Loved",
-              description: "Explore the history and wellness benefits of traditional Thai massage.",
-              tag: "Massage",
-              imageSrc: "https://beautybodybangkok.com/wp-content/uploads/2024/09/the-origin-of-thai-massage-768x432.webp",
-              imageAlt: "Thai massage guide",
-            },
-            {
-              title: "Eyelash Extensions in Bangkok",
-              description: "A practical guide to styles, retention, and aftercare.",
-              tag: "Eyelash",
-              imageSrc:
-                "https://beautybodybangkok.com/wp-content/uploads/2024/09/stunning-womans-long-eyelashes-768x432.webp",
-              imageAlt: "Eyelash extension close-up",
-            },
-            {
-              title: "How to Choose the Right Salon",
-              description: "Checklist for selecting a reliable salon with the right specialists.",
-              tag: "Salon",
-              imageSrc: "https://beautybodybangkok.com/wp-content/uploads/2024/06/image-7-768x384.jpeg",
-              imageAlt: "Salon styling scene",
-            },
-          ],
-        },
-      },
-      cta: {
-        blockType: "LeadCaptureCTA",
-        defaults: {
-          anchor: "book-now",
-          variant: "card",
-          paddingY: "sm",
-          maxWidth: "2xl",
-          background: "gradient",
-          backgroundGradient: "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-          title: "Ready for your next appointment?",
-          subtitle: "Choose your preferred service and reserve a time in minutes.",
-          cta: { label: "Book Now", href: "#contact", variant: "primary" },
-          note: "Same-day slots available for selected services.",
-        },
-      },
-      footer: {
-        blockType: "Footer",
-        defaults: {
-          anchor: "contact",
-          variant: "multiColumn",
-          paddingY: "md",
-          maxWidth: "2xl",
-          background: "gradient",
-          backgroundGradient: "linear-gradient(180deg,#fafaf9 0%,#f6f6f4 100%)",
-          logoText: "BEAUTY SALON BANGKOK",
-          columns: [
-            { title: "Services", links: [{ label: "Hair", href: "#services" }, { label: "Nails", href: "#services" }, { label: "Facial", href: "#services" }] },
-            { title: "Company", links: [{ label: "About", href: "#why-choose-us" }, { label: "Blog", href: "#blog" }, { label: "Contact", href: "#contact" }] },
-            { title: "Legal", links: [{ label: "Privacy", href: "#privacy" }, { label: "Terms", href: "#terms" }] },
-          ],
-          legal: "© 2026 Beauty Salon Bangkok. All rights reserved.",
-        },
-      },
-    },
-  },
 };
 
 const nowStamp = () => {
@@ -1126,7 +1201,7 @@ const ensurePreviewServer = async ({ previewBaseUrl }) => {
   const parsed = new URL(origin);
   const port = Number(parsed.port || (parsed.protocol === "https:" ? 443 : 80));
   const startLogPath = `/tmp/template-factory-preview-${port}.log`;
-  const startCmd = `cd ${JSON.stringify(ROOT)} && nohup npm run dev -- -p ${Math.floor(port)} > ${JSON.stringify(
+  const startCmd = `cd ${JSON.stringify(ROOT)} && nohup npm run start -- -p ${Math.floor(port)} > ${JSON.stringify(
     startLogPath
   )} 2>&1 < /dev/null &`;
 
@@ -1141,8 +1216,13 @@ const ensurePreviewServer = async ({ previewBaseUrl }) => {
     return null;
   };
 
-  const fastStart = await tryStartAndWait("dev");
+  const fastStart = await tryStartAndWait("start");
   if (fastStart) return fastStart;
+
+  const buildCmd = `cd ${JSON.stringify(ROOT)} && npm run build`;
+  await runShell(buildCmd, { cwd: ROOT, allowFailure: true });
+  const buildThenStart = await tryStartAndWait("build+start", 45);
+  if (buildThenStart) return buildThenStart;
 
   return {
     origin,
@@ -1489,32 +1569,16 @@ const getImageDimensions = async (filePath) => {
   }
 };
 
-const createImageSlice = async ({ sourcePath, targetPath, topRatio, heightRatio, leftRatio = 0, widthRatio = 1 }) => {
+const createImageSlice = async ({ sourcePath, targetPath, topRatio, heightRatio }) => {
   const dims = await getImageDimensions(sourcePath);
   if (!dims) return null;
   const cropHeight = Math.max(64, Math.min(dims.height, Math.round(dims.height * heightRatio)));
-  const cropWidth = Math.max(64, Math.min(dims.width, Math.round(dims.width * widthRatio)));
   const maxTop = Math.max(0, dims.height - cropHeight);
-  const maxLeft = Math.max(0, dims.width - cropWidth);
-  const topFromTop = Math.max(0, Math.min(maxTop, Math.round(dims.height * topRatio)));
-  const leftFromLeft = Math.max(0, Math.min(maxLeft, Math.round(dims.width * leftRatio)));
+  const top = Math.max(0, Math.min(maxTop, Math.round(dims.height * topRatio)));
   await ensureDir(path.dirname(targetPath));
-  const cmd = `python3 - <<'PY'
-from PIL import Image
-src = ${JSON.stringify(sourcePath)}
-dst = ${JSON.stringify(targetPath)}
-top = int(${topFromTop})
-left = int(${leftFromLeft})
-crop_h = int(${cropHeight})
-crop_w = int(${cropWidth})
-img = Image.open(src)
-w, h = img.size
-top = max(0, min(h - 1, top))
-left = max(0, min(w - 1, left))
-bottom = max(top + 1, min(h, top + crop_h))
-right = max(left + 1, min(w, left + crop_w))
-img.crop((left, top, right, bottom)).save(dst)
-PY`;
+  const cmd = `/usr/bin/sips -c ${cropHeight} ${dims.width} --cropOffset ${top} 0 ${JSON.stringify(sourcePath)} -o ${JSON.stringify(
+    targetPath
+  )}`;
   await runShell(cmd, { cwd: ROOT });
   return targetPath;
 };
@@ -1526,7 +1590,8 @@ const createReferenceSlices = async ({ siteId, desktopSource, mobileSource, pres
 
   const isDesignerPreset = preset === "designer_portfolio_minimal";
   const isNexusPreset = preset === "nexus_engineering_neon";
-  const isBeautyPreset = preset === "beauty_salon_serene";
+  const isAnaloguePreset = preset === "analogue_console_minimal";
+  const isPamamaPreset = preset === "pamama_machine_tools_corporate";
   const desktopRatios = isDesignerPreset
     ? {
         hero: { top: 0.0, height: 0.16 },
@@ -1547,15 +1612,25 @@ const createReferenceSlices = async ({ siteId, desktopSource, mobileSource, pres
           cta: { top: 0.85, height: 0.06 },
           footer: { top: 0.9, height: 0.1 },
         }
-    : isBeautyPreset
+    : isAnaloguePreset
       ? {
-          hero: { top: 0.0, height: 0.2, left: 0.52, width: 0.46 },
-          story: { top: 0.2, height: 0.22 },
-          approach: { top: 0.42, height: 0.15 },
-          products: { top: 0.57, height: 0.12 },
-          socialproof: { top: 0.69, height: 0.14 },
-          cta: { top: 0.83, height: 0.08 },
-          footer: { top: 0.91, height: 0.09 },
+          hero: { top: 0.0, height: 0.16 },
+          story: { top: 0.16, height: 0.18 },
+          approach: { top: 0.34, height: 0.12 },
+          products: { top: 0.46, height: 0.2 },
+          socialproof: { top: 0.66, height: 0.12 },
+          cta: { top: 0.78, height: 0.1 },
+          footer: { top: 0.88, height: 0.12 },
+        }
+    : isPamamaPreset
+      ? {
+          hero: { top: 0.0, height: 0.18 },
+          approach: { top: 0.18, height: 0.16 },
+          story: { top: 0.35, height: 0.16 },
+          products: { top: 0.51, height: 0.2 },
+          cta: { top: 0.71, height: 0.12 },
+          socialproof: { top: 0.83, height: 0.12 },
+          footer: { top: 0.94, height: 0.06 },
         }
     : {
         hero: { top: 0.0, height: 0.26 },
@@ -1586,15 +1661,25 @@ const createReferenceSlices = async ({ siteId, desktopSource, mobileSource, pres
           cta: { top: 0.86, height: 0.05 },
           footer: { top: 0.91, height: 0.09 },
         }
-    : isBeautyPreset
+    : isAnaloguePreset
+      ? {
+          hero: { top: 0.0, height: 0.2 },
+          story: { top: 0.2, height: 0.18 },
+          approach: { top: 0.38, height: 0.13 },
+          products: { top: 0.51, height: 0.22 },
+          socialproof: { top: 0.73, height: 0.11 },
+          cta: { top: 0.84, height: 0.07 },
+          footer: { top: 0.9, height: 0.1 },
+        }
+    : isPamamaPreset
       ? {
           hero: { top: 0.0, height: 0.22 },
-          story: { top: 0.22, height: 0.24 },
-          approach: { top: 0.46, height: 0.14 },
-          products: { top: 0.6, height: 0.11 },
-          socialproof: { top: 0.71, height: 0.14 },
-          cta: { top: 0.85, height: 0.07 },
-          footer: { top: 0.92, height: 0.08 },
+          approach: { top: 0.22, height: 0.16 },
+          story: { top: 0.38, height: 0.15 },
+          products: { top: 0.53, height: 0.2 },
+          cta: { top: 0.73, height: 0.12 },
+          socialproof: { top: 0.84, height: 0.1 },
+          footer: { top: 0.94, height: 0.06 },
         }
     : {
         hero: { top: 0.0, height: 0.28 },
@@ -1617,8 +1702,6 @@ const createReferenceSlices = async ({ siteId, desktopSource, mobileSource, pres
         targetPath: outPath,
         topRatio: ratio.top,
         heightRatio: ratio.height,
-        leftRatio: ratio.left ?? 0,
-        widthRatio: ratio.width ?? 1,
       });
       if (result) desktop[key] = `/assets/template-factory/${normalizedId}/slices/desktop-${key}.png`;
     }
@@ -1632,8 +1715,6 @@ const createReferenceSlices = async ({ siteId, desktopSource, mobileSource, pres
         targetPath: outPath,
         topRatio: ratio.top,
         heightRatio: ratio.height,
-        leftRatio: ratio.left ?? 0,
-        widthRatio: ratio.width ?? 1,
       });
       if (result) mobile[key] = `/assets/template-factory/${normalizedId}/slices/mobile-${key}.png`;
     }
@@ -1665,14 +1746,21 @@ const chooseRecipe = ({ prompt, title, url, siteId = "" }) => {
   if (/social-automation|socialautomation|luma/.test(siteFingerprint)) {
     return RECIPES.social_automation_neon;
   }
-  if (/beauty-salon-29|beautysalon29|beauty-salon|beauty salon bangkok/.test(siteFingerprint)) {
-    return RECIPES.beauty_salon_serene;
+  if (/analogue|analogue\.co|analogueco|pocket/.test(siteFingerprint)) {
+    return RECIPES.analogue_console_minimal;
+  }
+  if (/pamama|pamamachinetools|pama-machinetools|pama/.test(siteFingerprint)) {
+    return RECIPES.pamama_machine_tools_corporate;
   }
 
   if (has(/designer-portfolio-81|designer portfolio 81|nava moon|future of design content/i)) {
     return RECIPES.designer_portfolio_minimal;
   }
   if (has(/nexus|release orchestration|orchestrating product releases|ship faster/)) return RECIPES.nexus_engineering_neon;
+  if (has(/analogue|analogue pocket|retro handheld|fpga|retro gaming|cartridge|game preservation/))
+    return RECIPES.analogue_console_minimal;
+  if (has(/pamama|pama machine tools|machine tools|settori|prodotti|assistenza|contatti/))
+    return RECIPES.pamama_machine_tools_corporate;
   if (has(/industrial|manufactur|factory|equipment|b2b|automation|engineering/)) return RECIPES.industrial_precision;
   if (
     has(/social-automation|social automation|viral|growth velocity|reach automation|creator ai|luma/i) ||
@@ -1681,9 +1769,6 @@ const chooseRecipe = ({ prompt, title, url, siteId = "" }) => {
     return RECIPES.social_automation_neon;
   }
   if (has(/sixtine|gallery|editorial|luxury|spatial|interior/)) return RECIPES.editorial_luxury;
-  if (has(/beauty salon|beauty-salon|wellness salon|spa salon|salon bangkok|free consultation|nail services/)) {
-    return RECIPES.beauty_salon_serene;
-  }
   if (has(/wellness|clinic|hospitality|travel|hotel|retreat/)) return RECIPES.calm_service;
   if (has(/saas|ai|developer|fintech|platform|cloud|tooling|software/)) return RECIPES.modern_saas;
   return RECIPES.modern_saas;
@@ -1761,6 +1846,11 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
   const promptLine = site.prompt || site.description || "";
   const defaults = { ...(spec.defaults || {}) };
   const blockType = String(spec?.blockType || "");
+  const siteFingerprint = `${site?.id || ""} ${site?.url || ""}`.toLowerCase();
+  const isPamamaSite = /pamama|pamamachinetools|pama-machinetools|pama/.test(siteFingerprint);
+  const normalizedSiteId = slug(site?.id || "site") || "site";
+  const pamamaDesktopHeroTop = `/assets/template-factory/${normalizedSiteId}/desktop-hero-top.png`;
+  const pamamaMobileHeroTop = `/assets/template-factory/${normalizedSiteId}/mobile-hero-top.png`;
   const desktopSlices = assets?.slices?.desktop ?? {};
   const mobileSlices = assets?.slices?.mobile ?? {};
 
@@ -1774,43 +1864,87 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
         variant: "link",
       }));
     defaults.ctas = defaults.ctas || [{ label: "Get Started", href: "#contact", variant: "primary" }];
+    if (isPamamaSite) {
+      defaults.brand = defaults.brand || "pama";
+      // Match NavbarBlock expected shape.
+      defaults.logo =
+        defaults.logo && typeof defaults.logo === "object"
+          ? defaults.logo
+          : { alt: "PAMA" };
+      defaults.sticky = defaults.sticky ?? true;
+      defaults.showMenu = defaults.showMenu ?? true;
+      defaults.menuHref = defaults.menuHref || "#menu";
+      defaults.language = defaults.language || { label: "IT", href: "#lang" };
+    }
   }
 
   if (kind === "hero") {
-    defaults.title =
-      defaults.title ||
-      (promptLine ? promptLine.replace(/\s+/g, " ").slice(0, 78) : `Welcome to ${pageTitle}`);
-    defaults.subtitle = defaults.subtitle || `Designed for ${pageTitle} with a high-consistency block architecture.`;
+    if (!isPamamaSite) {
+      defaults.title =
+        defaults.title ||
+        (promptLine ? promptLine.replace(/\s+/g, " ").slice(0, 78) : `Welcome to ${pageTitle}`);
+      if (defaults.subtitle == null) {
+        defaults.subtitle = `Designed for ${pageTitle} with a high-consistency block architecture.`;
+      }
+    }
     defaults.ctas = defaults.ctas || [{ label: "Get Started", href: "#contact", variant: "primary" }];
     if (assets.desktopUrl) {
-      if (blockType === "NexusHeroDock") {
-        defaults.heroImageSrc = defaults.heroImageSrc || desktopSlices.hero || assets.desktopUrl;
-        defaults.mobileHeroImageSrc =
-          defaults.mobileHeroImageSrc || mobileSlices.hero || assets.mobileUrl || defaults.heroImageSrc;
-        defaults.heroImageAlt = defaults.heroImageAlt || `${pageTitle} hero visual`;
-        return defaults;
-      }
-      const usesImageBackground = !defaults.background || defaults.background === "image";
-      if (!defaults.background && !defaults.backgroundMedia && !defaults.media) {
-        defaults.background = "image";
-      }
-      if (usesImageBackground) {
+      const heroSrc = desktopSlices.hero || assets.desktopUrl;
+      if (!isPamamaSite) {
+        if (!defaults.background && !defaults.backgroundMedia && !defaults.media) {
+          defaults.background = "image";
+        }
         defaults.backgroundMedia = defaults.backgroundMedia || {
           kind: "image",
-          src: desktopSlices.hero || assets.desktopUrl,
+          src: heroSrc,
           alt: `${pageTitle} reference`,
         };
         defaults.backgroundOverlay = defaults.backgroundOverlay || "rgba(5,8,18,0.55)";
+      } else {
+        defaults.background = "none";
+        delete defaults.backgroundMedia;
+        delete defaults.backgroundOverlay;
+        delete defaults.backgroundOverlayOpacity;
+        const desktopHeroSrc = pamamaDesktopHeroTop;
+        const mobileHeroSrc = pamamaMobileHeroTop;
+        if (blockType === "HeroCover") {
+          defaults.mediaSrc = defaults.mediaSrc || desktopHeroSrc;
+          defaults.mediaAlt = defaults.mediaAlt || `${pageTitle} hero visual`;
+          defaults.mobileMediaSrc = defaults.mobileMediaSrc || mobileHeroSrc;
+          defaults.mobileMediaAlt = defaults.mobileMediaAlt || `${pageTitle} hero visual mobile`;
+          defaults.fullBleed = defaults.fullBleed ?? true;
+          defaults.flush = defaults.flush ?? true;
+          defaults.height = defaults.height || "calc(100vh - 84px)";
+          defaults.mobileHeight = defaults.mobileHeight || "calc(100vh - 72px)";
+        } else {
+          defaults.media = {
+            kind: "image",
+            src: desktopHeroSrc,
+            alt: `${pageTitle} hero visual`,
+          };
+          defaults.mediaSrc = desktopHeroSrc;
+          defaults.mediaAlt = `${pageTitle} hero visual`;
+          defaults.mobileMediaSrc = mobileHeroSrc;
+          defaults.mobileMediaAlt = `${pageTitle} hero visual mobile`;
+          defaults.mediaKind = "image";
+        }
       }
-      defaults.media =
-        defaults.media ||
-        (desktopSlices.hero || assets.desktopUrl
-          ? {
-              kind: "image",
-              src: desktopSlices.hero || assets.desktopUrl,
-              alt: `${pageTitle} hero visual`,
-            }
-          : undefined);
+      if (!isPamamaSite) {
+        defaults.media =
+          defaults.media ||
+          (heroSrc
+            ? {
+                kind: "image",
+                src: heroSrc,
+                alt: `${pageTitle} hero visual`,
+              }
+            : undefined);
+        if (!defaults.mediaSrc && heroSrc) {
+          defaults.mediaSrc = heroSrc;
+          defaults.mediaAlt = defaults.mediaAlt || `${pageTitle} hero visual`;
+          defaults.mediaKind = defaults.mediaKind || "image";
+        }
+      }
       if (blockType === "DesignerHeroEditorial") {
         defaults.meshImageSrc = defaults.meshImageSrc || desktopSlices.hero || assets.desktopUrl;
         defaults.previewImageSrc = defaults.previewImageSrc || desktopSlices.story || assets.desktopUrl;
@@ -1823,43 +1957,31 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
   if (kind === "story") {
     defaults.eyebrow = defaults.eyebrow || "Our Story";
     defaults.title = defaults.title || `Why ${pageTitle}`;
-    defaults.subtitle = defaults.subtitle || "Crafted experiences, measured outcomes, and durable visual language.";
-    defaults.body = defaults.body || "This section is generated from a template profile and tuned with prompt context.";
+    if (defaults.subtitle == null) {
+      defaults.subtitle = "Crafted experiences, measured outcomes, and durable visual language.";
+    }
+    if (defaults.body == null) {
+      defaults.body = "This section is generated from a template profile and tuned with prompt context.";
+    }
     defaults.ctas = defaults.ctas || [{ label: "Explore", href: "#", variant: "link" }];
-    if ((blockType === "ContentStory" || blockType === "NeonDashboardStrip" || blockType === "NexusControlPanel") && assets.desktopUrl && !defaults.dashboardImageSrc) {
+    if (assets.desktopUrl && !defaults.dashboardImageSrc) {
       defaults.dashboardImageSrc = desktopSlices.story || assets.desktopUrl;
       defaults.dashboardImageAlt = defaults.dashboardImageAlt || `${pageTitle} dashboard visual`;
     }
-    if ((blockType === "ContentStory" || blockType === "FeatureWithMedia") && !defaults.media?.src && desktopSlices.story) {
+    if (!defaults.media?.src && desktopSlices.story) {
       defaults.media = { kind: "image", src: desktopSlices.story, alt: `${pageTitle} story visual` };
     }
-    if ((blockType === "ContentStory" || blockType === "FeatureWithMedia") && !defaults.mediaSrc && desktopSlices.story) {
+    if (!defaults.mediaSrc && desktopSlices.story) {
       defaults.mediaSrc = desktopSlices.story;
       defaults.mediaAlt = defaults.mediaAlt || `${pageTitle} story visual`;
-    }
-    if (blockType === "CardsGrid" && assets.desktopUrl && Array.isArray(defaults.items)) {
-      defaults.items = defaults.items.map((item, index) => {
-        const next = { ...(item || {}) };
-        const hasImage =
-          Boolean(next.image?.src) ||
-          (typeof next.imageSrc === "string" && next.imageSrc.trim().length > 0) ||
-          Boolean(next.cover?.src);
-        if (hasImage) return next;
-        const src =
-          index % 2 === 0
-            ? desktopSlices.story || assets.desktopUrl
-            : mobileSlices.story || assets.mobileUrl || desktopSlices.story || assets.desktopUrl;
-        next.image = { src, alt: next.title || `Service ${index + 1}` };
-        next.imageSrc = src;
-        next.imageAlt = next.title || `Service ${index + 1}`;
-        return next;
-      });
     }
   }
 
   if (kind === "approach") {
     defaults.title = defaults.title || "Key Capabilities";
-    defaults.subtitle = defaults.subtitle || "Designed for scale, precision, and reliable execution.";
+    if (defaults.subtitle == null) {
+      defaults.subtitle = "Designed for scale, precision, and reliable execution.";
+    }
     defaults.items =
       defaults.items ||
       [
@@ -1867,7 +1989,7 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
         { title: "Quality", desc: "Design and implementation quality gates.", icon: "shield" },
         { title: "Impact", desc: "Outcome-focused iteration loop.", icon: "chart" },
       ];
-    if (desktopSlices.approach && Array.isArray(defaults.items) && blockType !== "NexusOpsMatrix") {
+    if (desktopSlices.approach && Array.isArray(defaults.items)) {
       defaults.items = defaults.items.map((item, index) => ({
         ...(item || {}),
         image:
@@ -1884,27 +2006,64 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
         imageAlt: item?.imageAlt || item?.title || `Capability ${index + 1}`,
       }));
     }
-    if ((blockType === "FeatureWithMedia" || blockType === "ContentStory") && !defaults.media?.src) {
-      const src = desktopSlices.approach || assets.desktopUrl;
-      if (src) {
-        defaults.media = { kind: "image", src, alt: `${pageTitle} approach visual` };
-        defaults.mediaSrc = defaults.mediaSrc || src;
-        defaults.mediaAlt = defaults.mediaAlt || `${pageTitle} approach visual`;
+    if (blockType === "FeatureWithMedia" && desktopSlices.approach) {
+      if (!defaults.media?.src) {
+        defaults.media = {
+          kind: "image",
+          src: desktopSlices.approach,
+          alt: defaults.title || `${pageTitle} approach visual`,
+        };
       }
-    }
-    if (blockType === "FeatureWithMedia" && defaults.background === "image" && desktopSlices.approach && !defaults.backgroundMedia) {
-      defaults.backgroundMedia = {
-        kind: "image",
-        src: desktopSlices.approach,
-        alt: `${pageTitle} section background`,
-      };
+      if (!defaults.mediaSrc) {
+        defaults.mediaSrc = desktopSlices.approach;
+        defaults.mediaAlt = defaults.mediaAlt || defaults.title || `${pageTitle} approach visual`;
+      }
     }
   }
 
   if (kind === "products") {
     defaults.title = defaults.title || "Product Portfolio";
-    defaults.subtitle = defaults.subtitle || "Modular blocks tailored to your site objectives.";
-    if ((blockType === "NeonDashboardStrip" || blockType === "NexusControlPanel") && assets.desktopUrl) {
+    if (defaults.subtitle == null) {
+      defaults.subtitle = "Modular blocks tailored to your site objectives.";
+    }
+    if (blockType === "CategoryTabs") {
+      defaults.eyebrow = defaults.eyebrow || "I NOSTRI PRODOTTI";
+      defaults.title = defaults.title || "";
+      defaults.subtitle = defaults.subtitle || "Seleziona una categoria per esplorare le soluzioni PAMA.";
+      defaults.tabs = defaults.tabs || [{ label: "ACCESSORI" }, { label: "CENTRI DI LAVORO" }, { label: "AUTOMAZIONE" }];
+      const mediaSrc = desktopSlices.products || desktopSlices.story || assets.desktopUrl;
+      defaults.panels =
+        defaults.panels ||
+        [
+          {
+            title: "Accessori per ogni esigenza",
+            description: "Versatilita e produttivita per processi complessi.",
+            bullets: ["Soluzioni modulari", "Setup rapido", "Qualita costante"],
+            cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
+            mediaSrc,
+            mediaAlt: "Accessori",
+          },
+          {
+            title: "Centri di lavoro",
+            description: "Massima versatilita e affidabilita per lavorazioni di precisione.",
+            bullets: ["Rigidita strutturale", "Controllo avanzato", "Prestazioni ripetibili"],
+            cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
+            mediaSrc: mobileSlices.products || assets.mobileUrl || mediaSrc,
+            mediaAlt: "Centri di lavoro",
+          },
+          {
+            title: "Automazione",
+            description: "Linee automatizzate per produttivita e qualita ripetibile.",
+            bullets: ["Integrazione su misura", "Riduzione tempi ciclo", "Monitoraggio produzione"],
+            cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
+            mediaSrc,
+            mediaAlt: "Automazione",
+          },
+        ];
+      defaults.activeIndex = Number.isFinite(defaults.activeIndex) ? defaults.activeIndex : 0;
+      return defaults;
+    }
+    if (blockType === "NeonDashboardStrip" && assets.desktopUrl) {
       defaults.dashboardImageSrc = defaults.dashboardImageSrc || desktopSlices.products || desktopSlices.story || assets.desktopUrl;
       defaults.mobileDashboardImageSrc =
         defaults.mobileDashboardImageSrc || mobileSlices.products || assets.mobileUrl || defaults.dashboardImageSrc;
@@ -1917,7 +2076,7 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
         { title: "Growth Offer", description: "Expanded capabilities and integrations.", cta: { label: "Details", href: "#" } },
         { title: "Enterprise Offer", description: "Full-service delivery and support.", cta: { label: "Details", href: "#" } },
       ];
-    if (assets.desktopUrl && Array.isArray(defaults.items) && (blockType === "CardsGrid" || blockType === "CaseStudies" || blockType === "DesignerProjectsSplit")) {
+    if (assets.desktopUrl && Array.isArray(defaults.items)) {
       defaults.items = defaults.items.map((item, index) => {
         const next = { ...(item || {}) };
         const projectImage = desktopSlices.products || assets.desktopUrl;
@@ -1954,11 +2113,11 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
           { quote: "They curated a lifestyle, not only a space.", name: "Alexander Vane", role: "CEO" },
           { quote: "A masterclass in restraint and elegance.", name: "Isabelle Dubois", role: "Founder" },
         ];
-      if ((blockType === "TestimonialsGrid" || blockType === "NeonResultsShowcase" || blockType === "NexusProofMosaic") && assets.desktopUrl && !defaults.imageSrc) {
+      if (assets.desktopUrl && !defaults.imageSrc) {
         defaults.imageSrc = desktopSlices.socialproof || assets.desktopUrl;
         defaults.imageAlt = defaults.imageAlt || "Results visual";
       }
-      if (blockType === "TestimonialsGrid" && assets.mobileUrl && Array.isArray(defaults.items)) {
+      if (assets.mobileUrl && Array.isArray(defaults.items)) {
         defaults.items = defaults.items.map((item, index) => ({
           ...(item || {}),
           avatar:
@@ -1970,43 +2129,6 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
                 },
         }));
       }
-      if ((blockType === "FeatureWithMedia" || blockType === "ContentStory") && !defaults.media?.src) {
-        const src = desktopSlices.socialproof || assets.desktopUrl;
-        if (src) {
-          defaults.media = { kind: "image", src, alt: `${pageTitle} social proof visual` };
-          defaults.mediaSrc = defaults.mediaSrc || src;
-          defaults.mediaAlt = defaults.mediaAlt || `${pageTitle} social proof visual`;
-        }
-      }
-    }
-  }
-
-  if (kind === "contact") {
-    if ((blockType === "FeatureWithMedia" || blockType === "ContentStory") && !defaults.media?.src) {
-      const src = desktopSlices.cta || desktopSlices.footer || assets.desktopUrl;
-      if (src) {
-        defaults.media = { kind: "image", src, alt: `${pageTitle} contact visual` };
-        defaults.mediaSrc = defaults.mediaSrc || src;
-        defaults.mediaAlt = defaults.mediaAlt || `${pageTitle} contact visual`;
-      }
-    }
-    if (blockType === "CardsGrid" && assets.desktopUrl && Array.isArray(defaults.items)) {
-      defaults.items = defaults.items.map((item, index) => {
-        const next = { ...(item || {}) };
-        const hasImage =
-          Boolean(next.image?.src) ||
-          (typeof next.imageSrc === "string" && next.imageSrc.trim().length > 0) ||
-          Boolean(next.cover?.src);
-        if (hasImage) return next;
-        const src =
-          index % 2 === 0
-            ? desktopSlices.cta || desktopSlices.footer || assets.desktopUrl
-            : mobileSlices.cta || mobileSlices.footer || assets.mobileUrl || desktopSlices.cta || assets.desktopUrl;
-        next.image = { src, alt: next.title || `Article ${index + 1}` };
-        next.imageSrc = src;
-        next.imageAlt = next.title || `Article ${index + 1}`;
-        return next;
-      });
     }
   }
 
@@ -2014,6 +2136,20 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
     defaults.title = defaults.title || "Ready to define your space?";
     defaults.subtitle = defaults.subtitle || "Book a private consultation or browse the lookbook.";
     defaults.cta = defaults.cta || { label: "Inquire Now", href: "#contact", variant: "primary" };
+    if (blockType === "FeatureWithMedia" && assets.desktopUrl) {
+      const ctaSrc = desktopSlices.cta || desktopSlices.story || assets.desktopUrl;
+      if (!defaults.media?.src) {
+        defaults.media = {
+          kind: "image",
+          src: ctaSrc,
+          alt: defaults.title || `${pageTitle} visual`,
+        };
+      }
+      if (!defaults.mediaSrc) {
+        defaults.mediaSrc = ctaSrc;
+        defaults.mediaAlt = defaults.mediaAlt || defaults.title || `${pageTitle} visual`;
+      }
+    }
   }
 
   if (kind === "footer") {
@@ -2026,7 +2162,7 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
         { title: "Legal", links: [{ label: "Privacy", href: "#" }, { label: "Terms", href: "#" }] },
       ];
     defaults.legal = defaults.legal || "© 2026 All rights reserved.";
-    if (desktopSlices.footer && !defaults.backgroundMedia && blockType === "NeonFooterGlow") {
+    if (desktopSlices.footer && !defaults.backgroundMedia && blockType !== "Footer") {
       defaults.background = "image";
       defaults.backgroundMedia = {
         kind: "image",
@@ -2358,15 +2494,14 @@ const main = async () => {
   let score = null;
   let previewLinks = [];
   let previewServer = null;
-  if (options.requestedSkipRegression) {
-    console.log("[template-factory] --skip-regression is ignored: template-first regression is mandatory after publish.");
-  }
   if (options.groups && options.groups.trim() && options.groups.trim() !== DEFAULT_TEMPLATE_FIRST_GROUP) {
     console.log(
       `[template-factory] groups overridden to ${DEFAULT_TEMPLATE_FIRST_GROUP} (requested=${options.groups.trim()}).`
     );
   }
-  {
+  if (options.requestedSkipRegression) {
+    console.log("[template-factory] skipping regression (--skip-regression).");
+  } else {
     regression = await runRegression({
       runDir,
       sites: processed,

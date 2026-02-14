@@ -18,3 +18,10 @@ visual-qa/node_modules
 !.env.example
 !.env.llm.example
 !builder/.env.example
+
+# Builder generated artifacts
+builder/tsconfig.tsbuildinfo
+builder/template-factory/runs/
+builder/regression/strategy-comparison/compare-*.json
+builder/regression/strategy-comparison/compare-*.md
+builder/regression/strategy-comparison/screenshots/

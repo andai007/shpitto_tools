@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "sites": [
+    {
+      "id": "pamama-machinetools-reference",
+      "url": "https://pamamachinetools.com/",
+      "description": "Industrial machine tools corporate homepage with product hero, capability sections, proof cards, and technical credibility",
+      "prompt": "Generate an industrial machine-tools homepage with clean navigation, large engineering hero, product/capability grid, technical highlights, social proof, strong CTA, and compact corporate footer."
+    }
+  ]
+}
