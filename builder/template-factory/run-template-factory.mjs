@@ -329,7 +329,7 @@ const RECIPES = {
       "highlights-cards",
       "teal-footer",
     ],
-    componentSignature: ["Navbar", "HeroCover", "SectorsStrip", "FeatureWithMedia", "CategoryTabs", "CardsGrid", "ContentStory", "Footer"],
+    componentSignature: ["Navbar", "HeroCover", "SectorsStrip", "FeatureWithMedia", "ProductCategoryBand", "CardsGrid", "ContentStory", "Footer"],
     requiredCategories: ["navigation", "hero", "approach", "story", "cta", "products", "contact", "socialproof", "footer"],
     sectionSpecs: {
       navigation: {
@@ -395,7 +395,7 @@ const RECIPES = {
         },
       },
       products: {
-        blockType: "CategoryTabs",
+        blockType: "ProductCategoryBand",
         defaults: {
           paddingY: "lg",
           maxWidth: "xl",
@@ -403,28 +403,31 @@ const RECIPES = {
           eyebrow: "I NOSTRI PRODOTTI",
           title: "",
           subtitle: "Seleziona una categoria per esplorare le soluzioni PAMA.",
-          tabs: [{ label: "ACCESSORI" }, { label: "CENTRI DI LAVORO" }, { label: "AUTOMAZIONE" }],
-          panels: [
+          tabs: [
+            { label: "MACHINES", href: "#prodotti" },
+            { label: "DIGITAL SOLUTIONS / OPTIMIZATION", href: "#prodotti" },
+            { label: "AUTOMATION", href: "#prodotti" },
+          ],
+          cards: [
             {
-              title: "Accessori per ogni esigenza",
-              description: "Versatilita e produttivita per processi complessi.",
-              bullets: ["Soluzioni modulari", "Setup rapido", "Qualita costante"],
+              title: "Machines",
+              description: "Macchine utensili ad alte prestazioni per lavorazioni di precisione.",
+              icon: "cpu",
               cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
             },
             {
-              title: "Centri di lavoro",
-              description: "Massima versatilita e affidabilita per lavorazioni di precisione.",
-              bullets: ["Rigidita strutturale", "Controllo avanzato", "Prestazioni ripetibili"],
+              title: "Digital",
+              description: "Soluzioni digitali per ottimizzazione e monitoraggio dei processi.",
+              icon: "globe",
               cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
             },
             {
-              title: "Automazione",
-              description: "Linee automatizzate per produttivita e qualita ripetibile.",
-              bullets: ["Integrazione su misura", "Riduzione tempi ciclo", "Monitoraggio produzione"],
+              title: "Automation",
+              description: "Automazione su misura per produttivita e qualita ripetibile.",
+              icon: "zap",
               cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
             },
           ],
-          activeIndex: 0,
         },
       },
       cta: {
@@ -2026,41 +2029,37 @@ const buildSectionDefaults = (kind, spec, site, summary, assets = {}) => {
     if (defaults.subtitle == null) {
       defaults.subtitle = "Modular blocks tailored to your site objectives.";
     }
-    if (blockType === "CategoryTabs") {
+    if (blockType === "ProductCategoryBand") {
       defaults.eyebrow = defaults.eyebrow || "I NOSTRI PRODOTTI";
       defaults.title = defaults.title || "";
       defaults.subtitle = defaults.subtitle || "Seleziona una categoria per esplorare le soluzioni PAMA.";
-      defaults.tabs = defaults.tabs || [{ label: "ACCESSORI" }, { label: "CENTRI DI LAVORO" }, { label: "AUTOMAZIONE" }];
-      const mediaSrc = desktopSlices.products || desktopSlices.story || assets.desktopUrl;
-      defaults.panels =
-        defaults.panels ||
-        [
+      defaults.tabs =
+        defaults.tabs || [
+          { label: "MACHINES", href: "#prodotti" },
+          { label: "DIGITAL SOLUTIONS / OPTIMIZATION", href: "#prodotti" },
+          { label: "AUTOMATION", href: "#prodotti" },
+        ];
+      defaults.cards =
+        defaults.cards || [
           {
-            title: "Accessori per ogni esigenza",
-            description: "Versatilita e produttivita per processi complessi.",
-            bullets: ["Soluzioni modulari", "Setup rapido", "Qualita costante"],
+            title: "Machines",
+            description: "Macchine utensili ad alte prestazioni per lavorazioni di precisione.",
+            icon: "cpu",
             cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
-            mediaSrc,
-            mediaAlt: "Accessori",
           },
           {
-            title: "Centri di lavoro",
-            description: "Massima versatilita e affidabilita per lavorazioni di precisione.",
-            bullets: ["Rigidita strutturale", "Controllo avanzato", "Prestazioni ripetibili"],
+            title: "Digital",
+            description: "Soluzioni digitali per ottimizzazione e monitoraggio dei processi.",
+            icon: "globe",
             cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
-            mediaSrc: mobileSlices.products || assets.mobileUrl || mediaSrc,
-            mediaAlt: "Centri di lavoro",
           },
           {
-            title: "Automazione",
-            description: "Linee automatizzate per produttivita e qualita ripetibile.",
-            bullets: ["Integrazione su misura", "Riduzione tempi ciclo", "Monitoraggio produzione"],
+            title: "Automation",
+            description: "Automazione su misura per produttivita e qualita ripetibile.",
+            icon: "zap",
             cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
-            mediaSrc,
-            mediaAlt: "Automazione",
           },
         ];
-      defaults.activeIndex = Number.isFinite(defaults.activeIndex) ? defaults.activeIndex : 0;
       return defaults;
     }
     if (blockType === "NeonDashboardStrip" && assets.desktopUrl) {

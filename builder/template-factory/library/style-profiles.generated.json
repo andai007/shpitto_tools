@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-02-14T14:37:47.157Z",
-  "sourceRunId": "tf-20260214-223743",
+  "generatedAt": "2026-02-14T16:01:04.019Z",
+  "sourceRunId": "tf-20260215-000100",
   "profileCount": 8,
   "profiles": [
     {
@@ -2336,9 +2336,9 @@
               }
             ],
             "mediaSrc": "/assets/template-factory/pamama-machinetools-reference/desktop-hero-top.png",
-            "mediaAlt": "pamama-machinetools-reference hero visual",
+            "mediaAlt": "Home - Alesatrici, fresatrici, centri di lavoro | PAMA Rovereto hero visual",
             "mobileMediaSrc": "/assets/template-factory/pamama-machinetools-reference/mobile-hero-top.png",
-            "mobileMediaAlt": "pamama-machinetools-reference hero visual mobile"
+            "mobileMediaAlt": "Home - Alesatrici, fresatrici, centri di lavoro | PAMA Rovereto hero visual mobile"
           }
         },
         "story": {
@@ -2360,14 +2360,14 @@
               }
             ],
             "dashboardImageSrc": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-story.png",
-            "dashboardImageAlt": "pamama-machinetools-reference dashboard visual",
+            "dashboardImageAlt": "Home - Alesatrici, fresatrici, centri di lavoro | PAMA Rovereto dashboard visual",
             "media": {
               "kind": "image",
               "src": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-story.png",
-              "alt": "pamama-machinetools-reference story visual"
+              "alt": "Home - Alesatrici, fresatrici, centri di lavoro | PAMA Rovereto story visual"
             },
             "mediaSrc": "/assets/template-factory/pamama-machinetools-reference/slices/desktop-story.png",
-            "mediaAlt": "pamama-machinetools-reference story visual"
+            "mediaAlt": "Home - Alesatrici, fresatrici, centri di lavoro | PAMA Rovereto story visual"
           }
         },
         "approach": {
@@ -2490,7 +2490,7 @@
           }
         },
         "products": {
-          "type": "CategoryTabs",
+          "type": "ProductCategoryBand",
           "props": {
             "paddingY": "lg",
             "maxWidth": "xl",
@@ -2500,24 +2500,23 @@
             "subtitle": "Seleziona una categoria per esplorare le soluzioni PAMA.",
             "tabs": [
               {
-                "label": "ACCESSORI"
+                "label": "MACHINES",
+                "href": "#prodotti"
               },
               {
-                "label": "CENTRI DI LAVORO"
+                "label": "DIGITAL SOLUTIONS / OPTIMIZATION",
+                "href": "#prodotti"
               },
               {
-                "label": "AUTOMAZIONE"
+                "label": "AUTOMATION",
+                "href": "#prodotti"
               }
             ],
-            "panels": [
+            "cards": [
               {
-                "title": "Accessori per ogni esigenza",
-                "description": "Versatilita e produttivita per processi complessi.",
-                "bullets": [
-                  "Soluzioni modulari",
-                  "Setup rapido",
-                  "Qualita costante"
-                ],
+                "title": "Machines",
+                "description": "Macchine utensili ad alte prestazioni per lavorazioni di precisione.",
+                "icon": "cpu",
                 "cta": {
                   "label": "SCOPRI DI PIÙ",
                   "href": "#contatti",
@@ -2525,13 +2524,9 @@
                 }
               },
               {
-                "title": "Centri di lavoro",
-                "description": "Massima versatilita e affidabilita per lavorazioni di precisione.",
-                "bullets": [
-                  "Rigidita strutturale",
-                  "Controllo avanzato",
-                  "Prestazioni ripetibili"
-                ],
+                "title": "Digital",
+                "description": "Soluzioni digitali per ottimizzazione e monitoraggio dei processi.",
+                "icon": "globe",
                 "cta": {
                   "label": "SCOPRI DI PIÙ",
                   "href": "#contatti",
@@ -2539,21 +2534,16 @@
                 }
               },
               {
-                "title": "Automazione",
-                "description": "Linee automatizzate per produttivita e qualita ripetibile.",
-                "bullets": [
-                  "Integrazione su misura",
-                  "Riduzione tempi ciclo",
-                  "Monitoraggio produzione"
-                ],
+                "title": "Automation",
+                "description": "Automazione su misura per produttivita e qualita ripetibile.",
+                "icon": "zap",
                 "cta": {
                   "label": "SCOPRI DI PIÙ",
                   "href": "#contatti",
                   "variant": "primary"
                 }
               }
-            ],
-            "activeIndex": 0
+            ]
           }
         },
         "contact": {
@@ -2658,7 +2648,7 @@
               }
             ],
             "legal": "© 2026 PAMA-inspired template",
-            "logoText": "pamama-machinetools-refe"
+            "logoText": "Home - Alesatrici, fresa"
           }
         }
       }

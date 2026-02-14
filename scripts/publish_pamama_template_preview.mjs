@@ -9,9 +9,103 @@ const SITE_KEY = "pamama-template-preview";
 const outDir = path.join(REPO_ROOT, "asset-factory", "out", SITE_KEY);
 const sandboxDir = path.join(outDir, "sandbox");
 const pageDir = path.join(outDir, "pages", "home");
+const themeDir = path.join(outDir, "theme");
 
 const assetsBase = "/assets/template-factory/pamama-machinetools-reference";
 const slices = `${assetsBase}/slices`;
+
+const hexToHsl = (raw) => {
+  if (!raw || typeof raw !== "string") return null;
+  const normalizedRaw = raw.trim();
+  if (!normalizedRaw.startsWith("#")) return null;
+  const normalized =
+    normalizedRaw.length === 4
+      ? normalizedRaw
+          .slice(1)
+          .split("")
+          .map((c) => c + c)
+          .join("")
+      : normalizedRaw.slice(1);
+  if (normalized.length !== 6) return null;
+  const r = parseInt(normalized.slice(0, 2), 16) / 255;
+  const g = parseInt(normalized.slice(2, 4), 16) / 255;
+  const b = parseInt(normalized.slice(4, 6), 16) / 255;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const delta = max - min;
+  let h = 0;
+  if (delta !== 0) {
+    if (max === r) h = ((g - b) / delta) % 6;
+    if (max === g) h = (b - r) / delta + 2;
+    if (max === b) h = (r - g) / delta + 4;
+  }
+  h = Math.round(h * 60);
+  if (h < 0) h += 360;
+  const l = (max + min) / 2;
+  const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+  return `${h} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`;
+};
+
+const colorToHslTriplet = (value) => {
+  if (!value || typeof value !== "string") return null;
+  const normalized = value.trim();
+  if (!normalized) return null;
+  if (normalized.startsWith("#")) return hexToHsl(normalized);
+  const hslWrapped = normalized.match(/^hsl\((.+)\)$/i);
+  const hslBody = hslWrapped?.[1]?.trim();
+  if (hslBody) {
+    return hslBody
+      .replace(/\s*\/\s*[\d.]+%?\s*$/, "")
+      .replace(/,/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+  if (/^\d+(\.\d+)?\s+\d+(\.\d+)?%\s+\d+(\.\d+)?%$/.test(normalized)) return normalized;
+  return null;
+};
+
+const lightnessFromHslTriplet = (triplet) => {
+  const parts = String(triplet || "").trim().split(/\s+/);
+  const lightness = Number(parts[2]?.replace("%", ""));
+  return Number.isFinite(lightness) ? lightness : 50;
+};
+
+const buildGoogleFontsImport = (fontHeading, fontBody) => {
+  const extract = (value) => {
+    if (!value || typeof value !== "string") return "";
+    const trimmed = value.trim();
+    if (!trimmed) return "";
+    const quoted = trimmed.match(/^['"]([^'"]+)['"]/);
+    if (quoted?.[1]) return quoted[1];
+    return trimmed.split(",")[0]?.trim() || "";
+  };
+  const families = Array.from(new Set([extract(fontHeading), extract(fontBody)].filter(Boolean)));
+  if (!families.length) return "";
+  const query = families
+    .map((family) => `family=${encodeURIComponent(family).replace(/%20/g, "+")}:wght@300;400;500;600;700;800`)
+    .join("&");
+  return `@import url('https://fonts.googleapis.com/css2?${query}&display=swap');`;
+};
+
+const buildThemeCss = (theme) => {
+  const palette = theme?.palette && typeof theme.palette === "object" ? theme.palette : {};
+  const background = colorToHslTriplet(palette.bg || palette.background) || "0 0% 100%";
+  const foreground = colorToHslTriplet(palette.text || palette.foreground) || "222 47% 11%";
+  const muted = colorToHslTriplet(palette.muted || palette.neutral) || "210 40% 96%";
+  const mutedForeground =
+    colorToHslTriplet(palette.textSecondary || palette.mutedForeground) || "215 16% 47%";
+  const border = colorToHslTriplet(palette.border || palette.neutral) || "214 32% 91%";
+  const card = colorToHslTriplet(palette.card || palette.neutral || palette.bg) || background;
+  const primary = colorToHslTriplet(palette.primary) || "222 89% 52%";
+  const accent = colorToHslTriplet(palette.accent) || primary;
+  const primaryForeground = lightnessFromHslTriplet(primary) > 58 ? "222 47% 11%" : "210 40% 98%";
+  const accentForeground = lightnessFromHslTriplet(accent) > 58 ? "222 47% 11%" : "210 40% 98%";
+  const radius = theme?.radius || "0.5rem";
+  const fontHeading = theme?.fontHeading || "system-ui";
+  const fontBody = theme?.fontBody || "system-ui";
+  const fontImport = buildGoogleFontsImport(fontHeading, fontBody);
+  return `${fontImport}:root{--background:${background};--foreground:${foreground};--muted:${muted};--muted-foreground:${mutedForeground};--border:${border};--primary:${primary};--primary-foreground:${primaryForeground};--accent:${accent};--accent-foreground:${accentForeground};--card:${card};--radius:${radius};--font-heading:${fontHeading};--font-body:${fontBody};}body{background:hsl(var(--background));color:hsl(var(--foreground));font-family:var(--font-body),ui-sans-serif,system-ui;} .font-heading{font-family:var(--font-heading),var(--font-body),ui-serif,serif;} .font-body{font-family:var(--font-body),ui-sans-serif,system-ui;}`;
+};
 
 const theme = {
   mode: "light",
@@ -27,7 +121,8 @@ const theme = {
     card: "#ffffff",
     // Tiffany-like cyan/teal (more blue, less green).
     primary: "#0093ad",
-    accent: "#0093ad",
+    // PAMA-like CTA accent (salmon/red).
+    accent: "#f15662",
     textSecondary: "#4b5563",
   },
 };
@@ -71,6 +166,18 @@ const content = [
       mediaAlt: "PAMA homepage hero",
       mobileMediaSrc: `${assetsBase}/mobile-hero-top.png`,
       mobileMediaAlt: "PAMA homepage hero mobile",
+    },
+  },
+  {
+    // Cookie-like banner overlay (for screenshot parity with the source).
+    type: "CookieBanner",
+    props: {
+      id: "cookie-banner",
+      message:
+        "Noi (pamamachinetools.com/) e terze parti selezionate (1) utilizziamo cookie o tecnologie simili per finalita tecniche e, con il tuo consenso, per finalita statistiche e di marketing.",
+      // Source screenshot shows only a close button.
+      acceptLabel: "",
+      closeLabel: "×",
     },
   },
   {
@@ -154,7 +261,7 @@ const content = [
     },
   },
   {
-    type: "CategoryTabs",
+    type: "ProductCategoryBand",
     props: {
       id: "prodotti",
       anchor: "prodotti",
@@ -166,44 +273,30 @@ const content = [
       subtitle:
         "Seleziona una categoria per esplorare le soluzioni PAMA.",
       tabs: [
-        { label: "ACCESSORI" },
-        { label: "CENTRI DI LAVORO" },
-        { label: "AUTOMAZIONE" },
+        { label: "MACHINES", href: "#prodotti" },
+        { label: "DIGITAL SOLUTIONS / OPTIMIZATION", href: "#prodotti" },
+        { label: "AUTOMATION", href: "#prodotti" },
       ],
-      panels: [
+      cards: [
         {
-          title: "Accessori per ogni esigenza",
-          description:
-            "Versatilita e produttivita per processi complessi.",
-          bullets: ["Soluzioni modulari", "Setup rapido", "Qualita costante"],
+          title: "Machines",
+          description: "Macchine utensili ad alte prestazioni per lavorazioni di precisione.",
+          icon: "cpu",
           cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
-          mediaSrc: `${slices}/desktop-products.png`,
-          mediaAlt: "Accessori",
         },
         {
-          title: "Centri di lavoro",
-          description:
-            "Massima versatilita e affidabilita per lavorazioni di precisione.",
-          bullets: [
-            "Rigidita strutturale",
-            "Controllo avanzato",
-            "Prestazioni ripetibili",
-          ],
+          title: "Digital",
+          description: "Soluzioni digitali per ottimizzazione e monitoraggio dei processi.",
+          icon: "globe",
           cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
-          mediaSrc: `${slices}/mobile-products.png`,
-          mediaAlt: "Centri di lavoro",
         },
         {
-          title: "Automazione",
-          description:
-            "Linee automatizzate per produttivita e qualita ripetibile.",
-          bullets: ["Integrazione su misura", "Riduzione tempi ciclo", "Monitoraggio produzione"],
+          title: "Automation",
+          description: "Automazione su misura per produttivita e qualita ripetibile.",
+          icon: "zap",
           cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
-          mediaSrc: `${slices}/desktop-products.png`,
-          mediaAlt: "Automazione",
         },
       ],
-      activeIndex: 0,
     },
   },
   {
@@ -317,10 +410,13 @@ const payload = {
 
 await fs.mkdir(sandboxDir, { recursive: true });
 await fs.mkdir(pageDir, { recursive: true });
+await fs.mkdir(themeDir, { recursive: true });
 
 await fs.writeFile(path.join(sandboxDir, "payload.json"), JSON.stringify(payload, null, 2), "utf8");
 await fs.writeFile(path.join(pageDir, "page.json"), JSON.stringify(page, null, 2), "utf8");
+await fs.writeFile(path.join(themeDir, "theme.css"), buildThemeCss(theme), "utf8");
 
 console.log(`[publish] wrote ${SITE_KEY}`);
 console.log(`- ${path.relative(REPO_ROOT, path.join(sandboxDir, "payload.json"))}`);
 console.log(`- ${path.relative(REPO_ROOT, path.join(pageDir, "page.json"))}`);
+console.log(`- ${path.relative(REPO_ROOT, path.join(themeDir, "theme.css"))}`);

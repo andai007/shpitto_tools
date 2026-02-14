@@ -2,7 +2,7 @@ import React from "react";
 
 import { cn } from "@/lib/cn";
 
-type ButtonVariant = "default" | "secondary" | "link" | "ghost";
+type ButtonVariant = "default" | "accent" | "secondary" | "link" | "ghost";
 type ButtonSize = "default" | "sm" | "lg";
 
 type ButtonProps =
@@ -30,6 +30,8 @@ const sizeClasses: Record<ButtonSize, string> = {
 
 const variantClasses: Record<ButtonVariant, string> = {
   default: "bg-primary text-primary-foreground hover:opacity-90",
+  // Use the theme accent token (e.g., for standout CTAs).
+  accent: "bg-accent text-accent-foreground hover:opacity-90",
   secondary: "border border-foreground/30 bg-transparent text-foreground hover:bg-muted/60",
   link: "text-primary underline-offset-4 hover:underline",
   ghost: "text-foreground hover:bg-muted/60",

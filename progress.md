@@ -245,3 +245,14 @@
   - `builder/regression/run-strategy-comparison.mjs`
   - `findings.md`
   - `progress.md`
+
+## Session: 2026-02-14 (PAMA Machine Tools Template)
+- **Status:** in progress
+- Actions taken:
+  - Created PAMA-inspired blocks (`HeroCover`, `SectorsStrip`, `CategoryTabs`) and wired them into Puck config.
+  - Added a dedicated template-factory recipe (`pamama_machine_tools_corporate`) and published `auto_pamama-machinetools-reference` to the style profile library.
+  - Added a template-only creation fallback when no API key is configured (uses the selected style profile templates).
+  - Generated a local preview payload (`pamama-template-preview`) and performed visual QA screenshots.
+- Visual QA outputs:
+  - Desktop: `/tmp/pamama-template-preview-desktop.png`
+  - Mobile: `/tmp/pamama-template-preview-mobile.png`

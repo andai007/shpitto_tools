@@ -7,6 +7,8 @@ import { FeatureGridBlock } from "@/components/blocks/feature-grid/block";
 import { FeatureWithMediaBlock } from "@/components/blocks/feature-with-media/block";
 import { CategoryTabsBlock } from "@/components/blocks/category-tabs/block";
 import { SectorsStripBlock } from "@/components/blocks/sectors-strip/block";
+import { ProductCategoryBandBlock } from "@/components/blocks/product-category-band/block";
+import { CookieBannerBlock } from "@/components/blocks/cookie-banner/block";
 import { PricingCardsBlock } from "@/components/blocks/pricing-cards/block";
 import { FAQAccordionBlock } from "@/components/blocks/faq-accordion/block";
 import { FooterBlock } from "@/components/blocks/footer/block";
@@ -884,6 +886,80 @@ export const puckConfig: Config = {
           },
         }),
         activeIndex: textField("Active Index"),
+      },
+    },
+    ProductCategoryBand: {
+      render: renderBlock(ProductCategoryBandBlock),
+      defaultProps: {
+        id: "ProductCategoryBand-1",
+        eyebrow: "I NOSTRI PRODOTTI",
+        title: "",
+        subtitle: "Seleziona una categoria per esplorare le soluzioni PAMA.",
+        tabs: [
+          { label: "MACHINES", href: "#prodotti" },
+          { label: "DIGITAL SOLUTIONS / OPTIMIZATION", href: "#prodotti" },
+          { label: "AUTOMATION", href: "#prodotti" },
+        ],
+        cards: [
+          {
+            title: "Machines",
+            description: "Macchine utensili ad alte prestazioni per lavorazioni di precisione.",
+            icon: "cpu",
+            cta: { label: "SCOPRI DI PIÙ", href: "#prodotti", variant: "primary" },
+          },
+          {
+            title: "Digital",
+            description: "Soluzioni digitali per ottimizzazione e monitoraggio dei processi.",
+            icon: "globe",
+            cta: { label: "SCOPRI DI PIÙ", href: "#prodotti", variant: "primary" },
+          },
+          {
+            title: "Automation",
+            description: "Automazione su misura per produttivita e qualita ripetibile.",
+            icon: "zap",
+            cta: { label: "SCOPRI DI PIÙ", href: "#prodotti", variant: "primary" },
+          },
+        ],
+        paddingY: "lg",
+        maxWidth: "xl",
+        background: "none",
+      },
+      fields: {
+        eyebrow: textField("Eyebrow"),
+        title: textField("Title"),
+        subtitle: textareaField("Subtitle"),
+        paddingY: selectField("Padding", ["sm", "md", "lg"]),
+        background: selectField("Background", ["none", "muted", "gradient", "image"]),
+        maxWidth: selectField("Max Width", ["lg", "xl", "2xl"]),
+        tabs: listField("Tabs", {
+          label: textField("Label"),
+          href: textField("Href"),
+        }),
+        cards: listField("Cards", {
+          title: textField("Title"),
+          description: textareaField("Description"),
+          icon: textField("Icon"),
+          cta: {
+            label: textField("CTA Label"),
+            href: textField("CTA Href"),
+            variant: selectField("CTA Variant", ["primary", "secondary", "link"]),
+          },
+        }),
+      },
+    },
+    CookieBanner: {
+      render: renderBlock(CookieBannerBlock),
+      defaultProps: {
+        id: "CookieBanner-1",
+        message:
+          "We use cookies and similar technologies for technical purposes and, with your consent, for analytics and marketing.",
+        acceptLabel: "OK",
+        closeLabel: "×",
+      },
+      fields: {
+        message: textareaField("Message"),
+        acceptLabel: textField("Accept Label"),
+        closeLabel: textField("Close Label"),
       },
     },
     ContentStory: {

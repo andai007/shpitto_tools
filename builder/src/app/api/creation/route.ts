@@ -60,7 +60,7 @@ const buildTemplateOnlyFallbackResult = (prompt: string) => {
           border: "#d6dde1",
           card: "#ffffff",
           primary: "#0093ad",
-          accent: "#0093ad",
+          accent: "#f15662",
           textSecondary: "#4b5563",
         },
       }

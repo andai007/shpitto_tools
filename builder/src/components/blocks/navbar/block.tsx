@@ -85,7 +85,7 @@ export function NavbarBlock({
     isPama ? "text-xs font-semibold uppercase tracking-[0.16em]" : ""
   );
   const ctaClass = isPama
-    ? "h-10 rounded-none bg-[#f15662] px-6 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:bg-[#e14c57]"
+    ? "h-10 rounded-none px-6 text-xs font-semibold uppercase tracking-[0.14em]"
     : "";
 
   return (
@@ -183,7 +183,15 @@ export function NavbarBlock({
                     <Button
                       key={idx}
                       asChild
-                      variant={cta.variant === "secondary" ? "secondary" : "default"}
+                      variant={
+                        isPama && idx === 0
+                          ? "accent"
+                          : cta.variant === "secondary"
+                            ? "secondary"
+                            : cta.variant === "link"
+                              ? "link"
+                              : "default"
+                      }
                       size="sm"
                       className={cn(isPama && idx === 0 ? ctaClass : "")}
                     >
