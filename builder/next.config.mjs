@@ -6,4 +6,8 @@ const __dirname = path.dirname(__filename);
 
 export default {
   outputFileTracingRoot: __dirname,
+  experimental: {
+    // Avoid Next.js devtools segment explorer issues that can break the dev RSC manifest.
+    devtoolSegmentExplorer: false,
+  },
 };

@@ -131,6 +131,7 @@ const content = [
   {
     type: "Navbar",
     props: {
+      id: "Navbar-1",
       variant: "withCTA",
       sticky: true,
       paddingY: "sm",
@@ -363,6 +364,7 @@ const content = [
   {
     type: "Footer",
     props: {
+      id: "Footer-1",
       variant: "multiColumn",
       paddingY: "md",
       maxWidth: "2xl",

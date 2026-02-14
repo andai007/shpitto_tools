@@ -258,8 +258,12 @@ function buildFallbackFeatureWithMediaProps(anchor?: string, extract?: ExtractDa
 
 function normalizePuckData(data: PuckData, extract?: ExtractData | null): PuckData {
   const zones = data.zones ?? {};
-  const content = data.content.map((item) => {
+  const content = data.content.map((item, idx) => {
     const props = { ...(item.props ?? {}) };
+    // Puck uses stable keys when rendering dropzones; ensure every block has a unique id.
+    if (typeof props.id !== "string" || !props.id.trim()) {
+      props.id = `${String(item.type || "Block")}-${idx + 1}`;
+    }
     if (item.variant && props.variant == null) {
       props.variant = item.variant;
     }
