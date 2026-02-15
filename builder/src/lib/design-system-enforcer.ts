@@ -69,7 +69,9 @@ const isMediaUrlKey = (key: string) => {
     key === "src" ||
     key.endsWith("src") ||
     key.endsWith("url") ||
-    key.includes("image") ||
+    // Only treat as media when the key clearly represents a URL.
+    // Avoid catching non-URL props like `imagePosition`, `imageShape`, etc.
+    key === "image" ||
     key.includes("avatar") ||
     key.includes("logo") ||
     key.includes("poster")

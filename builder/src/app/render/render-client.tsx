@@ -55,6 +55,10 @@ export function RenderClient({ data, motionMode, themeCss, fontLinks, fontCss }:
       ))}
       {fontCss ? <style dangerouslySetInnerHTML={{ __html: fontCss }} /> : null}
       {themeCss ? <style dangerouslySetInnerHTML={{ __html: themeCss }} /> : null}
+      {process.env.NODE_ENV === "development" ? (
+        // Hide Next.js dev overlay portal so template previews look like production.
+        <style dangerouslySetInnerHTML={{ __html: "nextjs-portal{display:none!important;}" }} />
+      ) : null}
       <main>
         <Render config={puckConfig} data={normalizedData as any} />
       </main>

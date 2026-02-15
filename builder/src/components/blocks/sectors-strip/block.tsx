@@ -103,7 +103,7 @@ export function SectorsStripBlock({
           ) : null}
           <h2
             className={cn(
-              "text-xl font-semibold tracking-tight text-foreground sm:text-2xl",
+              "text-xl font-semibold uppercase tracking-[0.12em] text-primary sm:text-2xl",
               eyebrow ? "mt-2" : ""
             )}
             style={headingStyle}
@@ -111,7 +111,13 @@ export function SectorsStripBlock({
             {title}
           </h2>
           {subtitle ? (
-            <p className="mt-3 text-sm text-muted-foreground sm:text-base" style={bodyStyle}>
+            <p
+              className={cn(
+                "mt-4 text-sm leading-7 text-muted-foreground sm:text-base",
+                isCentered ? "mx-auto max-w-3xl" : "max-w-3xl"
+              )}
+              style={bodyStyle}
+            >
               {subtitle}
             </p>
           ) : null}
@@ -124,9 +130,8 @@ export function SectorsStripBlock({
                 type="button"
                 onClick={() => setActive((v) => (v - 1 + safeItems.length) % safeItems.length)}
                 className={cn(
-                  "hidden md:inline-flex absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2",
-                  "h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-primary shadow-sm",
-                  "hover:bg-muted"
+                  "hidden md:inline-flex absolute left-0 top-1/2 -translate-x-10 -translate-y-1/2",
+                  "h-10 w-10 items-center justify-center text-primary"
                 )}
                 aria-label="Previous"
               >
@@ -138,9 +143,8 @@ export function SectorsStripBlock({
                 type="button"
                 onClick={() => setActive((v) => (v + 1) % safeItems.length)}
                 className={cn(
-                  "hidden md:inline-flex absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2",
-                  "h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-primary shadow-sm",
-                  "hover:bg-muted"
+                  "hidden md:inline-flex absolute right-0 top-1/2 translate-x-10 -translate-y-1/2",
+                  "h-10 w-10 items-center justify-center text-primary"
                 )}
                 aria-label="Next"
               >
@@ -155,41 +159,45 @@ export function SectorsStripBlock({
             {visibleItems.map((item, idx) => {
               const img = item.imageSrc;
               return (
-                <article
-                  key={`${item.title}-${activeIndex + idx}`}
-                  className="overflow-hidden rounded-md border border-border bg-card"
-                >
+                <div key={`${item.title}-${activeIndex + idx}`} className="flex h-full flex-col">
                   {img ? (
-                    <img
-                      src={img}
-                      alt={item.imageAlt ?? item.title}
-                      className="h-36 w-full object-cover"
-                      loading="lazy"
-                    />
+                    <div className={cn(isCentered ? "flex justify-center" : "")}>
+                      <img
+                        src={img}
+                        alt={item.imageAlt ?? item.title}
+                        className="h-28 w-full max-w-[320px] object-cover"
+                        loading="lazy"
+                      />
+                    </div>
                   ) : null}
-                  <div className="p-6">
-                    <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary" style={bodyStyle}>
-                      {item.title}
-                    </h3>
-                    {item.description ? (
-                      <p className="mt-3 text-xs leading-5 text-muted-foreground" style={bodyStyle}>
-                        {item.description}
-                      </p>
-                    ) : null}
-                    {item.cta ? (
-                      <div className="mt-5">
-                        <Button
-                          asChild
-                          size="sm"
-                          variant="default"
-                          className="h-10 rounded-none bg-primary px-7 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/90"
-                        >
-                          <a href={item.cta.href}>{item.cta.label}</a>
-                        </Button>
-                      </div>
-                    ) : null}
-                  </div>
-                </article>
+                  <h3
+                    className={cn(
+                      "mt-6 text-[13px] font-semibold uppercase tracking-[0.06em]",
+                      // The source site uses a lime accent for these headings.
+                      "text-[#b7d400]"
+                    )}
+                    style={bodyStyle}
+                  >
+                    {item.title}
+                  </h3>
+                  {item.description ? (
+                    <p className="mt-5 text-sm leading-7 text-muted-foreground" style={bodyStyle}>
+                      {item.description}
+                    </p>
+                  ) : null}
+                  {item.cta ? (
+                    <div className="mt-auto pt-10">
+                      <Button
+                        asChild
+                        size="lg"
+                        variant="default"
+                        className="h-12 rounded-none bg-primary px-10 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/90"
+                      >
+                        <a href={item.cta.href}>{item.cta.label}</a>
+                      </Button>
+                    </div>
+                  ) : null}
+                </div>
               );
             })}
           </div>
@@ -202,11 +210,19 @@ export function SectorsStripBlock({
                   type="button"
                   onClick={() => setActive(i)}
                   className={cn(
-                    "h-2 w-2 rounded-full border transition-colors",
-                    i === activeIndex ? "bg-primary border-primary" : "bg-transparent border-border/60"
+                    // Match PAMA: small circles with teal outline; active has a filled dot inside.
+                    "relative h-4 w-4 rounded-full border-2 border-primary transition-colors",
+                    i === activeIndex ? "border-primary" : "border-primary"
                   )}
                   aria-label={`Go to ${i + 1}`}
-                />
+                >
+                  {i === activeIndex ? (
+                    <span
+                      className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary"
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                </button>
               ))}
             </div>
           ) : null}

@@ -32,12 +32,17 @@ export type FeatureWithMediaProps = BaseBlockProps & {
   subtitle?: string;
   body?: string;
   contentTone?: "default" | "light";
+  textPanel?: "none" | "muted";
+  textPanelPadding?: "md" | "lg";
   ctas?: LinkProps[];
   items?: FeatureWithMediaItem[];
   media?: FeatureWithMediaMedia;
   mediaSrc?: string;
   mediaAlt?: string;
   mediaKind?: "image" | "video";
+  mediaShape?: "rounded" | "square";
+  mediaShadow?: "none" | "sm" | "md" | "lg";
+  mediaBorder?: "default" | "none";
 };
 
 export type FeatureWithMediaVariant = "simple" | "split" | "reverse";
@@ -59,12 +64,17 @@ export function FeatureWithMediaBlock({
   subtitle,
   body,
   contentTone = "default",
+  textPanel = "none",
+  textPanelPadding = "lg",
   ctas,
   items,
   media,
   mediaSrc,
   mediaAlt,
   mediaKind = "image",
+  mediaShape = "rounded",
+  mediaShadow = "sm",
+  mediaBorder = "default",
   headingFont,
   bodyFont,
   emphasis = "normal",
@@ -72,7 +82,9 @@ export function FeatureWithMediaBlock({
 }: FeatureWithMediaProps & { variant?: FeatureWithMediaVariant }) {
   const motionMode = useMotionMode();
   const motionClass =
-    motionMode === "off" ? "" : "transition-all duration-300 hover:-translate-y-1 hover:shadow-md";
+    motionMode === "off" || mediaShadow === "none"
+      ? ""
+      : "transition-all duration-300 hover:-translate-y-1 hover:shadow-md";
   const resolvedMedia =
     media ?? (mediaSrc ? { kind: mediaKind, src: mediaSrc, alt: mediaAlt } : undefined);
   const hasMedia = Boolean(resolvedMedia?.src);
@@ -105,6 +117,23 @@ export function FeatureWithMediaBlock({
   const isLightTone = contentTone === "light";
   const headingStyle = headingFont ? { fontFamily: headingFont } : undefined;
   const bodyStyle = bodyFont ? { fontFamily: bodyFont } : undefined;
+  const mediaRadiusClass = mediaShape === "square" ? "rounded-none" : "rounded-[calc(var(--radius)+4px)]";
+  const mediaShadowClass =
+    mediaShadow === "none"
+      ? ""
+      : mediaShadow === "lg"
+        ? "shadow-xl shadow-black/10"
+        : mediaShadow === "md"
+          ? "shadow-lg shadow-black/10"
+          : "shadow-md shadow-black/10";
+  const mediaBorderClass = mediaBorder === "none" ? "" : "border border-border";
+  const textPanelClass =
+    textPanel === "muted"
+      ? cn(
+          "bg-muted",
+          textPanelPadding === "md" ? "p-6 sm:p-8" : "p-8 sm:p-10"
+        )
+      : "";
 
   return (
     <section
@@ -144,11 +173,18 @@ export function FeatureWithMediaBlock({
             className={cn(
               textOrderClass,
               align === "center" ? "text-center" : "text-left",
-              isLightTone ? "text-white" : ""
+              isLightTone ? "text-white" : "",
+              textPanelClass
             )}
           >
             {eyebrow ? (
-              <p className={cn("text-sm", isLightTone ? "text-white/70" : "text-muted-foreground")} style={bodyStyle}>
+              <p
+                className={cn(
+                  "text-[11px] font-semibold uppercase tracking-[0.22em]",
+                  isLightTone ? "text-white/70" : "text-primary"
+                )}
+                style={bodyStyle}
+              >
                 {eyebrow}
               </p>
             ) : null}
@@ -223,13 +259,13 @@ export function FeatureWithMediaBlock({
                 <video
                   src={resolvedMedia.src}
                   controls
-                  className="w-full rounded-[calc(var(--radius)+4px)] border border-border shadow-sm"
+                  className={cn("w-full", mediaBorderClass, mediaRadiusClass, mediaShadowClass)}
                 />
               ) : (
                 <img
                   src={resolvedMedia?.src}
                   alt={resolvedMedia?.alt ?? ""}
-                  className="w-full rounded-[calc(var(--radius)+4px)] border border-border shadow-sm"
+                  className={cn("w-full", mediaBorderClass, mediaRadiusClass, mediaShadowClass)}
                   loading="lazy"
                 />
               )}

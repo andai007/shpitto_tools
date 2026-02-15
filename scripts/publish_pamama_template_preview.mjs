@@ -114,10 +114,11 @@ const theme = {
   fontHeading: "Space Grotesk",
   fontBody: "Space Grotesk",
   palette: {
-    bg: "#f4f6f7",
+    // PAMA pages are mostly white, with light-gray bands for section separation.
+    bg: "#ffffff",
     text: "#1f252b",
-    muted: "#eef2f4",
-    border: "#d6dde1",
+    muted: "#f4f6f7",
+    border: "#d8dee3",
     card: "#ffffff",
     // Tiffany-like cyan/teal (more blue, less green).
     primary: "#0093ad",
@@ -229,15 +230,16 @@ const content = [
       maxWidth: "xl",
       background: "muted",
       eyebrow: "CHI SIAMO",
-      title: "Your solution provider",
-      subtitle:
-        "PAMA progetta e realizza macchine utensili e servizi dedicati.",
+      title: "",
       body:
-        "Tecnologia, esperienza e supporto specialistico per processi produttivi ad alta precisione.",
+        "PAMA progetta e realizza macchine utensili e servizi dedicati. Tecnologia, esperienza e supporto specialistico per processi produttivi ad alta precisione.",
       ctas: [{ label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" }],
       mediaKind: "image",
       mediaSrc: `${slices}/desktop-story.png`,
       mediaAlt: "PAMA factory floor",
+      mediaShape: "square",
+      mediaShadow: "none",
+      mediaBorder: "none",
     },
   },
   {
@@ -259,6 +261,11 @@ const content = [
       mediaKind: "image",
       mediaSrc: `${slices}/desktop-cta.png`,
       mediaAlt: "PAMA machining detail",
+      textPanel: "muted",
+      textPanelPadding: "lg",
+      mediaShape: "square",
+      mediaShadow: "none",
+      mediaBorder: "none",
     },
   },
   {
@@ -269,31 +276,33 @@ const content = [
       paddingY: "lg",
       maxWidth: "xl",
       background: "none",
-      eyebrow: "I NOSTRI PRODOTTI",
-      title: "",
+      title: "I NOSTRI PRODOTTI",
       subtitle:
-        "Seleziona una categoria per esplorare le soluzioni PAMA.",
+        "Le macchine utensili PAMA permettono di eseguire con precisione e rapidita lavorazioni di alesatura, foratura, fresatura e tornitura, soddisfacendo le richieste dei clienti anche nei settori piu esigenti.",
       tabs: [
-        { label: "MACHINES", href: "#prodotti" },
-        { label: "DIGITAL SOLUTIONS / OPTIMIZATION", href: "#prodotti" },
-        { label: "AUTOMATION", href: "#prodotti" },
+        { label: "ACCESSORI", href: "#prodotti" },
+        { label: "CENTRI DI LAVORO VERTICALI NIDEC MACHINE TOOL SERIE MVR-HX", href: "#prodotti" },
+        { label: "AUTOMAZIONE", href: "#prodotti" },
       ],
       cards: [
         {
-          title: "Machines",
-          description: "Macchine utensili ad alte prestazioni per lavorazioni di precisione.",
+          title: "Accessori per ogni esigenza",
+          description:
+            "La versatilita e l'automazione delle varie macchine e accessori grazie a una vasta proposta di accessori.",
           icon: "cpu",
           cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
         },
         {
-          title: "Digital",
-          description: "Soluzioni digitali per ottimizzazione e monitoraggio dei processi.",
+          title: "Massima versatilita e flessibilita",
+          description:
+            "I centri di lavoro verticali Nidec Machine Tool serie MVR-HX sono disponibili in versione a tavola mobile.",
           icon: "globe",
           cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
         },
         {
-          title: "Automation",
-          description: "Automazione su misura per produttivita e qualita ripetibile.",
+          title: "Soluzioni ad alta produttivita",
+          description:
+            "Macchine automatizzate per lavorazioni non presidiate ad alta produttivita che garantiscono una produzione dinamica.",
           icon: "zap",
           cta: { label: "SCOPRI DI PIÙ", href: "#contatti", variant: "primary" },
         },
@@ -326,14 +335,16 @@ const content = [
       maxWidth: "xl",
       background: "none",
       title: "HIGHLIGHTS",
-      subtitle: "News, eventi e aggiornamenti PAMA.",
+      subtitle: "Attivita, news, eventi: gli ultimi aggiornamenti dal mondo PAMA.",
+      textAlign: "center",
+      sectionCta: { label: "SCOPRI TUTTE LE NEWS", href: "#highlights", variant: "primary" },
       variant: "media",
       columns: "3col",
       density: "normal",
       cardStyle: "solid",
-      imagePosition: "top",
-      imageSize: "md",
-      imageShape: "rounded",
+      imagePosition: "right",
+      horizontalImageStyle: "split",
+      imageShape: "square",
       headingSize: "sm",
       bodySize: "sm",
       items: [
@@ -345,7 +356,7 @@ const content = [
           imageAlt: "News 1",
         },
         {
-          title: "EMO 2025",
+          title: "EMO 2025 (22-26 SETTEMBRE 2025)",
           description: "Save the date: 22-26 Settembre 2025.",
           cta: { label: "SCOPRI DI PIÙ", href: "#highlights", variant: "link" },
           imageSrc: `${slices}/desktop-socialproof.png`,
@@ -370,6 +381,7 @@ const content = [
       maxWidth: "2xl",
       background: "gradient",
       backgroundGradient: "linear-gradient(180deg, #0092ad 0%, #00839a 100%)",
+      contentTone: "light",
       columns: [
         {
           title: "Azienda",

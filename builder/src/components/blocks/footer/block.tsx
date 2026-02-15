@@ -22,6 +22,7 @@ export type FooterProps = BaseBlockProps & {
   columns: FooterColumn[];
   socials?: { type: "x" | "github" | "linkedin" | "youtube" | "facebook" | "instagram"; href: string }[];
   legal?: string;
+  contentTone?: "default" | "light";
 };
 
 export type FooterVariant = "simple" | "multiColumn";
@@ -43,15 +44,20 @@ export function FooterBlock({
   columns,
   socials,
   legal,
+  contentTone = "default",
   headingFont,
   bodyFont,
   variant = "multiColumn",
 }: FooterProps & { variant?: FooterVariant }) {
   const motionMode = useMotionMode();
+  const isLightTone = contentTone === "light";
   const linkClass =
     motionMode === "off"
       ? ""
-      : "transition-colors duration-300 hover:text-foreground";
+      : cn(
+          "transition-colors duration-300",
+          isLightTone ? "hover:text-white" : "hover:text-foreground"
+        );
   const emphasisClass = emphasis === "high" ? "hover-underline" : "";
   const backgroundStyle = {
     ...(backgroundMediaStyle(background, backgroundMedia) || {}),
@@ -74,6 +80,7 @@ export function FooterBlock({
       data-block-variant={variant}
       className={cn(
         footerClass({ paddingY, background }),
+        isLightTone ? "text-white" : "",
         hasBackgroundVideo ? "relative overflow-hidden" : ""
       )}
       style={backgroundStyle}
@@ -113,14 +120,22 @@ export function FooterBlock({
             )}
             {socials?.length ? (
               <div
-                className="mt-4 flex flex-wrap text-sm text-muted-foreground"
+                className={cn(
+                  "mt-4 flex flex-wrap text-sm",
+                  isLightTone ? "text-white/75" : "text-muted-foreground"
+                )}
                 style={{ gap: "var(--space-2)", ...bodyStyle }}
               >
                 {socials.slice(0, 6).map((s, i) => (
                   <a
                     key={i}
                     href={s.href}
-                    className={cn("text-sm text-muted-foreground", linkClass, emphasisClass)}
+                    className={cn(
+                      "text-sm",
+                      isLightTone ? "text-white/75" : "text-muted-foreground",
+                      linkClass,
+                      emphasisClass
+                    )}
                     style={bodyStyle}
                   >
                     {labelForSocial(s.type)}
@@ -142,12 +157,23 @@ export function FooterBlock({
                 <div className="text-sm font-medium" style={headingStyle}>
                   {col.title}
                 </div>
-                <ul className="mt-4 text-sm text-muted-foreground space-y-2" style={bodyStyle}>
+                <ul
+                  className={cn(
+                    "mt-4 space-y-2 text-sm",
+                    isLightTone ? "text-white/75" : "text-muted-foreground"
+                  )}
+                  style={bodyStyle}
+                >
                   {col.links.slice(0, 10).map((l, j) => (
                     <li key={j}>
                       <a
                         href={l.href}
-                        className={cn("text-sm text-muted-foreground", linkClass, emphasisClass)}
+                        className={cn(
+                          "text-sm",
+                          isLightTone ? "text-white/75" : "text-muted-foreground",
+                          linkClass,
+                          emphasisClass
+                        )}
                         style={bodyStyle}
                       >
                         {l.label}
@@ -160,7 +186,13 @@ export function FooterBlock({
           </div>
         </div>
 
-        <div className="mt-10 border-t border-border pt-6 text-xs text-muted-foreground" style={bodyStyle}>
+        <div
+          className={cn(
+            "mt-10 border-t pt-6 text-xs",
+            isLightTone ? "border-white/20 text-white/70" : "border-border text-muted-foreground"
+          )}
+          style={bodyStyle}
+        >
           {legal ?? `© ${new Date().getFullYear()} All rights reserved.`}
         </div>
       </div>

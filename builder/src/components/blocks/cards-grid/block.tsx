@@ -2,6 +2,7 @@
 
 import React from "react";
 import { cn } from "@/lib/cn";
+import { Button } from "@/components/atoms/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/card";
 import { useMotionMode } from "@/components/theme/motion";
 import { useInViewReveal } from "@/lib/motion";
@@ -35,12 +36,14 @@ export type CardsGridItem = {
 export type CardsGridProps = BaseBlockProps & {
   title?: string;
   subtitle?: string;
+  sectionCta?: LinkProps;
   items: CardsGridItem[];
   variant?: "product" | "person" | "media" | "imageText" | "poster";
   columns?: "2col" | "3col" | "4col";
   density?: "compact" | "normal" | "spacious";
   cardStyle?: "glass" | "solid" | "muted";
   imagePosition?: "top" | "left" | "right";
+  horizontalImageStyle?: "thumb" | "split";
   imageSize?: "sm" | "md" | "lg";
   imageShape?: "square" | "rounded" | "circle";
   headingSize?: "sm" | "md" | "lg";
@@ -101,12 +104,14 @@ export function CardsGridBlock({
   emphasis = "normal",
   title,
   subtitle,
+  sectionCta,
   items,
   variant = "product",
   columns = "3col",
   density = "normal",
   cardStyle = "glass",
   imagePosition = "top",
+  horizontalImageStyle = "thumb",
   imageSize = "md",
   imageShape = "rounded",
   headingSize = "md",
@@ -136,6 +141,8 @@ export function CardsGridBlock({
   const headingStyle = headingFont ? { fontFamily: headingFont } : undefined;
   const bodyStyle = bodyFont ? { fontFamily: bodyFont } : undefined;
   const imageClass = cn("object-cover", imageShapeClass(imageShape));
+  const sectionCtaVariant =
+    sectionCta?.variant === "secondary" ? "secondary" : sectionCta?.variant === "link" ? "link" : "default";
 
   return (
     <section
@@ -183,6 +190,27 @@ export function CardsGridBlock({
                 {subtitle}
               </p>
             ) : null}
+            {sectionCta ? (
+              <div
+                className={cn(
+                  "mt-6",
+                  computedTextAlign === "center" ? "flex justify-center" : "flex justify-start"
+                )}
+              >
+                <Button
+                  asChild
+                  size="lg"
+                  variant={sectionCtaVariant}
+                  className={cn(
+                    sectionCtaVariant === "default"
+                      ? "h-12 rounded-none px-10 text-[11px] font-semibold uppercase tracking-[0.14em]"
+                      : ""
+                  )}
+                >
+                  <a href={sectionCta.href}>{sectionCta.label}</a>
+                </Button>
+              </div>
+            ) : null}
           </div>
         ) : null}
 
@@ -200,13 +228,15 @@ export function CardsGridBlock({
                 : null;
             const hasImage = Boolean(resolvedImage?.src);
             const isHorizontal = imagePosition === "left" || imagePosition === "right";
+            const useSplitHorizontal = Boolean(hasImage && isHorizontal && horizontalImageStyle === "split");
             return (
               <Card
-                key={idx}
+                key={`${item.title}-${idx}`}
                 className={cn(
                   cardStyleClass(cardStyle),
                   cardStyle === "glass" ? "card-glass" : "",
                   emphasis === "high" ? "hover-lift" : "",
+                  useSplitHorizontal ? "overflow-hidden" : "",
                   reveal.className
                 )}
                 style={
@@ -215,11 +245,19 @@ export function CardsGridBlock({
                     : undefined
                 }
               >
-                <div className={cn(isHorizontal ? "flex gap-4 p-4" : "")}>
+                <div
+                  className={cn(
+                    useSplitHorizontal
+                      ? "flex items-stretch"
+                      : isHorizontal
+                        ? "flex gap-4 p-4"
+                        : ""
+                  )}
+                >
                   {hasImage ? (
                     <div
                       className={cn(
-                        isHorizontal ? "shrink-0" : "",
+                        useSplitHorizontal ? "basis-1/2 shrink-0" : isHorizontal ? "shrink-0" : "",
                         imagePosition === "right" && "order-2"
                       )}
                     >
@@ -227,15 +265,24 @@ export function CardsGridBlock({
                         src={resolvedImage?.src}
                         alt={resolvedImage?.alt || item.title}
                         className={cn(
-                          imageClass,
-                          isHorizontal ? imageSizeClass(imageSize) : "h-44 w-full",
+                          useSplitHorizontal ? "h-full w-full object-cover" : imageClass,
+                          useSplitHorizontal
+                            ? ""
+                            : isHorizontal
+                              ? imageSizeClass(imageSize)
+                              : "h-44 w-full",
                           variant === "poster" ? "h-52" : ""
                         )}
                       />
                     </div>
                   ) : null}
-                  <div className={cn(isHorizontal ? "flex-1" : "")}>
-                    <CardHeader className={cn(isHorizontal ? "px-0 pb-2" : "")}>
+                  <div
+                    className={cn(
+                      isHorizontal ? "flex-1" : "",
+                      useSplitHorizontal ? "p-6" : ""
+                    )}
+                  >
+                    <CardHeader className={cn(isHorizontal ? (useSplitHorizontal ? "p-0 pb-2" : "px-0 pb-2") : "")}>
                       {item.tag ? (
                         <p className="text-xs uppercase tracking-wide text-muted-foreground">{item.tag}</p>
                       ) : null}
@@ -261,7 +308,11 @@ export function CardsGridBlock({
                       ) : null}
                     </CardHeader>
                     {item.description ? (
-                      <CardContent className={cn(isHorizontal ? "px-0" : "")}>
+                      <CardContent
+                        className={cn(
+                          useSplitHorizontal ? "px-0 pb-0" : isHorizontal ? "px-0" : ""
+                        )}
+                      >
                         <p className={cn("text-muted-foreground", sizeClass(bodySize))} style={bodyStyle}>
                           {item.description}
                         </p>
