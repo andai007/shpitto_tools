@@ -1,0 +1,1756 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breton | Pioneer in the development of advanced technologies and materials</title>
+  <meta name="description" content="Since 1963 Breton is an international leader in advanced industrial machines and plants." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand: #9b0837;
+      --brand-dark: #82072f;
+      --ink: #23262b;
+      --muted: #666b72;
+      --bg: #efeff1;
+      --line: #d3d6db;
+      --white: #ffffff;
+      --panel-dark: #1f2227;
+      --container: 1320px;
+      --ease: cubic-bezier(.215,.61,.355,1);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Roboto", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--container), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 84px;
+      background: var(--brand);
+      z-index: 70;
+      border-bottom: 1px solid rgba(255,255,255,.22);
+    }
+    .header-row {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 210px 1fr auto;
+      align-items: stretch;
+    }
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-left: 18px;
+      border-right: 1px solid rgba(255,255,255,.22);
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      display: block;
+    }
+    .brand-word {
+      color: #fff;
+      font-size: clamp(34px, 2vw, 46px);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: .01em;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      padding-left: 30px;
+    }
+    .main-nav a {
+      font-size: 31px;
+      font-size: clamp(15px, 1.2vw, 24px);
+      font-weight: 700;
+      color: #fff;
+      position: relative;
+      line-height: 1;
+      padding-top: 2px;
+    }
+    .main-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 100%;
+      height: 2px;
+      background: #fff;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform .24s var(--ease);
+    }
+    .main-nav a:hover::after { transform: scaleX(1); }
+
+    .header-actions {
+      display: flex;
+      align-items: stretch;
+      color: #fff;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .action-box {
+      min-width: 86px;
+      padding: 0 22px;
+      border-left: 1px solid rgba(255,255,255,.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+    }
+    .action-box:hover { background: rgba(0,0,0,.12); }
+    .action-talk {
+      background: #1f2227;
+      min-width: 202px;
+      justify-content: flex-start;
+      padding-left: 26px;
+      padding-right: 26px;
+    }
+    .menu-trigger {
+      width: 84px;
+      border-right: 1px solid rgba(255,255,255,.22);
+    }
+    .icon-search {
+      width: 22px;
+      height: 22px;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+    }
+    .icon-search::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 3px;
+      background: #fff;
+      right: -7px;
+      bottom: 1px;
+      transform: rotate(40deg);
+      transform-origin: center;
+    }
+    .icon-hamburger,
+    .icon-hamburger::before,
+    .icon-hamburger::after {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform .3s var(--ease), opacity .2s var(--ease);
+    }
+    .icon-hamburger {
+      position: relative;
+    }
+    .icon-hamburger::before { position: absolute; top: -7px; left: 0; }
+    .icon-hamburger::after { position: absolute; top: 7px; left: 0; }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 84px 0 0;
+      background: #202328;
+      color: #f1f2f3;
+      z-index: 65;
+      transform: translateY(-102%);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform .45s var(--ease), opacity .35s var(--ease), visibility .35s var(--ease);
+      border-top: 1px solid rgba(255,255,255,.14);
+    }
+    .menu-overlay.is-open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    .menu-grid {
+      height: calc(100vh - 84px);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+    }
+    .menu-left,
+    .menu-right {
+      padding: 58px 58px 70px;
+      overflow: auto;
+    }
+    .menu-left { border-right: 1px solid rgba(255,255,255,.15); }
+    .menu-left h3,
+    .menu-right h3 {
+      margin: 0 0 26px;
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #969ba1;
+      font-weight: 700;
+    }
+    .menu-links,
+    .menu-sub-links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .menu-links li + li,
+    .menu-sub-links li + li {
+      border-top: 1px solid rgba(255,255,255,.15);
+    }
+    .menu-links a,
+    .menu-sub-links a {
+      display: block;
+      padding: 18px 0;
+      font-size: clamp(25px, 2vw, 40px);
+      font-weight: 800;
+      line-height: 1.08;
+      transition: color .2s var(--ease);
+    }
+    .menu-sub-links a {
+      font-size: clamp(18px, 1.3vw, 30px);
+      font-weight: 700;
+    }
+    .menu-links a:hover,
+    .menu-sub-links a:hover {
+      color: #e65d8f;
+    }
+
+    .contact-backdrop {
+      position: fixed;
+      inset: 84px 0 0;
+      background: rgba(16, 18, 24, .42);
+      z-index: 66;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .26s var(--ease), visibility .26s var(--ease);
+    }
+    .contact-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .contact-drawer {
+      position: fixed;
+      top: 84px;
+      right: 0;
+      bottom: 0;
+      width: min(450px, 100vw);
+      background: #fff;
+      z-index: 67;
+      transform: translateX(102%);
+      transition: transform .35s var(--ease);
+      border-left: 1px solid #d1d4d9;
+      display: flex;
+      flex-direction: column;
+    }
+    .contact-drawer.is-open {
+      transform: translateX(0);
+    }
+    .contact-head {
+      min-height: 72px;
+      padding: 16px 18px;
+      border-bottom: 1px solid #d9dde2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .contact-head h3 {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1;
+      color: #23272c;
+      letter-spacing: -.01em;
+    }
+    .contact-close {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #c5cad1;
+      background: #fff;
+      color: #2f343a;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .contact-body {
+      padding: 20px 18px 28px;
+      overflow: auto;
+      display: grid;
+      gap: 12px;
+    }
+    .contact-intro {
+      margin: 0 0 4px;
+      color: #555b63;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .contact-form {
+      display: grid;
+      gap: 10px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border: 1px solid #c7ccd3;
+      min-height: 44px;
+      padding: 10px 12px;
+      font: inherit;
+      color: #22262b;
+      background: #fff;
+    }
+    .contact-form textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+    .contact-submit {
+      margin-top: 2px;
+      min-height: 46px;
+      border: 1px solid var(--brand);
+      background: var(--brand);
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .contact-meta {
+      border-top: 1px solid #d9dde2;
+      padding-top: 12px;
+      color: #4f555c;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .mobile-talk {
+      position: fixed;
+      right: 14px;
+      bottom: 16px;
+      z-index: 62;
+      min-height: 38px;
+      border: 1px solid var(--brand);
+      background: var(--brand);
+      color: #fff;
+      padding: 0 12px;
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-weight: 700;
+      display: none;
+    }
+    .chat-us {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 63;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--brand);
+      background: var(--brand);
+      color: #fff;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .chat-us::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .hero {
+      margin-top: 84px;
+      min-height: clamp(560px, 84vh, 980px);
+      background:
+        linear-gradient(100deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.18) 44%, rgba(0,0,0,.12) 100%),
+        url("https://api.breton.it/assets/assets/Homepage/Homo-Breton.jpg") center/cover no-repeat;
+      color: #fff;
+      display: flex;
+      align-items: flex-end;
+      padding: 82px 0 66px;
+      position: relative;
+    }
+    .hero h1 {
+      margin: 0;
+      max-width: 700px;
+      font-size: clamp(50px, 6.15vw, 104px);
+      line-height: .93;
+      letter-spacing: -.03em;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .hero-chooser {
+      position: absolute;
+      left: 24px;
+      bottom: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      z-index: 2;
+      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+    }
+    .hero-chooser-box {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255,255,255,.85);
+      display: grid;
+      place-items: center;
+      background: rgba(0,0,0,.2);
+    }
+    .hero-chooser-box::after {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(45deg) translate(-1px, -1px);
+      margin-top: -2px;
+    }
+
+    .section {
+      border-top: 1px solid transparent;
+      padding: 66px 0;
+    }
+    .section + .section {
+      padding-top: 74px;
+    }
+    .title-row {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+    }
+    .section h2 {
+      margin: 0;
+      font-size: clamp(36px, 3.1vw, 58px);
+      line-height: .98;
+      letter-spacing: -.02em;
+      color: #272a2f;
+    }
+    .subtitle {
+      margin: 0;
+      color: #4f545b;
+      font-size: clamp(20px, 1.7vw, 33px);
+      line-height: 1.25;
+      font-weight: 400;
+      max-width: 760px;
+    }
+    .section-link {
+      font-size: 14px;
+      color: #2f3338;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .section-link::after {
+      content: " \203a";
+      font-size: 16px;
+      vertical-align: baseline;
+    }
+
+    .find-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0,1fr));
+      gap: 12px;
+    }
+    .find-card {
+      background: #dfe1e5;
+      min-height: 180px;
+      border: 1px solid #d8dbe0;
+      position: relative;
+      overflow: hidden;
+    }
+    .find-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s var(--ease), filter .35s var(--ease);
+    }
+    .find-card:hover img {
+      transform: scale(1.04);
+      filter: saturate(1.08);
+    }
+    .find-labels {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0,1fr));
+      gap: 12px;
+    }
+    .find-labels p {
+      margin: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #464b52;
+      line-height: 1.2;
+    }
+    .find-labels strong {
+      display: block;
+      margin-top: 4px;
+      color: #1f2328;
+      font-size: clamp(21px, 1.25vw, 28px);
+      font-weight: 700;
+      text-transform: none;
+    }
+
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0,1fr));
+      gap: 12px;
+    }
+    .industry-card {
+      background: #dedfe2;
+      border: 1px solid #d2d5d9;
+      min-height: 176px;
+      overflow: hidden;
+      position: relative;
+    }
+    .industry-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s var(--ease);
+    }
+    .industry-card:hover img { transform: scale(1.03); }
+
+    .whats-new-cards {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 30px;
+    }
+    .wn-item {
+      background: #dedfe2;
+      border: 1px solid #d4d7dc;
+    }
+    .wn-item .thumb {
+      height: 220px;
+      background: #d9dbdf;
+      overflow: hidden;
+    }
+    .wn-item .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s var(--ease);
+    }
+    .wn-item:hover .thumb img { transform: scale(1.04); }
+    .wn-item .meta {
+      padding: 12px 2px 0;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #4f545b;
+      line-height: 1.2;
+    }
+    .wn-item .name {
+      display: block;
+      text-transform: none;
+      margin-top: 4px;
+      font-size: clamp(21px, 1.25vw, 29px);
+      font-weight: 700;
+      color: #23272d;
+    }
+
+    .deals-wrap {
+      min-height: 250px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+    }
+    .deals-left h2 { margin-bottom: 30px; }
+    .ghost-btn {
+      display: inline-flex;
+      min-height: 56px;
+      min-width: 210px;
+      padding: 0 26px;
+      border: 1px solid #c2c5cb;
+      color: #22252b;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #fff;
+    }
+    .ghost-btn::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      bottom: -1px;
+      width: 12px;
+      height: 12px;
+      border-right: 3px solid var(--brand);
+      border-bottom: 3px solid var(--brand);
+    }
+    .deals-copy {
+      max-width: 460px;
+      font-size: clamp(28px, 2vw, 40px);
+      line-height: 1.2;
+      color: #252a30;
+      position: relative;
+      padding-left: 24px;
+    }
+    .deals-copy::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 13px;
+      height: 13px;
+      border-left: 4px solid var(--brand);
+      border-bottom: 4px solid var(--brand);
+    }
+
+    .stories-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 0;
+      border: 1px solid #d3d6db;
+      border-left: 0;
+      border-right: 0;
+    }
+    .story-card {
+      min-height: 302px;
+      background: #eaebee;
+      border-right: 1px solid #d3d6db;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 22px 18px;
+      color: #fff;
+    }
+    .story-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s var(--ease);
+    }
+    .story-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(20,24,30,.76), rgba(20,24,30,.05));
+    }
+    .story-card:hover img { transform: scale(1.05); }
+    .story-card .content {
+      position: relative;
+      z-index: 1;
+    }
+    .story-card .kicker {
+      margin: 0;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      opacity: .88;
+    }
+    .story-card h3 {
+      margin: 7px 0 0;
+      font-size: clamp(18px, 1.1vw, 24px);
+      line-height: 1.2;
+    }
+
+    .bit-wrap {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      min-height: 470px;
+      align-items: center;
+      background: transparent;
+    }
+    .bit-panel {
+      height: 86%;
+      background: #1f2227;
+      color: #fff;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 2;
+      max-width: 620px;
+    }
+    .bit-panel p.small {
+      margin: 0 0 18px;
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #b6bbc2;
+      font-weight: 700;
+    }
+    .bit-panel h3 {
+      margin: 0 0 22px;
+      font-size: clamp(34px, 2.15vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -.01em;
+    }
+    .bit-panel p.copy {
+      margin: 0 0 26px;
+      font-size: clamp(18px, 1.2vw, 24px);
+      line-height: 1.5;
+      color: #dee2e7;
+      max-width: 430px;
+    }
+    .bit-image {
+      margin-left: -80px;
+      height: 100%;
+      min-height: 470px;
+      overflow: hidden;
+      border: 1px solid #d3d6db;
+      background: #dfe3e9;
+    }
+    .bit-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .news-block {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      border: 1px solid #d3d6db;
+    }
+    .news-card {
+      min-height: 260px;
+      padding: 18px;
+      border-right: 1px solid #d3d6db;
+      border-bottom: 1px solid #d3d6db;
+      background: #f1f2f4;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .news-card.photo {
+      padding: 0;
+      overflow: hidden;
+      background: #d9dce1;
+    }
+    .news-card.photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .news-card.photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(18,22,28,.45) 0%, rgba(18,22,28,0) 45%);
+    }
+    .news-card.photo .corner {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      z-index: 2;
+    }
+    .news-card.dark {
+      background: #666a70;
+      color: #fff;
+    }
+    .news-card .tag {
+      margin: 0;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 700;
+      color: #80858c;
+    }
+    .news-card.dark .tag { color: #d4d7dc; }
+    .news-card h4 {
+      margin: 8px 0 0;
+      font-size: clamp(23px, 1.4vw, 35px);
+      line-height: 1.15;
+    }
+    .news-card p {
+      margin: 10px 0 0;
+      font-size: clamp(15px, .95vw, 19px);
+      line-height: 1.38;
+      color: #595e66;
+      max-width: 90%;
+    }
+    .news-card.dark p { color: #eceff2; }
+    .news-card .corner {
+      width: 39px;
+      height: 39px;
+      border: 1px solid #c4c8ce;
+      align-self: end;
+      position: relative;
+      background: #fff;
+      margin-top: 10px;
+    }
+    .news-card .corner::before {
+      content: "\203a";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #646a72;
+      font-size: 19px;
+      font-weight: 600;
+    }
+    .news-card .corner::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      bottom: -1px;
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid var(--brand);
+      border-bottom: 2px solid var(--brand);
+    }
+
+    .numbers-copy {
+      margin-top: 12px;
+      max-width: 620px;
+      font-size: clamp(18px, 1.15vw, 24px);
+      line-height: 1.45;
+      color: #3f444b;
+    }
+    .numbers-grid {
+      margin-top: 38px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 0;
+      border: 1px solid #d3d6db;
+    }
+    .num-card {
+      min-height: 170px;
+      padding: 18px 18px 14px;
+      border-right: 1px solid rgba(255,255,255,.22);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .num-card strong {
+      font-size: clamp(52px, 3.2vw, 72px);
+      line-height: .9;
+      letter-spacing: -.02em;
+      font-weight: 900;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .num-card span {
+      font-size: clamp(26px, 1.45vw, 36px);
+      line-height: 1.18;
+      font-weight: 700;
+      display: block;
+      max-width: 320px;
+    }
+    .num-1 { background: var(--brand); color: #fff; }
+    .num-2 { background: #e5e6e9; color: #9b0837; }
+    .num-3 { background: #1f2227; color: #fff; }
+    .num-4 { background: #aeb7be; color: #9b0837; border-right: 0; }
+
+    .world-map {
+      margin-top: 24px;
+      width: min(640px, 100%);
+      background: transparent;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .world-map img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .company-book {
+      margin-top: 22px;
+      width: 100%;
+      border: 1px solid #d3d6db;
+      background: #f8f9fa;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 48px 1fr 48px;
+      align-items: center;
+      gap: 12px;
+    }
+    .book-nav {
+      width: 100%;
+      height: 100%;
+      min-height: 58px;
+      border: 1px solid #c6cbd2;
+      background: #fff;
+      color: #464c54;
+      font-size: 28px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+    .book-spread {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.18), rgba(0,0,0,.08));
+      z-index: 2;
+      transform: translateX(-.5px);
+    }
+    .book-view {
+      position: relative;
+      height: min(430px, 54vw);
+      border: 1px solid #d2d6dc;
+      background: #eceef2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 8px;
+      perspective: 1300px;
+      overflow: hidden;
+    }
+    .book-page {
+      background: #fff;
+      border: 1px solid #d2d7de;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 20px rgba(0,0,0,.06);
+    }
+    .book-page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .book-page.right {
+      transform-origin: left center;
+    }
+    .book-page.right.is-flip {
+      animation: pageFlip .52s var(--ease);
+    }
+    @keyframes pageFlip {
+      0% { transform: rotateY(0deg); }
+      45% { transform: rotateY(-78deg); }
+      100% { transform: rotateY(0deg); }
+    }
+    .book-note {
+      margin: 10px 2px 0;
+      color: #5a6068;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .bottom-links {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
+    }
+    .bottom-links a {
+      border: 1px solid #babfc6;
+      min-height: 74px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 15px;
+      color: #2b3036;
+      font-weight: 700;
+      background: transparent;
+    }
+    .bottom-links a::after {
+      content: "\2197";
+      color: #9a9fa7;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .site-footer {
+      margin-top: 28px;
+      padding: 18px 0 24px;
+      border-top: 1px solid #cfd3d8;
+      background: transparent;
+      color: #3e434a;
+      font-size: 12px;
+    }
+    .footer-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+    }
+    .footer-social {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .footer-social .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #8c9198;
+    }
+    .footer-meta {
+      text-align: center;
+      color: #575c64;
+    }
+    .built {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #666b72;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    @media (max-width: 1200px) {
+      .main-nav { gap: 22px; }
+      .main-nav a { font-size: 18px; }
+      .action-talk { min-width: 172px; }
+      .find-card,
+      .industry-card { min-height: 160px; }
+      .bit-wrap { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 980px) {
+      .container { width: min(var(--container), calc(100% - 34px)); }
+      .site-header { height: 74px; }
+      .header-row {
+        grid-template-columns: 118px 1fr auto;
+      }
+      .brand-box {
+        padding-left: 12px;
+        border-right: 0;
+      }
+      .brand-icon {
+        width: 24px;
+        height: 24px;
+      }
+      .brand-word {
+        font-size: 16px;
+      }
+      .main-nav { display: none; }
+      .action-talk,
+      .action-search,
+      .action-lang {
+        display: none;
+      }
+      .menu-trigger {
+        width: 64px;
+        border-left: 1px solid rgba(255,255,255,.22);
+      }
+      .hero {
+        margin-top: 74px;
+        min-height: 76vh;
+        padding: 54px 0 36px;
+      }
+      .hero-chooser {
+        left: 12px;
+        bottom: 10px;
+        font-size: 10px;
+      }
+      .hero-chooser-box {
+        width: 26px;
+        height: 26px;
+      }
+      .hero-chooser-box::after {
+        width: 7px;
+        height: 7px;
+      }
+      .hero h1 {
+        font-size: clamp(42px, 11vw, 72px);
+        max-width: 92%;
+      }
+      .menu-overlay {
+        inset: 74px 0 0;
+      }
+      .contact-backdrop {
+        inset: 74px 0 0;
+      }
+      .contact-drawer {
+        top: 74px;
+      }
+      .menu-grid {
+        grid-template-columns: 1fr;
+        height: calc(100vh - 74px);
+      }
+      .menu-left,
+      .menu-right {
+        padding: 26px 18px 34px;
+      }
+      .menu-left { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+      .menu-links a,
+      .menu-sub-links a {
+        font-size: 34px;
+      }
+      .mobile-talk {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chat-us {
+        bottom: 60px;
+      }
+
+      .section {
+        padding: 44px 0;
+      }
+      .section + .section {
+        padding-top: 48px;
+      }
+      .section h2 {
+        font-size: clamp(36px, 10vw, 56px);
+      }
+      .subtitle {
+        font-size: 31px;
+        line-height: 1.28;
+      }
+      .find-grid,
+      .find-labels,
+      .industries-grid,
+      .whats-new-cards {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
+      .find-labels p,
+      .wn-item .meta {
+        font-size: 11px;
+      }
+      .find-labels strong,
+      .wn-item .name {
+        font-size: 20px;
+      }
+      .deals-wrap {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+      .deals-copy {
+        font-size: 28px;
+      }
+      .stories-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .bit-wrap {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .bit-panel {
+        max-width: none;
+        height: auto;
+        padding: 32px 22px;
+      }
+      .bit-panel h3 {
+        font-size: clamp(32px, 9vw, 52px);
+      }
+      .bit-panel p.copy {
+        font-size: 26px;
+      }
+      .bit-image {
+        margin-left: 0;
+        min-height: 300px;
+      }
+      .news-block {
+        grid-template-columns: 1fr 1fr;
+      }
+      .numbers-copy {
+        font-size: 25px;
+      }
+      .numbers-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .num-card strong { font-size: 58px; }
+      .num-card span { font-size: 24px; }
+      .company-book {
+        grid-template-columns: 38px 1fr 38px;
+        padding: 10px;
+      }
+      .book-view {
+        height: 320px;
+      }
+      .bottom-links {
+        grid-template-columns: 1fr;
+      }
+      .footer-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .footer-meta,
+      .built {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(var(--container), calc(100% - 20px));
+      }
+      .hero h1 {
+        max-width: 300px;
+        font-size: 64px;
+      }
+      .section h2 {
+        font-size: 57px;
+      }
+      .subtitle {
+        font-size: 17px;
+      }
+      .find-grid,
+      .find-labels,
+      .industries-grid,
+      .whats-new-cards,
+      .stories-grid,
+      .news-block,
+      .numbers-grid {
+        grid-template-columns: 1fr;
+      }
+      .find-card,
+      .industry-card,
+      .wn-item .thumb {
+        min-height: 190px;
+        height: 190px;
+      }
+      .find-labels strong,
+      .wn-item .name,
+      .deals-copy,
+      .bit-panel p.copy,
+      .numbers-copy,
+      .num-card span,
+      .news-card h4 {
+        font-size: 18px;
+      }
+      .num-card strong {
+        font-size: 48px;
+      }
+      .menu-links a,
+      .menu-sub-links a {
+        font-size: 28px;
+      }
+      .site-footer {
+        padding-bottom: 18px;
+      }
+      .book-view {
+        height: 210px;
+      }
+      .chat-us {
+        bottom: 58px;
+        min-height: 38px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand-box" href="./breton-homepage.html" aria-label="Breton home">
+        <img class="brand-icon" src="https://www.breton.it/_nuxt/img/logo-small-rev.f8ceb0b.svg" alt="" />
+        <span class="brand-word">reton</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="./breton-engineering.html">Engineering</a>
+        <a href="./breton-products.html">Products</a>
+        <a href="./breton-services.html">Services</a>
+        <a href="./breton-bit.html">BIT</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="action-box action-talk" id="talkToggle" type="button" aria-label="Open contact window">Let's talk</button>
+        <button class="action-box action-search" type="button" aria-label="Search">
+          <span class="icon-search" aria-hidden="true"></span>
+        </button>
+        <button class="action-box action-lang" type="button" aria-label="Language">Language</button>
+        <button class="action-box menu-trigger" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainMenu">
+          <span class="icon-hamburger" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="menu-overlay" id="mainMenu" aria-hidden="true">
+    <div class="container menu-grid">
+      <div class="menu-left">
+        <h3>Main navigation</h3>
+        <ul class="menu-links">
+          <li><a href="./breton-engineering.html">Engineering</a></li>
+          <li><a href="./breton-products.html">Products</a></li>
+          <li><a href="./breton-services.html">Services</a></li>
+          <li><a href="./breton-bit.html">BIT</a></li>
+          <li><a href="./breton-news-events.html">News &amp; Events</a></li>
+          <li><a href="./breton-about.html">About us</a></li>
+        </ul>
+      </div>
+      <div class="menu-right">
+        <h3>Quick links</h3>
+        <ul class="menu-sub-links">
+          <li><a href="./breton-contacts.html">Contacts</a></li>
+          <li><a href="./breton-about.html#world">Breton in the world</a></li>
+          <li><a href="./breton-about.html">Company profile</a></li>
+          <li><a href="./breton-news-events.html">News</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <div class="contact-backdrop" id="contactBackdrop" aria-hidden="true"></div>
+  <aside class="contact-drawer" id="contactDrawer" aria-hidden="true">
+    <div class="contact-head">
+      <h3>Contact window</h3>
+      <button class="contact-close" id="contactClose" type="button" aria-label="Close contact window">×</button>
+    </div>
+    <div class="contact-body">
+      <p class="contact-intro">Tell us your project and Breton team will contact you.</p>
+      <form class="contact-form" action="./breton-contacts.html" method="get">
+        <input type="text" name="name" placeholder="Your name" />
+        <input type="email" name="email" placeholder="Email" />
+        <input type="text" name="company" placeholder="Company" />
+        <textarea name="message" placeholder="Message"></textarea>
+        <button class="contact-submit" type="submit">Send request</button>
+      </form>
+      <div class="contact-meta">
+        <div>Phone: +39 0423 7691</div>
+        <div>Email: info@breton.it</div>
+        <div>Via Garibaldi 27, 31030 Castello di Godego (TV), Italy</div>
+      </div>
+    </div>
+  </aside>
+  <button class="mobile-talk" id="mobileTalk" type="button" aria-label="Open contact window">Let's talk</button>
+  <button class="chat-us" id="chatUs" type="button" aria-label="Chat with us">Chat with us</button>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Pioneer in the development of advanced technologies and materials</h1>
+      <a class="hero-chooser" href="#find-solution"><span class="hero-chooser-box" aria-hidden="true"></span><span>Choose a category</span></a>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="industries">
+      <div class="container">
+        <h2>Industries</h2>
+        <div class="industries-grid" style="margin-top: 26px;">
+          <a class="industry-card" href="https://www.breton.it/landings/breton-technology-at-your-service-stone" aria-label="Stone fabrication shop">
+            <img src="https://api.breton.it/assets/assets/Homepage/Business-Units/breton-viper.jpg" alt="Stone fabrication" />
+          </a>
+          <a class="industry-card" href="https://www.breton.it/products/machines-and-lines" aria-label="Machine tools">
+            <img src="https://api.breton.it/assets/assets/Homepage/Business-Units/BRETON-HAWX_test-machining-2_08.2021.jpg" alt="Machine tools" />
+          </a>
+          <a class="industry-card" href="https://www.breton.it/landings/breton-technology-at-your-service-stone-primary-processing" aria-label="Stone primary processing">
+            <img src="https://api.breton.it/assets/assets/Homepage/Business-Units/Tetrix-Ok_rev.jpg" alt="Stone primary processing" />
+          </a>
+          <a class="industry-card" href="https://www.breton.it/products/machines-and-lines/breton-genesi" aria-label="Additive manufacturing">
+            <img src="https://api.breton.it/assets/assets/Homepage/Business-Units/3d-printing-service.jpg" alt="Additive manufacturing" />
+          </a>
+          <a class="industry-card" href="https://www.breton.it/products/plants" aria-label="Compound stone">
+            <img src="https://api.breton.it/assets/products/Plants/BretonStone-Quartz-Slabs/_listing/Progetto-senza-titolo-7.jpg" alt="Compound stone" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="find-solution">
+      <div class="container">
+        <div class="title-row">
+          <div>
+            <h2>Find your solution</h2>
+            <p class="subtitle">Discover Breton's new technological solutions</p>
+          </div>
+        </div>
+
+        <div class="find-grid">
+          <a class="find-card" href="https://www.breton.it/products/machines-and-lines/microwire" aria-label="Microwire">
+            <img src="https://api.breton.it/assets/products/Machines/MICROWIRE/heading-image/_listing/BRETON_WEBSITE_NEW_TAG.jpg" alt="Microwire" />
+          </a>
+          <a class="find-card" href="https://www.breton.it/products/machines-and-lines/breton-nexa" aria-label="Breton Nexa">
+            <img src="https://api.breton.it/assets/products/Machines/Breton-Nexa/heading/_listing/Nexa.png" alt="Breton Nexa" />
+          </a>
+          <a class="find-card" href="https://www.breton.it/products/machines-and-lines/breton-hydra" aria-label="Breton Hydra">
+            <img src="https://api.breton.it/assets/products/Machines/Breton-Hydra/Heading-image/_listing/Hydra.png" alt="Breton Hydra" />
+          </a>
+          <a class="find-card" href="https://www.breton.it/products/machines-and-lines/breton-kappa-g" aria-label="Breton Kappa G">
+            <img src="https://api.breton.it/assets/products/Machines/Breton-Kappa-G/Heading-image/_listing/Kappa-G.png" alt="Breton Kappa G" />
+          </a>
+          <a class="find-card" href="https://www.breton.it/products/machines-and-lines/breton-kobra" aria-label="Breton Kobra">
+            <img src="https://api.breton.it/assets/products/Machines/Breton-Kobra/Heading-image/_listing/Kobra.png" alt="Breton Kobra" />
+          </a>
+        </div>
+        <div class="find-labels">
+          <p>MULTIWIRE<strong>Microwire</strong></p>
+          <p>CUTTING CENTRE<strong>Breton Nexa</strong></p>
+          <p>CUTTING CENTRE<strong>Breton Hydra</strong></p>
+          <p>POLISHER<strong>Breton Kappa G</strong></p>
+          <p>ROUTER<strong>Breton Kobra</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="whats-new">
+      <div class="container">
+        <h2>What's New</h2>
+        <p class="subtitle">Discover Breton's new technological solutions</p>
+        <div class="whats-new-cards">
+          <a class="wn-item" href="https://www.breton.it/products/machines-and-lines/microwire">
+            <div class="thumb"><img src="https://api.breton.it/assets/products/Machines/MICROWIRE/heading-image/_listing/BRETON_WEBSITE_NEW_TAG.jpg" alt="Microwire" /></div>
+            <div class="meta">MULTIWIRE <span class="name">Microwire</span></div>
+          </a>
+          <a class="wn-item" href="https://www.breton.it/products/machines-and-lines/breton-nexa">
+            <div class="thumb"><img src="https://api.breton.it/assets/products/Machines/Breton-Nexa/heading/_listing/Nexa.png" alt="Breton Nexa" /></div>
+            <div class="meta">CUTTING CENTRE <span class="name">Breton Nexa</span></div>
+          </a>
+          <a class="wn-item" href="https://www.breton.it/products/machines-and-lines/breton-hydra">
+            <div class="thumb"><img src="https://api.breton.it/assets/products/Machines/Breton-Hydra/Heading-image/_listing/Hydra.png" alt="Breton Hydra" /></div>
+            <div class="meta">CUTTING CENTRE <span class="name">Breton Hydra</span></div>
+          </a>
+          <a class="wn-item" href="https://www.breton.it/products/machines-and-lines/breton-kappa-g">
+            <div class="thumb"><img src="https://api.breton.it/assets/products/Machines/Breton-Kappa-G/Heading-image/_listing/Kappa-G.png" alt="Breton Kappa G" /></div>
+            <div class="meta">POLISHER <span class="name">Breton Kappa G</span></div>
+          </a>
+          <a class="wn-item" href="https://www.breton.it/products/machines-and-lines/breton-kobra">
+            <div class="thumb"><img src="https://api.breton.it/assets/products/Machines/Breton-Kobra/Heading-image/_listing/Kobra.png" alt="Breton Kobra" /></div>
+            <div class="meta">ROUTER <span class="name">Breton Kobra</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="deals">
+      <div class="container deals-wrap">
+        <div class="deals-left">
+          <h2>Breton Deals</h2>
+          <a class="ghost-btn" href="https://www.breton.it/deals">Discover more</a>
+        </div>
+        <p class="deals-copy">Explore Breton second-hand machinery for compound stone and natural stone at attractive prices.</p>
+      </div>
+    </section>
+
+    <section class="section" id="stories">
+      <div class="container">
+        <h2>Articles and stories by Breton</h2>
+        <div class="stories-grid">
+          <a class="story-card" href="https://www.breton.it/innovation-stories/revolutionizing-manufacturing-with-3d-printing-and-recycled-biocomposites">
+            <img src="https://api.breton.it/assets/assets/Stories/Innovation-stories/Mixcycling/biocomponents.jpg" alt="Revolutionizing Manufacturing" />
+            <div class="content">
+              <p class="kicker">Innovation story</p>
+              <h3>Revolutionizing Manufacturing with Biocomponents</h3>
+            </div>
+          </a>
+          <a class="story-card" href="https://www.breton.it/innovation-stories/kis-3d-printed-kitchen-island">
+            <img src="https://api.breton.it/assets/assets/Stories/Innovation-stories/Kitchen-Island/KiS-3d-printed-kitchen-island-cover.png" alt="Interior design and 3D printing" />
+            <div class="content">
+              <p class="kicker">Innovation story</p>
+              <h3>Interior design and 3D printing: the next standard</h3>
+            </div>
+          </a>
+          <a class="story-card" href="https://www.breton.it/customer-stories/nikolaus-bagnara">
+            <img src="https://api.breton.it/assets/assets/Stories/Customer-stories/Nikolaus-Bagnara/Nikolaus-Bagnara-cover.jpg" alt="Nikolaus Bagnara" />
+            <div class="content">
+              <p class="kicker">Customer story</p>
+              <h3>Nikolaus Bagnara: diligence, hard work and vision</h3>
+            </div>
+          </a>
+          <a class="story-card" href="https://www.breton.it/customer-stories/xshore">
+            <img src="https://api.breton.it/assets/assets/Stories/Customer-stories/XShore/XShore-Breton-cover.jpg" alt="X Shore" />
+            <div class="content">
+              <p class="kicker">Customer story</p>
+              <h3>X Shore and Breton: reliability and innovation</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bit">
+      <div class="container bit-wrap">
+        <div class="bit-panel">
+          <p class="small">Where technological innovation is born</p>
+          <h3>BIT - Breton Institute of Technology</h3>
+          <p class="copy">Pioneer in the development of innovative processes, materials, machines and plants, Breton has always been committed to research.</p>
+          <a class="ghost-btn" href="https://www.breton.it/bit">Discover more</a>
+        </div>
+        <div class="bit-image">
+          <img src="https://api.breton.it/assets/assets/Homepage/bit_hp.jpg" alt="BIT - Breton Institute of Technology" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="news-world">
+      <div class="container">
+        <div class="title-row">
+          <h2>News from Breton's world</h2>
+          <a class="section-link" href="https://www.breton.it/news-events">Find your solution</a>
+        </div>
+
+        <div class="news-block">
+          <article class="news-card">
+            <div>
+              <p class="tag">News</p>
+              <h4>Breton and Tianjing Equipment set the course to higher quality</h4>
+              <p>The agreement strengthens both companies' leadership in primary stone processing.</p>
+            </div>
+            <span class="corner" aria-hidden="true"></span>
+          </article>
+
+          <article class="news-card photo">
+            <img src="https://api.breton.it/assets/assets/News-Events/News/Arlington/Arlington-Marble-6_970x1020.jpg" alt="Arlington project" />
+            <span class="corner" aria-hidden="true"></span>
+          </article>
+
+          <article class="news-card dark" style="grid-row: span 2;">
+            <div>
+              <p class="tag">News</p>
+              <h4>Breton &amp; ZOLLER take stone fabrication productivity to the next level</h4>
+              <p>Breton has partnered with ZOLLER, the global leader in tool presetting, measuring and digital tool management.</p>
+            </div>
+            <span class="corner" aria-hidden="true"></span>
+          </article>
+
+          <article class="news-card">
+            <div>
+              <p class="tag">News</p>
+              <h4>Breton Kappa G, The Evolution Of The Legend</h4>
+              <p>Breton Kappa G granite slab polisher evolves: now enhanced with a renewed setup.</p>
+            </div>
+            <span class="corner" aria-hidden="true"></span>
+          </article>
+
+          <article class="news-card photo">
+            <img src="https://api.breton.it/assets/assets/News-Events/Events/events-2025/Breton-Demo-Days-European-Tour/Breton-Demo-Days-Europena-Tour-25-cover.jpg" alt="Breton demo days event" />
+            <span class="corner" aria-hidden="true"></span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="numbers">
+      <div class="container">
+        <h2>A story told in numbers</h2>
+        <p class="numbers-copy">The numbers outline the philosophy, history and growth of Breton, starting from the vision of the founder and proceeding in the aim of anticipating future trends.</p>
+
+        <div class="numbers-grid">
+          <div class="num-card num-1">
+            <div>
+              <strong>+100</strong>
+              <span>Countries in which Breton is present</span>
+            </div>
+          </div>
+          <div class="num-card num-2">
+            <div>
+              <strong>+1700</strong>
+              <span>Registered Patents</span>
+            </div>
+          </div>
+          <div class="num-card num-3">
+            <div>
+              <strong>+50</strong>
+              <span>Scientific partnerships with top universities</span>
+            </div>
+          </div>
+          <div class="num-card num-4">
+            <div>
+              <strong>+40</strong>
+              <span>Authorized Technical Services Worldwide</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="world">
+      <div class="container">
+        <h2>Breton in the world</h2>
+        <div class="world-map">
+          <img src="https://api.breton.it/assets/assets/Homepage/map.jpg" alt="Breton worldwide map" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="company-profile">
+      <div class="container">
+        <h2>Breton Company profile</h2>
+        <div class="company-book" aria-label="Breton company profile flip book">
+          <button class="book-nav" id="bookPrev" type="button" aria-label="Previous pages">‹</button>
+          <div class="book-view">
+            <span class="book-spread" aria-hidden="true"></span>
+            <div class="book-page left">
+              <img id="bookLeftImage" src="https://api.breton.it/assets/assets/Homepage/Homo-Breton.jpg" alt="Breton company profile page left" />
+            </div>
+            <div class="book-page right" id="bookRightPage">
+              <img id="bookRightImage" src="https://api.breton.it/assets/assets/Homepage/Business-Units/breton-viper.jpg" alt="Breton company profile page right" />
+            </div>
+          </div>
+          <button class="book-nav" id="bookNext" type="button" aria-label="Next pages">›</button>
+        </div>
+        <p class="book-note">Flip through Breton company profile pages.</p>
+
+        <div class="bottom-links">
+          <a href="./breton-services.html">Customer Service</a>
+          <a href="./breton-contacts.html">Contacts</a>
+          <a href="./breton-about.html">Terms</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div class="footer-social">
+        <span>Follow Breton on:</span>
+        <a href="https://www.facebook.com/BretonSpa/" target="_blank" rel="noopener">Facebook</a>
+        <span class="dot" aria-hidden="true"></span>
+        <a href="https://www.linkedin.com/company/breton" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="dot" aria-hidden="true"></span>
+        <a href="https://www.youtube.com/c/BretonSpAofficialchannel" target="_blank" rel="noopener">YouTube</a>
+      </div>
+      <div class="footer-meta">VAT: 01880270267 · © <span id="year"></span> Breton S.p.A. All rights reserved.</div>
+      <div class="built">boiled by <strong>we go</strong></div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const menuToggle = document.getElementById("menuToggle");
+      const menu = document.getElementById("mainMenu");
+      const talkToggle = document.getElementById("talkToggle");
+      const mobileTalk = document.getElementById("mobileTalk");
+      const chatUs = document.getElementById("chatUs");
+      const contactDrawer = document.getElementById("contactDrawer");
+      const contactBackdrop = document.getElementById("contactBackdrop");
+      const contactClose = document.getElementById("contactClose");
+      const bookLeftImage = document.getElementById("bookLeftImage");
+      const bookRightImage = document.getElementById("bookRightImage");
+      const bookRightPage = document.getElementById("bookRightPage");
+      const bookPrev = document.getElementById("bookPrev");
+      const bookNext = document.getElementById("bookNext");
+
+      function closeMenu() {
+        menu.classList.remove("is-open");
+        menu.setAttribute("aria-hidden", "true");
+        menuToggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("menu-open");
+      }
+
+      function openMenu() {
+        closeContact();
+        menu.classList.add("is-open");
+        menu.setAttribute("aria-hidden", "false");
+        menuToggle.setAttribute("aria-expanded", "true");
+        document.body.classList.add("menu-open");
+      }
+
+      function closeContact() {
+        contactDrawer.classList.remove("is-open");
+        contactBackdrop.classList.remove("is-open");
+        contactDrawer.setAttribute("aria-hidden", "true");
+        contactBackdrop.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("menu-open");
+      }
+
+      function openContact() {
+        closeMenu();
+        contactDrawer.classList.add("is-open");
+        contactBackdrop.classList.add("is-open");
+        contactDrawer.setAttribute("aria-hidden", "false");
+        contactBackdrop.setAttribute("aria-hidden", "false");
+        document.body.classList.add("menu-open");
+      }
+
+      menuToggle.addEventListener("click", function () {
+        if (menu.classList.contains("is-open")) closeMenu();
+        else openMenu();
+      });
+
+      [talkToggle, mobileTalk, chatUs].forEach(function (trigger) {
+        if (!trigger) return;
+        trigger.addEventListener("click", function () {
+          if (contactDrawer.classList.contains("is-open")) closeContact();
+          else openContact();
+        });
+      });
+
+      contactClose.addEventListener("click", closeContact);
+      contactBackdrop.addEventListener("click", closeContact);
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeMenu();
+          closeContact();
+        }
+      });
+
+      menu.addEventListener("click", function (event) {
+        if (event.target === menu) closeMenu();
+      });
+
+      document.querySelectorAll("#mainMenu a").forEach(function (a) {
+        a.addEventListener("click", closeMenu);
+      });
+
+      const bookPages = [
+        "https://api.breton.it/assets/assets/Homepage/Homo-Breton.jpg",
+        "https://api.breton.it/assets/assets/Homepage/Business-Units/breton-viper.jpg",
+        "https://api.breton.it/assets/assets/Homepage/Business-Units/BRETON-HAWX_test-machining-2_08.2021.jpg",
+        "https://api.breton.it/assets/assets/Homepage/Business-Units/Tetrix-Ok_rev.jpg",
+        "https://api.breton.it/assets/assets/Homepage/Business-Units/3d-printing-service.jpg",
+        "https://api.breton.it/assets/assets/Homepage/bit_hp.jpg",
+        "https://api.breton.it/assets/assets/Stories/Customer-stories/XShore/XShore-Breton-cover.jpg",
+        "https://api.breton.it/assets/assets/News-Events/News/Zoller-partnership/Breton-Zoller-partnership-cover-website.jpg"
+      ];
+      let pageIndex = 0;
+      function renderBook(animate) {
+        if (!bookLeftImage || !bookRightImage) return;
+        bookLeftImage.src = bookPages[pageIndex];
+        bookRightImage.src = bookPages[(pageIndex + 1) % bookPages.length];
+        if (animate && bookRightPage) {
+          bookRightPage.classList.remove("is-flip");
+          void bookRightPage.offsetWidth;
+          bookRightPage.classList.add("is-flip");
+        }
+      }
+      if (bookPrev && bookNext) {
+        bookPrev.addEventListener("click", function () {
+          pageIndex = (pageIndex - 2 + bookPages.length) % bookPages.length;
+          renderBook(true);
+        });
+        bookNext.addEventListener("click", function () {
+          pageIndex = (pageIndex + 2) % bookPages.length;
+          renderBook(true);
+        });
+      }
+      renderBook(false);
+
+      const year = document.getElementById("year");
+      if (year) year.textContent = String(new Date().getFullYear());
+    })();
+  </script>
+</body>
+</html>

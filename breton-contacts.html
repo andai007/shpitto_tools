@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breton | Contacts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./breton-secondary.css" />
+  <style>
+    .contact-page-grid { margin-top: 20px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; }
+    .contact-panel { border: 1px solid var(--line); background: #fff; padding: 16px; }
+    .contact-panel h3 { margin: 0 0 10px; font-size: 26px; }
+    .contact-panel p { margin: 0 0 8px; color: #50565e; line-height: 1.5; }
+    .contact-panel .contact-form { margin-top: 10px; }
+    @media (max-width:980px) { .contact-page-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page="contacts" style="--hero-img:url('https://api.breton.it/assets/assets/Homepage/map.jpg');">
+  <header class="site-header"><div class="container header-row"><a class="brand-box" href="./breton-homepage.html"><img class="brand-icon" src="https://www.breton.it/_nuxt/img/logo-small-rev.f8ceb0b.svg" alt="" /><span class="brand-word">reton</span></a><nav class="main-nav"><a data-nav="engineering" href="./breton-engineering.html">Engineering</a><a data-nav="products" href="./breton-products.html">Products</a><a data-nav="services" href="./breton-services.html">Services</a><a data-nav="bit" href="./breton-bit.html">BIT</a></nav><div class="header-actions"><button class="action-box action-talk" id="talkToggle" type="button">Let's talk</button><button class="action-box action-search" type="button"><span class="icon-search"></span></button><button class="action-box action-lang" type="button">Language</button><button class="action-box menu-trigger" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainMenu"><span class="icon-hamburger"></span></button></div></div></header>
+  <aside class="menu-overlay" id="mainMenu" aria-hidden="true"><div class="container menu-grid"><div class="menu-left"><h3>Main navigation</h3><ul class="menu-links"><li><a href="./breton-engineering.html">Engineering</a></li><li><a href="./breton-products.html">Products</a></li><li><a href="./breton-services.html">Services</a></li><li><a href="./breton-bit.html">BIT</a></li><li><a href="./breton-news-events.html">News &amp; Events</a></li><li><a href="./breton-about.html">About us</a></li></ul></div><div class="menu-right"><h3>Quick links</h3><ul class="menu-sub-links"><li><a href="./breton-contacts.html">Contacts</a></li><li><a href="./breton-about.html#world">Breton in the world</a></li><li><a href="./breton-about.html">Company profile</a></li><li><a href="./breton-news-events.html">News</a></li></ul></div></div></aside>
+  <div class="contact-backdrop" id="contactBackdrop" aria-hidden="true"></div><aside class="contact-drawer" id="contactDrawer" aria-hidden="true"><div class="contact-head"><h3>Contact window</h3><button class="contact-close" id="contactClose" type="button">×</button></div><div class="contact-body"><p class="contact-intro">Tell us your project and Breton team will contact you.</p><form class="contact-form" action="./breton-contacts.html" method="get"><input type="text" name="name" placeholder="Your name" /><input type="email" name="email" placeholder="Email" /><input type="text" name="company" placeholder="Company" /><textarea name="message" placeholder="Message"></textarea><button class="contact-submit" type="submit">Send request</button></form><div class="contact-meta"><div>Phone: +39 0423 7691</div><div>Email: info@breton.it</div><div>Via Garibaldi 27, 31030 Castello di Godego (TV), Italy</div></div></div></aside><button class="mobile-talk" id="mobileTalk" type="button">Let's talk</button>
+
+  <section class="page-hero"><div class="container"><p class="breadcrumb">Home / Contacts</p><h1>Contacts</h1></div></section>
+
+  <main>
+    <section class="section"><div class="container"><h2>Headquarter</h2><div class="contact-page-grid">
+      <div class="contact-panel">
+        <h3>Breton S.p.A.</h3>
+        <p>Via Garibaldi, 27</p>
+        <p>31030 Castello di Godego (TV), Italy</p>
+        <p>Phone: +39 0423 7691</p>
+        <p>Email: info@breton.it</p>
+      </div>
+      <div class="contact-panel">
+        <h3>Send a request</h3>
+        <form class="contact-form" action="./breton-contacts.html" method="get">
+          <input type="text" placeholder="Name" />
+          <input type="email" placeholder="Email" />
+          <input type="text" placeholder="Subject" />
+          <textarea placeholder="Your message"></textarea>
+          <button class="contact-submit" type="submit">Submit</button>
+        </form>
+      </div>
+    </div></div></section>
+
+    <section class="section"><div class="container"><h2>Breton in the world</h2><div class="section-map"><img src="https://api.breton.it/assets/assets/Homepage/map.jpg" alt="World map" /></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-row"><div class="footer-social"><span>Follow Breton on:</span><a href="https://www.facebook.com/BretonSpa/" target="_blank" rel="noopener">Facebook</a><span class="dot"></span><a href="https://www.linkedin.com/company/breton" target="_blank" rel="noopener">LinkedIn</a><span class="dot"></span><a href="https://www.youtube.com/c/BretonSpAofficialchannel" target="_blank" rel="noopener">YouTube</a></div><div class="footer-meta">VAT: 01880270267 · © <span id="year"></span> Breton S.p.A. All rights reserved.</div><div class="built">boiled by <strong>we go</strong></div></div></footer>
+  <script src="./breton-secondary.js"></script>
+</body>
+</html>
