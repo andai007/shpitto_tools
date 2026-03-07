@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "export:pen": "node scripts/export_pen_html.mjs",
+    "clone:pagani:subpages": "node scripts/build-pagani-subpages.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.58.2"
+  }
+}
